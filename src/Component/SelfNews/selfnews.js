@@ -11,11 +11,11 @@ const AddNews = () => {
     image: null,
     imagePreview: preview, // Default placeholder path
     shareWith: {
-      freeTrial: true,
-      extendedTrial: true,
-      basic: false,
-      standard: false,
-      premium: false,
+      freeTrialUsers: true,
+      extendedTrialUsers: true,
+      basicTrailUsers: false,
+      standardTrailUsers: false,
+      premiumTrailUsers: false,
     }
   });
 
@@ -29,6 +29,8 @@ const AddNews = () => {
           [name]: checked,
         },
       });
+     
+      console.log("name ==>"+name);
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -58,6 +60,10 @@ const AddNews = () => {
 
     const newsData = new FormData();
     newsData.append('addTitle', formData.title);
+    console.log("==========>my log");
+    // console.log(formData.title);
+    // console.log("news data");
+    // console.log(newsData);
     newsData.append('addContent', formData.content);
     newsData.append('addLink', formData.link);
     if (formData.image) {
@@ -65,9 +71,16 @@ const AddNews = () => {
     }
     newsData.append('shareNews', JSON.stringify(shareNews));
 
+    for (const [key, value] of newsData.entries()) {
+      console.log(`${key}:`, value);
+    }
+
+    // console.log("news data");
+    // console.log(newsData.data);
     try {
       const response = await axios.post(
-        'https://market-hub-backend-kappa.vercel.app/admin/add-self-news',
+        'https://markethub-backend-ceka.onrender.com/admin/add-self-news',
+      
         newsData,
         {
           headers: {
@@ -153,7 +166,7 @@ const AddNews = () => {
               <label>
                 <input
                   type="checkbox"
-                  name="freeTrial"
+                  name="freeTrialUsers"
                   checked={formData.shareWith.freeTrial}
                   onChange={handleChange}
                 /> Free Trial Users
@@ -161,7 +174,7 @@ const AddNews = () => {
               <label>
                 <input
                   type="checkbox"
-                  name="extendedTrial"
+                  name="extendedTrialUsers"
                   checked={formData.shareWith.extendedTrial}
                   onChange={handleChange}
                 /> Extended Trial Users
@@ -169,7 +182,7 @@ const AddNews = () => {
               <label>
                 <input
                   type="checkbox"
-                  name="basic"
+                  name="basicTrailUsers"
                   checked={formData.shareWith.basic}
                   onChange={handleChange}
                 /> Basic Users
@@ -177,7 +190,7 @@ const AddNews = () => {
               <label>
                 <input
                   type="checkbox"
-                  name="standard"
+                  name="standardTrailUsers"
                   checked={formData.shareWith.standard}
                   onChange={handleChange}
                 /> Standard Users
@@ -185,7 +198,7 @@ const AddNews = () => {
               <label>
                 <input
                   type="checkbox"
-                  name="premium"
+                  name="premiumTrailUsers"
                   checked={formData.shareWith.premium}
                   onChange={handleChange}
                 /> Premium Users

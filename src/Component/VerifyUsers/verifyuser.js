@@ -1,41 +1,45 @@
-import './verifyuser.css'; // Import external CSS
+import './verifyuser.css';
 import filterimg from '../../assets/filter.png';
 import tickimg from '../../assets/tickimg.png';
 import delimg from '../../assets/removeimg.png';
-import visitcard from '../../assets/visitcard.png';
-import React, { useState } from 'react';
-import axios from 'axios'; // Import Axios
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Pagination from '../Pagination';
 
 function VerifyUsers() {
-  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false); // Accept Modal visibility state
-  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false); // Reject Modal visibility state
-  const [selectedUser, setSelectedUser] = useState(null); // To store selected user for confirmation
-  const [users, setUsers] = useState([ // Initialize users in state
-    {
-      name: 'Bhavesh Kumar',
-      phone: '+91 7838392384',
-      alterno: '+91 7838392384',
-      pincode: '400089',
-      city: 'Mumbai',
-      state: 'Maharashtra',
-      visitingCard: visitcard, // Image path or URL
-      dateTime: '30-Sep-2024, 10:23',
-      id: 1, // Add an ID for each user
-    },
-    {
-      name: 'Ravi Sandeep',
-      phone: '+91 7859923183',
-      alterno: '+91 7838392384',
-      pincode: '400020',
-      city: 'Gurgaon',
-      state: 'Haryana',
-      visitingCard: visitcard,
-      dateTime: '29-Sep-2024, 14:55',
-      id: 2, // Add an ID for each user
-    },
-    // Add other users here...
-  ]);
+  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
+  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchPendingUsers = async () => {
+      try {
+        const response = await axios.get('https://markethub-app-backend.onrender.com/user/pending-user-list');
+        if (response.data.success) {
+          const fetchedUsers = response.data.data.map((user) => ({
+            id: user._id,
+            name: user.fullName,
+            phone: user.phoneNumber,
+            alterno: user.whatsappNumber,
+            email: user.email,
+            pincode: user.pincode,
+            city: user.city,
+            state: user.state,
+            visitingCard: user.visitingCard,
+            dateTime: new Date(user.createdAt).toLocaleString(),
+          }));
+          setUsers(fetchedUsers);
+        } else {
+          console.error('Failed to fetch users:', response.data.message);
+        }
+      } catch (error) {
+        console.error('Error fetching users:', error.response?.data || error.message);
+      }
+    };
+
+    fetchPendingUsers();
+  }, []);
 
   const handleTickClick = (user) => {
     setSelectedUser(user);
@@ -47,21 +51,36 @@ function VerifyUsers() {
     setIsRejectModalOpen(true);
   };
 
-  const handleConfirm = () => {
-    console.log('User accepted:', selectedUser);
-    setIsAcceptModalOpen(false); // Close the modal after confirmation
-    // Add your logic here for accepting the user
+  const handleConfirm = async () => {
+    try {
+      console.log("Selected User Email:", selectedUser.email); // Log the email being sent
+      const response = await axios.get(`https://markethub-app-backend.onrender.com/user/user-approve`, {
+        params: {
+          email: selectedUser.email,
+          isApproved: "true",
+        },
+      });
+      if (response.data.success) {
+        setUsers((prevUsers) => prevUsers.filter(user => user.id !== selectedUser.id));
+      } else {
+        console.error('Failed to approve user:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error approving user:', error.response?.data || error.message);
+    } finally {
+      setIsAcceptModalOpen(false);
+    }
   };
-
+  
   const handleRejectConfirm = async () => {
     try {
-      const response = await axios.post('https://markethub-app-backend.onrender.com/user/reject-user', {
-        userId: selectedUser.id, // Ensure you send the user ID here
+      const response = await axios.get('https://markethub-app-backend.onrender.com/user/reject-user', {
+        params: {
+          email: selectedUser.email,
+          isRejected: "false",
+        },
       });
-  
       if (response.data.success) {
-        console.log('User rejected:', selectedUser);
-        // Remove the user from the state
         setUsers((prevUsers) => prevUsers.filter(user => user.id !== selectedUser.id));
       } else {
         console.error('Failed to reject user:', response.data.message);
@@ -69,14 +88,14 @@ function VerifyUsers() {
     } catch (error) {
       console.error('Error rejecting user:', error.response?.data || error.message);
     } finally {
-      setIsRejectModalOpen(false); // Close the reject modal after confirmation
+      setIsRejectModalOpen(false);
     }
   };
   
 
   const handleCancel = () => {
-    setIsAcceptModalOpen(false); // Close the accept modal without action
-    setIsRejectModalOpen(false); // Close the reject modal without action
+    setIsAcceptModalOpen(false);
+    setIsRejectModalOpen(false);
   };
 
   return (
@@ -101,6 +120,7 @@ function VerifyUsers() {
               <th>Full Name</th>
               <th>WhatsApp No</th>
               <th>Alternate No</th>
+              <th>Email</th>
               <th>Pincode</th>
               <th>City</th>
               <th>State</th>
@@ -109,8 +129,8 @@ function VerifyUsers() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
-              <tr key={index}>
+            {users.map((user) => (
+              <tr key={user.id}>
                 <td className='buttonsverify'>
                   <button className="edit-btn" onClick={() => handleTickClick(user)}>
                     <img src={tickimg} alt="accept" />
@@ -122,6 +142,7 @@ function VerifyUsers() {
                 <td>{user.name}</td>
                 <td>{user.phone}</td>
                 <td>{user.alterno}</td>
+                <td>{user.email}</td>
                 <td>{user.pincode}</td>
                 <td>{user.city}</td>
                 <td>{user.state}</td>
@@ -141,7 +162,6 @@ function VerifyUsers() {
 
       <Pagination />
 
-      {/* Accept Modal Popup */}
       {isAcceptModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content accept-modal">
@@ -155,7 +175,6 @@ function VerifyUsers() {
         </div>
       )}
 
-      {/* Reject Modal Popup */}
       {isRejectModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content reject-modal">

@@ -74,7 +74,7 @@ const RejectedUserTrial = () => {
           </tbody>
         </table>
       </div> 
-      <Pagination />
+      
     </div>
   );
 };

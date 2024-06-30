@@ -14,13 +14,15 @@ import spot from '../../assets/spot.png';
 import updateslogo from '../../assets/updateslogo.png';
 import feed from '../../assets/feed.png';
 import logoutadmin from '../../assets/logoutadmin.png';
+import futurelogo from '../../assets/futurelogo.png';
 
 const Sidebar = ({ activeIndex, onTabClick }) => {
   const navigate = useNavigate();
   const [isUserListOpen, setIsUserListOpen] = useState(false);
   const [isNewsOpen, setIsNewsOpen] = useState(false);
   const [isSpotOpen, setIsSpotOpen] = useState(false);
-  const [isUpdatesOpen, setIsUpdatesOpen] = useState(false);  // Added state for updates
+  const [isUpdatesOpen, setIsUpdatesOpen] = useState(false);
+  const [isFutureOpen, setIsFutureOpen] = useState(false);  // New state for Future Price
 
   const toggleUserList = () => {
     setIsUserListOpen(!isUserListOpen);
@@ -115,20 +117,59 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           <button
             className={`menu-item ${activeIndex === 16 ? 'active' : 'inactive'}`}
             onClick={() => {
-              setIsUpdatesOpen(!isUpdatesOpen); // Fixed usage of state here
+              setIsUpdatesOpen(!isUpdatesOpen);
               onTabClick(16);
             }}
           >
-            <img src={updateslogo} alt="Spot Price Icon" className="icon" />
+            <img src={updateslogo} alt="Updates Icon" className="icon" />
             Updates
           </button>
           <ul className={`submenu ${isUpdatesOpen ? 'submenu-open' : ''}`}>
               <li>
-              <Link
+                <Link
                   className={`submenu-item ${activeIndex === 18 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(18)}
                 >
                   Add Update
+                </Link>
+              </li>
+            </ul>
+        </li>
+        
+        <li>
+          <button
+            className={`menu-item ${activeIndex === 44 ? 'active' : 'inactive'}`}
+            onClick={() => {
+              setIsFutureOpen(!isFutureOpen); // Toggle future state
+              onTabClick(16);
+            }}
+          >
+            <img src={futurelogo} alt="Future Price Icon" className="icon" />
+            Future Price
+          </button>
+          <ul className={`submenu ${isFutureOpen ? 'submenu-open' : ''}`}>
+              <li>
+                <Link
+                  className={`submenu-item ${activeIndex === 19 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(19)}
+                >
+                  Add Reference Rate (SBI)
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`submenu-item ${activeIndex === 20 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(20)}
+                >
+                  Add Warehouse Stock
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`submenu-item ${activeIndex === 18 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(18)}
+                >
+                  Add Settlement
                 </Link>
               </li>
             </ul>
@@ -147,16 +188,15 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           </button>
           <ul className={`submenu ${isSpotOpen ? 'submenu-open' : ''}`}>
               <li>
-              <Link
+                <Link
                   className={`submenu-item ${activeIndex === 5 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(5)}
                 >
                   Add Spot Price
                 </Link>
               </li>
-
               <li>
-              <Link
+                <Link
                   className={`submenu-item ${activeIndex === 8 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(8)}
                 >
@@ -207,7 +247,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
             className={`menu-item ${activeIndex === 17 ? 'active' : 'inactive'}`}
             onClick={() => onTabClick(17)}
           >
-            <img src={feed} alt="Cash Management Icon" className="icon" />
+            <img src={feed} alt="Feedback Icon" className="icon" />
             Feedback
           </Link>
         </li>             
@@ -225,11 +265,25 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
         <li>
           <Link
             className={`menu-item ${activeIndex === 14 ? 'active' : 'inactive'}`}
-            onClick={() => onTabClick(9)}
+            onClick={() => onTabClick(14)}
           >
-            <img src={logoutadmin} alt="Add Admin Icon" className="icon" />
-            Logout
+            <img src={cash} alt="Subscription Icon" className="icon" />
+            Subscription
           </Link>
+        </li>
+
+        <li>
+          <button
+            className={`menu-item ${activeIndex === 15 ? 'active' : 'inactive'}`}
+            onClick={() => {
+              if (window.confirm("Are you sure you want to log out?")) {
+                navigate('/LoginAdmin');
+              }
+            }}
+          >
+            <img src={logoutadmin} alt="Logout Icon" className="icon" />
+            Logout
+          </button>
         </li>
       </ul>
     </div>

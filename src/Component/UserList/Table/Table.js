@@ -20,6 +20,7 @@ const TableComponent = () => {
         if (response.data.success) {
           const mappedUsers = response.data.data.map(user => ({
             name: user.fullName,
+            email: user.email,  // Ensure you have the email in your user data
             whatsapp: user.whatsappNumber,
             alternateno: user.phoneNumber,
             pincode: user.pincode,
@@ -57,8 +58,22 @@ const TableComponent = () => {
   };
 
   const handleDeleteUser = () => {
-    // Perform delete action here, e.g., call delete API
-    console.log(`Deleting user: ${userToDelete.name}`);
+    if (userToDelete) {
+      const email = userToDelete.email; // Get the email of the user to delete
+      axios.delete(`https://markethub-app-backend.onrender.com/user/delete-user?email=${email}`)
+        .then(response => {
+          if (response.data.success) {
+            // Update the user list to remove the deleted user
+            setUsers(users.filter(user => user.email !== email));
+            console.log(`Deleted user: ${userToDelete.name}`);
+          } else {
+            console.error("Failed to delete user:", response.data.message);
+          }
+        })
+        .catch(error => {
+          console.error("There was an error deleting the user!", error);
+        });
+    }
     // Reset states after delete
     setUserToDelete(null);
     setIsDeletePopupOpen(false);
