@@ -37,7 +37,7 @@ const DashboardPage = () => {
               <img src={totaluser} alt="Total Users Icon" width="40px" />
               <Box>
                 <Typography variant="h6">Total Users</Typography>
-                <Typography variant="h4">16,689</Typography>
+                <Typography variant="h4" sx={{fontWeight:'700'}}>16,689</Typography>
               </Box>
             </CardContent>
           </Card>
@@ -46,16 +46,17 @@ const DashboardPage = () => {
               <img src={freetrailUser} alt="Free Trial Users Icon" width="40px" />
               <Box>
                 <Typography variant="h6">Free Trial Users</Typography>
-                <Typography variant="h4">10,293</Typography>
+                <Typography variant="h4" sx={{fontWeight:'700'}}>10,293</Typography>
               </Box>
             </CardContent>
           </Card>
-          <Card sx={{ borderRadius: '20px' }} className="card">
+          <Card sx={{ borderRadius: '20px'}} className="card">
             <CardContent className="card-content">
-              <img src={subscribedUser} alt="Subscribed Users Icon" width="40px" />
+            <img src={subscribedUser} alt="Subscribed Users Icon" width="40px" />
               <Box>
+             
                 <Typography variant="h6">Subscribed Users</Typography>
-                <Typography variant="h4">4,279</Typography>
+                <Typography variant="h4" sx={{fontWeight:'700'}}>4,279</Typography>
               </Box>
             </CardContent>
           </Card>
@@ -64,7 +65,7 @@ const DashboardPage = () => {
               <img src={rejectedUser} alt="Rejected Users Icon" width="40px" />
               <Box>
                 <Typography variant="h6">Rejected Users</Typography>
-                <Typography variant="h4">2,040</Typography>
+                <Typography variant="h4" sx={{fontWeight:'700'}}>2,040</Typography>
               </Box>
             </CardContent>
           </Card>
@@ -82,8 +83,15 @@ const DashboardPage = () => {
             sx={{ width: '300px' }}
           />
           <Box>
-            <TextField label="Select Date" variant="outlined" size="small" type="date" sx={{ mr: 1 }} />
-            <Button variant="contained" startIcon={<FilterAltIcon />}>Filter & Sort</Button>
+          <TextField
+  label="Select Date"
+  variant="outlined"
+  size="small"
+  type="date"
+  sx={{ mr: 1, marginRight:'340px' , width: 'auto' }} // Add width for better alignment
+/>
+
+            <Button variant="contained" sx={{marginRight:'20px',textAlign:'left'}}startIcon={<FilterAltIcon />}>Filter & Sort</Button>
           </Box>
         </Box>
   

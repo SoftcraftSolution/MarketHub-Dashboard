@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 body{
     font-family: 'Poppins', sans-serif;
+    background-color: #F4F6FA;
 }
 .dashboard-container {
     display: flex;
@@ -21,27 +22,31 @@ body{
     display: flex;
     align-items: center;
     padding: 0px;
-    font-family: 'Poppins', sans-serif;
-   
-     /* This gives the card rounded corners */
-    background-color: #fff; /* Optional: Add a background color for visibility */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow effect */
+    height: 100px; /* Adjust height as needed */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+
+  
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Ensure alignment to start */
+    gap: 10px; /* Adjust gap as needed */
+    padding: 10px;
+    flex-direction: row-reverse;
+    /* Add padding for better spacing */
 }
 
   
-  .card-content {
-    display: flex;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
-    flex-direction: row-reverse;
-    gap: 50px;
- 
-  }
-  
   .card-content img {
-    margin-right: 10px;
-     
-  }
+    max-width: 40px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    overflow: hidden; /* Prevent overflow */
+}
+
   
   .search-filter-section {
     display: flex;
