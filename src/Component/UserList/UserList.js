@@ -7,7 +7,7 @@ import totaluser from '../../asset/totaluser.png';
 import freetrailUser from '../../asset/freetrail.png';
 import subscribedUser from '../../asset/subscribe.png';
 import rejectedUser from '../../asset/rejected.png';
-import visitingcard from '../../asset/vistingcard.png'
+import visitingcard from '../../asset/visting card.png';
 
 const userListData = [
     { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },

@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Use Link for internal navigation and useNavigate for programmatic navigation
 import './Sidebar.css';
-import logo from '../../assets/mhublogo.png'; // Your logo image here
+import logo from '../../assets/mhublogo.png';
 import homeimg from '../../assets/home.png';
 import userimg from '../../assets/user.png';
 import verimg from '../../assets/verify.png';
 import newsimg from '../../assets/news.png';
 import add from '../../assets/addadmin.png';
-import downArrow from '../../assets/downarrow.png'; // Arrow images
-import upArrow from '../../assets/uparrow.png'; // Arrow images
+import downArrow from '../../assets/downarrow.png';
+import upArrow from '../../assets/uparrow.png';
 
 const Sidebar = () => {
-  const [isUserListOpen, setIsUserListOpen] = useState(false);
-  const [isNewsOpen, setIsNewsOpen] = useState(false);
+  const navigate = useNavigate(); // Get navigate function for programmatic navigation
+  const [isUserListOpen, setIsUserListOpen] = React.useState(false);
+  const [isNewsOpen, setIsNewsOpen] = React.useState(false);
 
   const toggleUserList = () => {
     setIsUserListOpen(!isUserListOpen);
   };
 
-  const toggleNews = () => {
-    setIsNewsOpen(!isNewsOpen);
+  const navigateToUserList = () => {
+    navigate('/userlist'); // Navigate to the User List page
   };
 
   return (
@@ -29,60 +31,61 @@ const Sidebar = () => {
 
       <ul className="sidebar-menu">
         <li>
-          <a href="/dashboard">
-            <img src={homeimg} alt="Dashboard Icon" className="icon" /> 
+          <Link to="/userlist">
+            <img src={homeimg} alt="Dashboard Icon" className="icon" />
             Dashboard
-          </a>
+          </Link>
         </li>
 
         <li>
           <button className="menu-item" onClick={toggleUserList}>
-            <img src={userimg} alt="User List Icon" className="icon" /> 
+          
+            <img src={userimg} alt="User List Icon" className="icon" />
             User List
             <img src={isUserListOpen ? upArrow : downArrow} alt="Toggle" className="arrow-icon" />
           </button>
           {isUserListOpen && (
             <ul className="submenu">
               <li>
-                <a href="/user-list/free-trial">Free Trial</a>
+                <Link to="/user-list/free-trial">Free Trial</Link>
               </li>
               <li>
-                <a href="/user-list/rejected">Rejected Users</a>
+                <Link to="/user-list/rejected">Rejected Users</Link>
               </li>
             </ul>
           )}
         </li>
 
         <li>
-          <a href="/verify-user">
-            <img src={verimg} alt="Verify Icon" className="icon" /> 
+          <Link to="/verify-user">
+            <img src={verimg} alt="Verify Icon" className="icon" />
             Verify User
-          </a>
+          </Link>
         </li>
 
         <li>
-          <button className="menu-item" onClick={toggleNews}>
-            <img src={newsimg} alt="News Icon" className="icon" /> 
+          <button className="menu-item" onClick={() => setIsNewsOpen(!isNewsOpen)}>
+            <img src={newsimg} alt="News Icon" className="icon" />
             News
             <img src={isNewsOpen ? upArrow : downArrow} alt="Toggle" className="news-icon" />
           </button>
           {isNewsOpen && (
             <ul className="submenu">
               <li>
-                <a href="/news/article-1">Article 1</a>
+                <Link to="/news/article-1">Article 1</Link>
               </li>
               <li>
-                <a href="/news/article-2">Article 2</a>
+                <Link to="/news/article-2">Article 2</Link>
               </li>
             </ul>
           )}
         </li>
 
         <li>
-          <a href="/add-admin">
-            <img src={add} alt="Admin Icon" className="icon" /> 
+          <Link to="/add-admin">
+            <img src={add} alt="Admin Icon" className="icon" />
             Add Admin
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
