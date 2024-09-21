@@ -1,0 +1,93 @@
+/* Sidebar styles */
+.sidebar {
+    width: 200px;
+    background-color: #fff;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.logo {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column; /* Ensure submenu aligns properly */
+}
+
+.sidebar-menu li a,
+.menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Add space between icon and arrow */
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 10px 5px; /* Add padding for better spacing */
+}
+
+.icon {
+    margin-right: 10px;
+    width: 20px; /* Standardize icon width */
+    height: 20px; /* Standardize icon height */
+}
+
+.arrow-icon {
+  /* Set arrow size */
+    margin-left: 90px; /* Add spacing before arrow */
+}
+.news-icon{
+  margin-left: 110px;
+}
+.submenu {
+    list-style-type: none;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.submenu li {
+    margin: 10px 0;
+}
+
+.submenu li a {
+    color: #555;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+button.menu-item {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
+    color: #333;
+    padding: 14px 0; /* Add padding for spacing */
+    font-family: 'Open Sans', sans-serif;
+}
+
+button.menu-item:hover {
+    color: #ff5722;
+}
+
+button.menu-item:focus {
+    outline: none;
+}
+
+/* Optional: Highlight active menu items */
+.sidebar-menu li a.active,
+button.menu-item.active {
+    color: #ff5722; /* Change color for active items */
+    font-weight: bold; /* Highlight active */
+}
