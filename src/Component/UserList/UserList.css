@@ -4,6 +4,7 @@ body{
     background-color: #F4F6FA;
 }
 .dashboard-container {
+    font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -12,12 +13,14 @@ body{
   }
   
   .statistics-section {
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
   }
   
   .card {
+    font-family: 'Poppins', sans-serif;
     width: 24%;
     display: flex;
     align-items: center;
@@ -31,6 +34,7 @@ body{
 
   
 .card-content {
+    font-family: 'Poppins', sans-serif;
     display: flex;
     align-items: center;
     justify-content: flex-start; /* Ensure alignment to start */
@@ -49,19 +53,23 @@ body{
 
   
   .search-filter-section {
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
   }
   
+
   .table {
+    font-family: 'Poppins', sans-serif;
     width: 100%;
     border-collapse: collapse;
     font-size: 16px;
   }
   
   .table-header {
+    font-family: 'Poppins', sans-serif;
     padding: 12px;
     text-align: left;
     background-color: #f0f0f0;
@@ -69,10 +77,12 @@ body{
   }
   
   .table-row {
+    font-family: 'Poppins', sans-serif;
     border-bottom: 1px solid #ddd;
   }
   
   .table-cell {
+    font-family: 'Poppins', sans-serif;
     padding: 12px;
   }
   
