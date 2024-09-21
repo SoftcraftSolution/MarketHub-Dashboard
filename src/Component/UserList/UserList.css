@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+body{
+    font-family: 'Poppins', sans-serif;
+}
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f4f5f7;
+  }
+  
+  .statistics-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  
+  .card {
+    width: 24%;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    font-family: 'Poppins', sans-serif;
+   
+     /* This gives the card rounded corners */
+    background-color: #fff; /* Optional: Add a background color for visibility */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow effect */
+}
+
+  
+  .card-content {
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    flex-direction: row-reverse;
+    gap: 50px;
+ 
+  }
+  
+  .card-content img {
+    margin-right: 10px;
+     
+  }
+  
+  .search-filter-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+  
+  .table-header {
+    padding: 12px;
+    text-align: left;
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+  
+  .table-row {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table-cell {
+    padding: 12px;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
