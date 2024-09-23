@@ -1,0 +1,86 @@
+.verify-users-container {
+    padding: 20px;
+    background-color: #f5f7fa;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    text-align: left;
+    font-weight: 600;
+  }
+  
+  .top-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .search-input, .date-input, .filter-btn {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .search-input, .date-input {
+    width: 200px;
+  }
+  
+  .filter-btn {
+    
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .filter-btn:hover {
+    
+  }
+  
+  .table-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .users-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .users-table th, .users-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .users-table th {
+    background-color: #f1f3f6;
+    font-weight: bold;
+  }
+  
+  .visiting-card {
+    width: 50px;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 8px;
+  }
+  
+  .edit-btn:hover {
+    color: #007bff;
+  }
+  
+  .delete-btn:hover {
+    color: #ff4d4d;
+  }
+  

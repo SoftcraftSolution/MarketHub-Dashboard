@@ -4,6 +4,9 @@ import Sidebar from './Component/Sidebar/Sidebar'; // Adjust the import path as 
 import DashboardPage from './Component/UserList/UserList';
 //import LoginPage from './Component/login/login';
 import Login from './Component/Login/login';
+import OtpPage from './Component/EnterOTP/enterotp';
+import VerifyUsers from './Component/VerifyUsers/verifyuser';
+import FreeTrial from './Component/FreeTrial/freetrial';
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
           <Routes>
             <Route path="/userlist" element={<DashboardPage />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/enterotp" element={<OtpPage />} />
+            <Route path="/verifyuser" element={<VerifyUsers />} />
+            <Route path="/freetrial" element={<FreeTrial />} />
             {/* Add more routes here as needed */}
      
           </Routes>
