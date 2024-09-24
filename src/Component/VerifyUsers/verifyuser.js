@@ -1,8 +1,9 @@
-import React from 'react';
+
 import './verifyuser.css'; // Import external CSS
 import filterimg from '../../assets/filter.png';
 import tickimg from '../../assets/tickimg.png';
 import delimg from '../../assets/removeimg.png';
+import React, { useState, useEffect } from 'react';
 import visitcard from '../../assets/visitcard.png'
 
 function VerifyUsers() {
@@ -62,6 +63,19 @@ function VerifyUsers() {
       dateTime: '30-Sep-2024, 14:45',
     },
   ];
+  const handleDateChange = (event) => {
+    const date = new Date(event.target.value);
+    setSelectedDate(date);
+    console.log(date);
+  };
+
+  const getStringDate = (date) => {
+    // Ensure date is a Date object
+    if (!(date instanceof Date)) {
+      throw new Error("Input must be a Date object");
+    }
+  }
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
     <div className="verify-users-container">
@@ -70,9 +84,11 @@ function VerifyUsers() {
       <div className="top-bar">
         <h3>All Users</h3>
         <input type="text" className="search-input" placeholder="Search by name, phone..." />
-        <input type="date" className="date-input" />
+        <div id="datteePickeer">
+          <input type="date" id="birthday" name="birthday" className="date-picker-input" value={getStringDate(selectedDate)} onChange={handleDateChange} />
+        </div>
         <button className="filter-btn">
-          <img src={filterimg} alt="filter" />
+          <img src={filterimg} alt="filter" />  
         </button>
       </div>
 
