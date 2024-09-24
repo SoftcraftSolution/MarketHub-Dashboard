@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Use Link for internal navigation and useNavigate for programmatic navigation
 import './Sidebar.css';
 import logo from '../../assets/mhublogo.png';
@@ -10,17 +10,13 @@ import add from '../../assets/addadmin.png';
 import downArrow from '../../assets/downarrow.png';
 import upArrow from '../../assets/uparrow.png';
 
-const Sidebar = () => {
-  const navigate = useNavigate(); // Get navigate function for programmatic navigation
-  const [isUserListOpen, setIsUserListOpen] = React.useState(false);
-  const [isNewsOpen, setIsNewsOpen] = React.useState(false);
+const Sidebar = ({ activeIndex, onTabClick }) => {
+  const navigate = useNavigate();
+  const [isUserListOpen, setIsUserListOpen] = useState(false);
+  const [isNewsOpen, setIsNewsOpen] = useState(false);
 
   const toggleUserList = () => {
     setIsUserListOpen(!isUserListOpen);
-  };
-
-  const navigateToUserList = () => {
-    navigate('/userlist'); // Navigate to the User List page
   };
 
   return (
@@ -31,18 +27,31 @@ const Sidebar = () => {
 
       <ul className="sidebar-menu">
         <li>
-          <Link to="/userlist">
+          <Link
+            to="/userlist"
+            className={`menu-item ${activeIndex === 0 ? 'active' : 'inactive'}`}
+            onClick={() => onTabClick(0)}
+          >
             <img src={homeimg} alt="Dashboard Icon" className="icon" />
             Dashboard
           </Link>
         </li>
 
         <li>
-          <button className="menu-item" onClick={toggleUserList}>
-          
+          <button
+            className={`menu-item ${activeIndex === 1 ? 'active' : 'inactive'}`}
+            onClick={() => {
+              toggleUserList();
+              onTabClick(1);
+            }}
+          >
             <img src={userimg} alt="User List Icon" className="icon" />
             User List
-            <img src={isUserListOpen ? upArrow : downArrow} alt="Toggle" className="arrow-icon" />
+            <img
+              src={isUserListOpen ? upArrow : downArrow}
+              alt="Toggle"
+              className="arrow-icon"
+            />
           </button>
           {isUserListOpen && (
             <ul className="submenu">
@@ -57,17 +66,31 @@ const Sidebar = () => {
         </li>
 
         <li>
-          <Link to="/verify-user">
+          <Link
+            to="/verify-user"
+            className={`menu-item ${activeIndex === 2 ? 'active' : 'inactive'}`}
+            onClick={() => onTabClick(2)}
+          >
             <img src={verimg} alt="Verify Icon" className="icon" />
             Verify User
           </Link>
         </li>
 
         <li>
-          <button className="menu-item" onClick={() => setIsNewsOpen(!isNewsOpen)}>
+          <button
+            className={`menu-item ${activeIndex === 3 ? 'active' : 'inactive'}`}
+            onClick={() => {
+              setIsNewsOpen(!isNewsOpen);
+              onTabClick(3);
+            }}
+          >
             <img src={newsimg} alt="News Icon" className="icon" />
             News
-            <img src={isNewsOpen ? upArrow : downArrow} alt="Toggle" className="news-icon" />
+            <img
+              src={isNewsOpen ? upArrow : downArrow}
+              alt="Toggle"
+              className="news-icon"
+            />
           </button>
           {isNewsOpen && (
             <ul className="submenu">
@@ -82,7 +105,11 @@ const Sidebar = () => {
         </li>
 
         <li>
-          <Link to="/add-admin">
+          <Link
+            to="/add-admin"
+            className={`menu-item ${activeIndex === 4 ? 'active' : 'inactive'}`}
+            onClick={() => onTabClick(4)}
+          >
             <img src={add} alt="Admin Icon" className="icon" />
             Add Admin
           </Link>
