@@ -84,3 +84,16 @@
     color: #ff4d4d;
   }
   
+  #datteePickeer input{
+    width: 150px;
+    height: 30px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins';
+    color: gray;
+  }
+  #datteePickeer{
+    padding: 20px;
+  }
