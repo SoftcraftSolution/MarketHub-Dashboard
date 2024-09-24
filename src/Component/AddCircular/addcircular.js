@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './selfnews.css';
+import './addcircular.css';
 import imagepreview from '../../assets/imagepreview.png';
 
-const NewsForm = () => {
+const AddCircular = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [link, setLink] = useState('');
@@ -54,7 +54,7 @@ const NewsForm = () => {
 
     return (
         <div className="container">
-            <h2>Add Self News</h2>
+            <h2>Add Circular</h2>
             <form onSubmit={handleSubmit}>
                 <div className='news-top'>
                     <div className="form-group">
@@ -111,7 +111,7 @@ const NewsForm = () => {
                                 onChange={handleImageChange}
                             />
                         </div>
-                   
+                       
                     </div>
                 </div>
                 <h4>Share With:</h4>
@@ -187,4 +187,4 @@ const NewsForm = () => {
     );
 };
 
-export default NewsForm;
+export default AddCircular;
