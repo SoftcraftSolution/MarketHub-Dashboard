@@ -1,0 +1,90 @@
+/* Common styles for input and textarea */
+.form-control {
+    width: 350px; /* Set the desired width */
+    height: 80px; /* Set the desired height for textarea */
+    margin-top: 24px; /* Set the desired top margin */
+    margin-left: 29px; /* Set the desired left margin */
+    border-radius: 5px; /* Set the border radius */
+    border: 1.27px solid #ccc; /* Set the border with specified thickness */
+    padding: 10px; /* Add padding for better spacing */
+    box-sizing: border-box;
+     /* Include padding in width and height */
+}
+.form-control-1{
+    width: 350px; /* Set the desired width */
+    height: 40px; /* Set the desired height for textarea */
+    margin-top: 24px; /* Set the desired top margin */
+    margin-left: 29px; /* Set the desired left margin */
+    border-radius: 5px; /* Set the border radius */
+    border: 1.27px solid #ccc; /* Set the border with specified thickness */
+    padding: 10px; /* Add padding for better spacing */
+    box-sizing: border-box;
+}
+.form-control-content{
+    width: 350px; /* Set the desired width */
+    height: 80px; /* Set the desired height for textarea */
+    margin-top: 24px; /* Set the desired top margin */
+    margin-left: 29px; /* Set the desired left margin */
+    border-radius: 5px; /* Set the border radius */
+    border: 1.27px solid #ccc; /* Set the border with specified thickness */
+    padding: 10px; /* Add padding for better spacing */
+    box-sizing: border-box;
+}
+.news-top{
+    display: flex;
+    flex-direction: row;
+}
+textarea.form-control {
+    height: 120px; /* Adjust the height for the textarea */
+}
+
+/* Placeholder styles */
+input::placeholder, textarea::placeholder {
+    color: #888; /* Change to your desired placeholder color */
+     /* Italic style for placeholder text */
+}
+
+input:focus::placeholder, textarea:focus::placeholder {
+    color: transparent; /* Hides the placeholder when focused */
+}
+.file-upload-box {
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding inside the box */
+    margin-top: 10px; /* Margin on top */
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: flex-start; /* Align children to the start */
+    background-color: #f9f9f9;
+    width: 200px;
+    margin-left: 130px;
+    height: 30px;
+    margin-left: 20px; /* Light background color */
+}
+
+.form-control-file {
+    margin-top: 5px; /* Margin on top of the input */
+}
+
+.file-upload-box p {
+    margin-top: 5px; /* Margin on top of the selected image text */
+    font-size: 14px; /* Font size for the text */
+    color: #555; /* Text color */
+}
+
+.preview{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.form-check {
+    margin-bottom: 10px;
+    flex-direction: row;
+}
+
+.form-check-horizontal {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row;
+}

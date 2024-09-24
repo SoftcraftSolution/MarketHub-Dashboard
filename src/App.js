@@ -7,6 +7,9 @@ import Login from './Component/Login/login';
 import OtpPage from './Component/EnterOTP/enterotp';
 import VerifyUsers from './Component/VerifyUsers/verifyuser';
 import FreeTrial from './Component/FreeTrial/freetrial';
+import ExpiredTrial from './Component/ExpiredTrail/expiredtrial';
+import RejectedUser from './Component/RejectedUser/rejecteduser';
+import SelfNews from './Component/SelfNews/selfnews';
 
 function App() {
   return (
@@ -20,6 +23,10 @@ function App() {
             <Route path="/enterotp" element={<OtpPage />} />
             <Route path="/verifyuser" element={<VerifyUsers />} />
             <Route path="/freetrial" element={<FreeTrial />} />
+            <Route path="/expiredtrial" element={<ExpiredTrial />} />
+            <Route path="/rejecteduser" element={<RejectedUser />} />
+            <Route path="/selfnews" element={<SelfNews />} />
+
             {/* Add more routes here as needed */}
      
           </Routes>
