@@ -10,6 +10,7 @@ import FreeTrial from './Component/FreeTrial/freetrial';
 import NewsPage from './Component/News/news';
 import Dashboard from './Component/Dashboard.js/dashboard';
 import AdminDashboard from './Component/AddAdmin/addadmin';
+import CashManagement from './Component/CashManagement/cashmanagement';
 function App() {
   return (
     <Router>
@@ -25,6 +26,7 @@ function App() {
             <Route path="/freetrial" element={<FreeTrial />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/addadmin" element={<AdminDashboard />} />
+            <Route path="/cash" element={<CashManagement />} />
             {/* Add more routes here as needed */}
      
           </Routes>
