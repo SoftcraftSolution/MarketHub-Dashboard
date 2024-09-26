@@ -3,26 +3,26 @@ import './selfnews.css';
 import imagepreview from '../../assets/imagepreview.png';
 
 const NewsForm = () => {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [link, setLink] = useState('');
+    const [addTitle, setAddTitle] = useState('');
+    const [addContent, setAddContent] = useState('');
+    const [addLink, setAddLink] = useState('');
     const [image, setImage] = useState(null);
+    const [imagePreviewURL, setImagePreviewURL] = useState(imagepreview); // Default preview image
+    const [adminPhoneNumber, setAdminPhoneNumber] = useState("+917905333486"); // Static value; modify as needed
     const [selectedUsers, setSelectedUsers] = useState([]);
+    const [responseMessage, setResponseMessage] = useState('');
+    const [uploadedNews, setUploadedNews] = useState(null);
 
-    const handleTitleChange = (event) => {
-        setTitle(event.target.value);
-    };
-
-    const handleContentChange = (event) => {
-        setContent(event.target.value);
-    };
-
-    const handleLinkChange = (event) => {
-        setLink(event.target.value);
-    };
+    const handleTitleChange = (event) => setAddTitle(event.target.value);
+    const handleContentChange = (event) => setAddContent(event.target.value);
+    const handleLinkChange = (event) => setAddLink(event.target.value);
 
     const handleImageChange = (event) => {
-        setImage(event.target.files[0]);
+        const file = event.target.files[0];
+        if (file) {
+            setImage(file);
+            setImagePreviewURL(URL.createObjectURL(file)); // Preview selected image
+        }
     };
 
     const handleUserChange = (event) => {
@@ -38,43 +38,60 @@ const NewsForm = () => {
         event.preventDefault();
 
         const formData = new FormData();
-        formData.append('title', title);
-        formData.append('content', content);
-        formData.append('link', link);
+        formData.append('addTitle', addTitle);
+        formData.append('addContent', addContent);
+        formData.append('addLink', addLink);
         formData.append('image', image);
-        formData.append('users', selectedUsers);
+        formData.append('adminPhoneNumber', adminPhoneNumber);
+        formData.append('shareNews', JSON.stringify(selectedUsers));
 
-        const response = await fetch('/api/news', {
-            method: 'POST',
-            body: formData,
-        });
+        try {
+            const response = await fetch('https://market-hub-backend-kappa.vercel.app/admin/add-self-news', {
+                method: 'POST',
+                body: formData,
+            });
 
-        // Handle the response here.
+            const data = await response.json();
+
+            if (response.ok) {
+                setUploadedNews(data.addSelfNews);
+                setResponseMessage(data.message);
+            } else {
+                setResponseMessage(data.message || 'Failed to upload news');
+                setUploadedNews(null);
+            }
+        } catch (error) {
+            console.error('Error uploading news:', error);
+            setResponseMessage('An error occurred while uploading news');
+            setUploadedNews(null);
+        }
     };
 
     return (
         <div className="container">
             <h2>Add Self News</h2>
+            {responseMessage && <p className="response-message">{responseMessage}</p>}
             <form onSubmit={handleSubmit}>
                 <div className='news-top'>
                     <div className="form-group">
                         <input
                             type="text"
                             className="form-control"
-                            id="title"
-                            value={title}
+                            id="addTitle"
+                            value={addTitle}
                             onChange={handleTitleChange}
                             placeholder="Enter the title"
+                            required
                         />
                     </div>
                     <div className="form-group">
-                        <input
-                            type="text"
+                        <textarea
                             className="form-control-content"
-                            id="content"
-                            value={content}
+                            id="addContent"
+                            value={addContent}
                             onChange={handleContentChange}
                             placeholder="Enter the content"
+                            required
                         />
                     </div>
                 </div>
@@ -83,8 +100,8 @@ const NewsForm = () => {
                     <input
                         type="text"
                         className="form-control-1"
-                        id="link"
-                        value={link}
+                        id="addLink"
+                        value={addLink}
                         onChange={handleLinkChange}
                         placeholder="Enter the link"
                     />
@@ -94,15 +111,11 @@ const NewsForm = () => {
                     <label htmlFor="image" style={{ paddingTop: "50px", marginBottom: "10px" }}>Upload Image (optional):</label>
                     
                     <div className='preview'>
-
-                    <div className='imagee-preview'>
-                        <img src={imagepreview} alt="Image Preview" style={{ width: '100px', margin: '10px' }} />
-                    </div>  
-                    <div className='upload'>
-                        <div className="divtitle"style={{ marginLeft: '120px' }}>Please upload a JPG or PNG File size less than 2mb</div>  
-                        <div className="file-upload-box">
-                    </div>        
-
+                        <div className='image-preview'>
+                            <img src={imagePreviewURL} alt="Image Preview" style={{ width: '100px', margin: '10px' }} />
+                        </div>  
+                        <div className='upload'>
+                            <div className="divtitle" style={{ marginLeft: '120px' }}>Please upload a JPG or PNG File size less than 2MB</div>  
                             <input
                                 type="file"
                                 className="form-control-file"
@@ -111,72 +124,25 @@ const NewsForm = () => {
                                 onChange={handleImageChange}
                             />
                         </div>
-                   
                     </div>
                 </div>
+
                 <h4>Share With:</h4>
                 <div className="form-group">
-                   
-                    <div className="form-check">
-                        <input
-                            type="checkbox"
-                            className="form-check-input"
-                            id="free-trial-users"
-                            value="free_trial_users"
-                            onChange={handleUserChange}
-                        />
-                        <label className="form-check-label" htmlFor="free-trial-users">
-                            Free Trial Users
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input
-                            type="checkbox"
-                            className="form-check-input"
-                            id="extended-trial-users"
-                            value="extended_trial_users"
-                            onChange={handleUserChange}
-                        />
-                        <label className="form-check-label" htmlFor="extended-trial-users">
-                            Extended Trial Users
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input
-                            type="checkbox"
-                            className="form-check-input"
-                            id="basic-users"
-                            value="basic_users"
-                            onChange={handleUserChange}
-                        />
-                        <label className="form-check-label" htmlFor="basic-users">
-                            Basic Users
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input
-                            type="checkbox"
-                            className="form-check-input"
-                            id="standard-users"
-                            value="standard_users"
-                            onChange={handleUserChange}
-                        />
-                        <label className="form-check-label" htmlFor="standard-users">
-                            Standard Users
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input
-                            type="checkbox"
-                            className="form-check-input"
-                            id="premium-users"
-                            value="premium_users"
-                            onChange={handleUserChange}
-                        />
-                        <label className="form-check-label" htmlFor="premium-users">
-                            Premium Users
-                        </label>
-                    </div>
+                    {['freeTrialUsers', 'extendedTrialUsers', 'standardTrialUsers', 'premiumTrialUsers', 'basicTrialUsers'].map((userType) => (
+                        <div key={userType} className="form-check">
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                                id={userType}
+                                value={userType}
+                                onChange={handleUserChange}
+                            />
+                            <label className="form-check-label" htmlFor={userType}>
+                                {userType.split(/(?=[A-Z])/).join(' ')}
+                            </label>
+                        </div>
+                    ))}
                 </div>
                 
                 <button type="submit" className="btn btn-primary custom-button">
