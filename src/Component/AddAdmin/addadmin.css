@@ -29,6 +29,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 25px;
 }
 .admin-avatar {
     border-radius: 50%;
@@ -117,4 +118,58 @@ tr:hover {
     flex-direction: column;
     justify-content: space-around;
     padding-right: 20px;
+    gap: 40px;
+}
+
+.admin-name{
+    font-weight: 600;
+}
+.admin-avatar-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.admin-avatar {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.admin-avatar-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.admin-avatar {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.delete-image-btn {
+    margin-top: 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
 }
