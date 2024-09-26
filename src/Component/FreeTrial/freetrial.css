@@ -10,12 +10,14 @@ body{
     background-color: #f8f9fc;
     border-radius: 10px;
     font-family: 'Poppins', sans-serif;
+    border: 1px solid grey;
   }
   
   .user-list-header {
     display: flex;
-    justify-content: space-between;
+    
     align-items: center;
+    gap: 40px;
     margin-bottom: 20px;
   }
   
@@ -30,8 +32,8 @@ body{
     border: 1px solid #ddd;
     border-radius: 5px;
     outline: none;
-    margin-right: 400px;
-    margin-top: 20px;
+    margin-right: 40px;
+    
   }
   
   .user-list-table {
@@ -47,7 +49,7 @@ body{
   }
   
   .user-list-table th {
-    background-color: #f0f0f0;
+    background-color: #FFFFFF;
     color: #333;
   }
   

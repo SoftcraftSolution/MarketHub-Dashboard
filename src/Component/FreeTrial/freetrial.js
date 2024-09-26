@@ -18,7 +18,7 @@ const FreeTrial = () => {
   return (
     <div className="user-list-container">
       <div className="user-list-header">
-        <h2>User List</h2>
+        <h2 style={{margin: '0px'}}>Free Trial</h2>
         <input type="text" placeholder="Search by name, phone..." />
         <input type="date" className='datepick'/>
       </div>
@@ -43,7 +43,7 @@ const FreeTrial = () => {
               <td>{user.extendeddays}</td>
               <td>{user.expirydata}</td>
               <td>
-                <button><img src={actionimg}/></button>
+                <button style={{border:'none',backgroundColor:'#FFFFFF'}}><img src={actionimg}/></button>
               </td>
             </tr>
           ))}
