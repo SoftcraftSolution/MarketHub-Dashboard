@@ -20,6 +20,8 @@ const RejectedUserTrial = () => {
 
   return (
     <div className="expired-container">
+      <div className='pagetitle'>Users List</div>
+    <div className='tablebg'>  
       <div className="expired-header">
         <h3 className="expired-title">Rejected Users</h3>
         <div className="expired-search">
@@ -33,9 +35,12 @@ const RejectedUserTrial = () => {
           <tr>
             <th className="expired-th">Full Name</th>
             <th className="expired-th">Phone No</th>
+            <th className="expired-th">Pin Code</th>
+            <th className="expired-th">City</th>
+            <th className="expired-th">State</th>
             <th className="expired-th">Subscription Date</th>
-            <th className="expired-th">Expiration Date</th>
-            <th className="expired-th">Extended Days</th>
+            <th className="expired-th">Rejection Date</th>
+            
             <th className="expired-th">Action</th>
           </tr>
         </thead>
@@ -56,6 +61,7 @@ const RejectedUserTrial = () => {
           ))}
         </tbody>
       </table>
+    </div> 
     </div>
   );
 };

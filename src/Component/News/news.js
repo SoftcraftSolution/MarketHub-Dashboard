@@ -40,7 +40,6 @@ const NewsPage = () => {
     <div className="stats">
       <StatBox title="Total Self News Shared" number="4356" shareCount="3" color='#C7C5FF' />
       <StatBox title="Total Circular Shared" number="48" shareCount="3"  color='#B2FFD9'/>
-
       <StatBox title="Self News Shared" number="4356" shareCount="3" color='#ffe8af'/>
     </div>
 

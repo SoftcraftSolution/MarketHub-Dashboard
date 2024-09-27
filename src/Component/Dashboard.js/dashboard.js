@@ -7,6 +7,7 @@ import "./dashboard.css" // Your CSS file for styling
 import VerifyUsers from '../VerifyUsers/verifyuser.js';
 import FreeTrial from '../FreeTrial/freetrial.js';
 import NewsPage from '../News/news.js';
+import RejectedUserTrial from '../RejectedUser/rejecteduser.js';
 
 
 const Dashboard = () => {
@@ -19,7 +20,7 @@ const Dashboard = () => {
     const renderContent = () => {
       switch (activeIndex) {
         case 0:
-          return <NewsPage />;
+          return <RejectedUserTrial />;
         case 1:
           return <VerifyUsers />;
         case 2:
