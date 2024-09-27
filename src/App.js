@@ -10,8 +10,9 @@ import FreeTrial from './Component/FreeTrial/freetrial';
 import ExpiredTrial from './Component/ExpiredTrail/expiredtrial';
 import RejectedUser from './Component/RejectedUser/rejecteduser';
 import SelfNews from './Component/SelfNews/selfnews';
-import AddCircular from './Component/AddCircular/addcircular'
-import SpotPrice from './Component/SpotPrice/spotprice'
+import AddCircular from './Component/AddCircular/addcircular';
+import SpotPrice from './Component/SpotPrice/spotprice';
+import Dashboard from './Component/Dashboard.js/dashboard';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <div style={{ flex: 1, padding: '20px' }}>
           <Routes>
             <Route path="/userlist" element={<DashboardPage />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/enterotp" element={<OtpPage />} />
             <Route path="/verifyuser" element={<VerifyUsers />} />
