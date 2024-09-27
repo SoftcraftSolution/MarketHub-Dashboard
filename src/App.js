@@ -7,10 +7,13 @@ import Login from './Component/Login/login';
 import OtpPage from './Component/EnterOTP/enterotp';
 import VerifyUsers from './Component/VerifyUsers/verifyuser';
 import FreeTrial from './Component/FreeTrial/freetrial';
-import NewsPage from './Component/News/news';
+import ExpiredTrial from './Component/ExpiredTrail/expiredtrial';
+import RejectedUser from './Component/RejectedUser/rejecteduser';
+import SelfNews from './Component/SelfNews/selfnews';
+import AddCircular from './Component/AddCircular/addcircular';
+import SpotPrice from './Component/SpotPrice/spotprice';
 import Dashboard from './Component/Dashboard.js/dashboard';
-import AdminDashboard from './Component/AddAdmin/addadmin';
-import CashManagement from './Component/CashManagement/cashmanagement';
+
 function App() {
   return (
     <Router>
@@ -24,9 +27,12 @@ function App() {
             <Route path="/enterotp" element={<OtpPage />} />
             <Route path="/verifyuser" element={<VerifyUsers />} />
             <Route path="/freetrial" element={<FreeTrial />} />
-            <Route path="/news" element={<NewsPage />} />
-            <Route path="/addadmin" element={<AdminDashboard />} />
-            <Route path="/cash" element={<CashManagement />} />
+            <Route path="/expiredtrial" element={<ExpiredTrial />} />
+            <Route path="/rejecteduser" element={<RejectedUser />} />
+            <Route path="/selfnews" element={<SelfNews />} />
+            <Route path="/addcircular" element={<AddCircular />} />
+            <Route path="/spotprice" element={<SpotPrice />} />
+
             {/* Add more routes here as needed */}
      
           </Routes>
