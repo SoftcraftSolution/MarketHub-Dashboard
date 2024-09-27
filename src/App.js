@@ -11,6 +11,7 @@ import ExpiredTrial from './Component/ExpiredTrail/expiredtrial';
 import RejectedUser from './Component/RejectedUser/rejecteduser';
 import SelfNews from './Component/SelfNews/selfnews';
 import AddCircular from './Component/AddCircular/addcircular'
+import SpotPrice from './Component/SpotPrice/spotprice'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/rejecteduser" element={<RejectedUser />} />
             <Route path="/selfnews" element={<SelfNews />} />
             <Route path="/addcircular" element={<AddCircular />} />
+            <Route path="/spotprice" element={<SpotPrice />} />
 
             {/* Add more routes here as needed */}
      
