@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Sidebar from './Component/Sidebar/Sidebar'; // Adjust the import path as needed
+ // Adjust the import path as needed
 import DashboardPage from './Component/UserList/UserList';
 //import LoginPage from './Component/login/login';
 import Login from './Component/Login/login';

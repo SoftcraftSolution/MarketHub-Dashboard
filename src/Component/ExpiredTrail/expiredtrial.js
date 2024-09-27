@@ -19,9 +19,13 @@ const ExpiredTrial = () => {
   ];
 
   return (
+    <div className='expired-root-container'>
+      <div className="expired-title-top">
+        User List
+      </div>
     <div className="expired-container">
       <div className="expired-header">
-        <h3 className="expired-title">ExpiredTrail</h3>
+        <div className="expired-title">ExpiredTrail</div>
         <div className="expired-search">
           <input type="text" placeholder="Search by name, phone..." className="expired-input" />
           <input type="date" className="expired-datepicker" />
@@ -56,6 +60,7 @@ const ExpiredTrial = () => {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 };
