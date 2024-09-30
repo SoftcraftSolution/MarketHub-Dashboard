@@ -15,6 +15,7 @@ import SpotPrice from './Component/SpotPrice/spotprice';
 import Dashboard from './Component/Dashboard.js/dashboard';
 import ForgotPassword from './Component/ForgotPassword/forgotpassword';
 import NewPassword from './Component/NewPassword/newpassword';
+import SuccessPage from './Component/SucessPopup/sucess';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/spotprice" element={<SpotPrice />} />
             <Route path="/forgot" element={<ForgotPassword />} />
             <Route path="/new" element={<NewPassword />} />
+            <Route path="/sucess" element={<SuccessPage />} />
 
             {/* Add more routes here as needed */}
      
