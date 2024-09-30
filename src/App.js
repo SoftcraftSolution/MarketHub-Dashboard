@@ -13,6 +13,8 @@ import SelfNews from './Component/SelfNews/selfnews';
 import AddCircular from './Component/AddCircular/addcircular';
 import SpotPrice from './Component/SpotPrice/spotprice';
 import Dashboard from './Component/Dashboard.js/dashboard';
+import ForgotPassword from './Component/ForgotPassword/forgotpassword';
+import NewPassword from './Component/NewPassword/newpassword';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
             <Route path="/selfnews" element={<SelfNews />} />
             <Route path="/addcircular" element={<AddCircular />} />
             <Route path="/spotprice" element={<SpotPrice />} />
+            <Route path="/forgot" element={<ForgotPassword />} />
+            <Route path="/new" element={<NewPassword />} />
 
             {/* Add more routes here as needed */}
      

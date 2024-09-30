@@ -42,8 +42,8 @@ const OtpPage = () => {
   return (
     <div className="otp-container">
       <div className="otp-box">
-        <h2>Enter OTP</h2>
-        <p>An OTP has been sent to your mobile number</p>
+        <h2 className="otp-title">Enter OTP</h2>
+        <p>An OTP has been sent to your Email Address</p>
         <input
           type="text"
           className="otp-input"

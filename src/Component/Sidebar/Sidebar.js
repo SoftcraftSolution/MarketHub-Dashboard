@@ -9,12 +9,14 @@ import newsimg from '../../assets/news.png';
 import add from '../../assets/addadmin.png';
 import downArrow from '../../assets/downarrow.png';
 import upArrow from '../../assets/uparrow.png';
+import cash from '../../assets/cash.png';
+import spot from '../../assets/spot.png';
 
 const Sidebar = ({ activeIndex, onTabClick }) => {
   const navigate = useNavigate();
   const [isUserListOpen, setIsUserListOpen] = useState(false);
   const [isNewsOpen, setIsNewsOpen] = useState(false);
-
+  const [isSpotOpen, setIsSpotOpen] = useState(false);
   const toggleUserList = () => {
     setIsUserListOpen(!isUserListOpen);
   };
@@ -80,8 +82,33 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           <button
             className={`menu-item ${activeIndex === 3 ? 'active' : 'inactive'}`}
             onClick={() => {
-              setIsNewsOpen(!isNewsOpen);
+              setIsSpotOpen(!isSpotOpen);
               onTabClick(3);
+            }}
+          >
+            <img src={spot} alt="News Icon" className="icon" />
+            Spot Price
+            <img
+              src={isSpotOpen ? upArrow : downArrow}
+              alt="Toggle"
+              className="news-icon"
+            />
+          </button>
+          {isSpotOpen && (
+            <ul className="submenu">
+              <li>
+                <Link to="/news/article-1">Add Spot Price</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+
+        <li>
+          <button
+            className={`menu-item ${activeIndex === 4 ? 'active' : 'inactive'}`}
+            onClick={() => {
+              setIsNewsOpen(!isNewsOpen);
+              onTabClick(4);
             }}
           >
             <img src={newsimg} alt="News Icon" className="icon" />
@@ -107,8 +134,19 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
         <li>
           <Link
             to="/add-admin"
-            className={`menu-item ${activeIndex === 4 ? 'active' : 'inactive'}`}
-            onClick={() => onTabClick(4)}
+            className={`menu-item ${activeIndex === 5 ? 'active' : 'inactive'}`}
+            onClick={() => onTabClick(5)}
+          >
+            <img src={cash} alt="Admin Icon" className="icon" />
+            Cash Management
+          </Link>
+        </li>             
+
+        <li>
+          <Link
+            to="/add-admin"
+            className={`menu-item ${activeIndex === 6 ? 'active' : 'inactive'}`}
+            onClick={() => onTabClick(6)}
           >
             <img src={add} alt="Admin Icon" className="icon" />
             Add Admin

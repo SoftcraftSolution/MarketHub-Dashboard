@@ -25,6 +25,8 @@ const Dashboard = () => {
           return <VerifyUsers />;
         case 2:
           return < FreeTrial/>;
+          case 3:
+            return <VerifyUsers/>;
         default:
           return null;
       }
