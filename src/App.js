@@ -16,6 +16,8 @@ import Dashboard from './Component/Dashboard.js/dashboard';
 import ForgotPassword from './Component/ForgotPassword/forgotpassword';
 import NewPassword from './Component/NewPassword/newpassword';
 import SuccessPage from './Component/SucessPopup/sucess';
+import AdminDashboard from './Component/AddAdmin/addadmin';
+import MainDashboard from './Component/DashboardMain/maindashboard';
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
             <Route path="/forgot" element={<ForgotPassword />} />
             <Route path="/new" element={<NewPassword />} />
             <Route path="/sucess" element={<SuccessPage />} />
+            <Route path="/addadmin" element={<AdminDashboard />} />
+            <Route path="/main" element={<MainDashboard />} />
 
             {/* Add more routes here as needed */}
      
