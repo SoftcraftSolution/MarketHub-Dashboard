@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import './spotprice.css'; // Importing the CSS file
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
+//import { DatePicker } from '@mui/lab'; // Import DatePicker from MUI Lab
 import righttick from '../../assets/tickimg.png';
 import wrongtick from '../../assets/removeimg.png';
+import filterimg from '../../assets/filter.png';
 
 function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [actionType, setActionType] = useState(null); // State for action type
   const [searchTerm, setSearchTerm] = useState(''); // State for search term
+  const [selectedDate, setSelectedDate] = useState(null); // State for selected date in DatePicker
 
   // Example data to show when no data is passed
   const exampleData = [
@@ -57,7 +60,7 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
   const displayedData = data.length > 0 ? data : exampleData;
 
   // Filter data based on search term
-  const filteredData = displayedData.filter(item => 
+  const filteredData = displayedData.filter(item =>
     item.commodity.toLowerCase().includes(searchTerm.toLowerCase()) ||
     item.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
     item.postedBy.toLowerCase().includes(searchTerm.toLowerCase())
@@ -88,17 +91,24 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
 
   return (
     <div className="spot-price-table">
+    <div className='spot-verify-heading'>
+      <div className='spot-verify-title'>Verify Users</div>
       {/* Search Input */}
       <TextField
+      
         label="Search"
         variant="outlined"
-        size="small" // Make the input field smaller
+        size="small"
         margin="normal"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)} // Update search term
-        style={{ width: '200px' }} // Set a fixed width for smaller appearance
+        style={{ width: '200px' }} 
+        // Set a fixed width for smaller appearance
       />
-
+      <button className="spotprice-filter-btn">
+          <img src={filterimg} alt="filter" />  
+        </button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -123,14 +133,14 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
               <td>{item.currentAmt}</td>
               <td>{item.dateTime}</td>
               <td>
-                <button 
-                  style={{ border: 'none' }} 
+                <button
+                  style={{ border: 'none' }}
                   onClick={() => handleDialogOpen(item, 'verify')} // Opens dialog for verification
                 >
                   <img src={righttick} alt="Verify" />
                 </button>
-                <button 
-                  style={{ border: 'none' }} 
+                <button
+                  style={{ border: 'none' }}
                   onClick={() => handleDialogOpen(item, 'reject')} // Opens dialog for rejection
                 >
                   <img src={wrongtick} alt="Reject" />
@@ -159,6 +169,58 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* PriceList Table with DatePicker and Search */}
+      <div className="spot-price-table">
+      {/* Container for search bar and date picker */}
+      <div className="search-and-datepicker-container">
+        <div className='spot-title'>Price list</div>
+        <input
+          type="text"
+          placeholder="Search"
+          className="search-bar-price-list "
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        <input
+          type="date"
+          className="expired-price-list-datepicker"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)} // Update selected date
+        />
+         <button className="filter-btn">
+          <img src={filterimg} alt="filter" />  
+        </button>
+      </div>
+
+
+        {/* PriceList Table */}
+        <table>
+          <thead>
+            <tr>
+              <th>Posted by</th>
+              <th>Commodity</th>
+              <th>City</th>
+              <th>Previous Amt</th>
+              <th>Current Amt</th>
+              <th>Date & Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.map((item) => (
+              <tr key={item.id}>
+                <td>{item.postedBy}</td>
+                <td>{item.commodity}</td>
+                <td>{item.city}</td>
+                <td>{item.previousAmt}</td>
+                <td>{item.currentAmt}</td>
+                <td>{item.dateTime}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

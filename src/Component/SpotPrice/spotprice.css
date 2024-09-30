@@ -32,4 +32,64 @@
   .MuiDialogContent-root {
     padding: 16px;
   }
-  
+/* Datepicker input styling */
+.expired-price-list-datepicker {
+  font-family: 'Poppins', sans-serif;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #F2F4F8;
+
+}
+
+/* Flex container for search bar and datepicker */
+.search-and-datepicker-container {
+  display: flex;
+  align-items: center;
+  gap: 25px; 
+  padding: 15px 0px;
+ /* Space between search bar and datepicker */
+}
+.search-bar-price-list {
+  width: 20%;
+  padding: 10px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+.filter-btn-price-list{   
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  height: 20px;
+}
+
+.spotprice-filter-btn{
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  height: 20px;
+  background-color: black;
+  padding-top: 20px;
+  margin-left: 20px;
+  background-color: #f4f6fa;
+}
+
+.spot-title{
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.spot-verify-heading{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.spot-verify-title{
+  padding-top: 25px;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+}
