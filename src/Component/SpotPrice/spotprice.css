@@ -51,9 +51,16 @@
  /* Space between search bar and datepicker */
 }
 .search-bar-price-list {
-  width: 20%;
+  width: 200px;
   padding: 10px;
 
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+.search-bar-verify-user-list {
+  width: 20%;
+  height: 30px;
+ margin-top: 20px;
   border: 1px solid #ddd;
   border-radius: 10px;
 }

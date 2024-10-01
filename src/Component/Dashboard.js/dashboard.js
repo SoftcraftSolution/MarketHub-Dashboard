@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-
+import SpotPrice from '../SpotPrice/spotprice.js';
 
 import Sidebar from '../Sidebar/Sidebar.js';
 import "./dashboard.css" // Your CSS file for styling
@@ -28,7 +28,7 @@ const Dashboard = () => {
         case 2:
           return < FreeTrial/>;
           case 3:
-            return <VerifyUsers/>;
+            return <SpotPrice/>;
         default:
           return null;
       }

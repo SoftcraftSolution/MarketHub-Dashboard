@@ -94,17 +94,15 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
     <div className='spot-verify-heading'>
       <div className='spot-verify-title'>Verify Users</div>
       {/* Search Input */}
-      <TextField
-      
-        label="Search"
-        variant="outlined"
-        size="small"
-        margin="normal"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)} // Update search term
-        style={{ width: '200px' }} 
-        // Set a fixed width for smaller appearance
-      />
+      <input
+          type="text"
+          placeholder="Search"
+          className="search-bar-verify-user-list "
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        
       <button className="spotprice-filter-btn">
           <img src={filterimg} alt="filter" />  
         </button>
@@ -157,15 +155,15 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
         </DialogTitle>
         <DialogContent>
           <p>
-            Are you sure you want to {actionType === 'verify' ? 'verify' : 'reject'} the {selectedItem?.commodity}?
+            Are you sure you want to continue {actionType === 'verify' ? 'verify' : 'reject'} the {selectedItem?.commodity}?
           </p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="primary">
-            Cancel
+            No
           </Button>
           <Button onClick={handleConfirm} color="primary">
-            Confirm
+            Yes
           </Button>
         </DialogActions>
       </Dialog>

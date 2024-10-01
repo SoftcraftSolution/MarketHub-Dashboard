@@ -100,7 +100,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           {isSpotOpen && (
             <ul className="submenu">
               <li>
-                <Link to="/news/article-1">Add Spot Price</Link>
+                <Link to="/news/Add Self News">Add Spot Price</Link>
               </li>
             </ul>
           )}
@@ -125,10 +125,10 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           {isNewsOpen && (
             <ul className="submenu">
               <li>
-                <Link to="/news/article-1">Article 1</Link>
+                <Link to="/news/Add Self News">Add Self News</Link>
               </li>
               <li>
-                <Link to="/news/article-2">Article 2</Link>
+                <Link to="/news/article-2">Add Circular News</Link>
               </li>
             </ul>
           )}
