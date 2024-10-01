@@ -83,9 +83,9 @@ function VerifyUsers() {
 
       <div className="top-bar">
         <h3>All Users</h3>
-        <input type="text" className="search-input" placeholder="Search by name, phone..." />
-        <div id="datteePickeer">
-          <input type="date" id="birthday" name="birthday" className="date-picker-input" value={getStringDate(selectedDate)} onChange={handleDateChange} />
+        <div className="verify-search">
+          <input type="text" placeholder="Search by name, phone..." className="expired-input" />
+          <input type="date" className="verify-datepicker" />
         </div>
         <button className="filter-btn">
           <img src={filterimg} alt="filter" />  

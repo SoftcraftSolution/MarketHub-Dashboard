@@ -8,6 +8,7 @@ import VerifyUsers from '../VerifyUsers/verifyuser.js';
 import FreeTrial from '../FreeTrial/freetrial.js';
 import NewsPage from '../News/news.js';
 import ExpiredTrial from '../ExpiredTrail/expiredtrial.js';
+import RejectedUserTrial from '../RejectedUser/rejecteduser.js';
 
 
 const Dashboard = () => {
@@ -21,10 +22,13 @@ const Dashboard = () => {
       switch (activeIndex) {
         case 0:
           return <ExpiredTrial />;
+          return <RejectedUserTrial />;
         case 1:
           return <VerifyUsers />;
         case 2:
           return < FreeTrial/>;
+          case 3:
+            return <VerifyUsers/>;
         default:
           return null;
       }

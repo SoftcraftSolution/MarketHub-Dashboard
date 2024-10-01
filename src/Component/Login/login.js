@@ -5,13 +5,23 @@ import './login.css';
 import logo from '../../assets/mhublogo.png';
 
 function Login() {
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [keepSignedIn, setKeepSignedIn] = useState(false);
   const navigate = useNavigate(); // React Router hook for navigation
 
-  const handlePhoneChange = (e) => {
-    setPhoneNumber(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleKeepSignedInChange = (e) => {
+    setKeepSignedIn(e.target.checked);
   };
 
   const handleSubmit = async (e) => {
@@ -20,21 +30,33 @@ function Login() {
     setError('');
 
     try {
-      const response = await axios.post('https://market-hub-backend-kappa.vercel.app/admin/send-otp', {
-        phoneNumber: phoneNumber
+      const response = await axios.post('https://market-hub-backend-kappa.vercel.app/admin/login', {
+        email: email,
+        password: password,
       });
-      // Handle successful response
-      console.log('OTP sent successfully:', response.data);
+      
+      // Store the JWT token
+      const token = response.data.token;
+      if (keepSignedIn) {
+        localStorage.setItem('token', token);
+      } else {
+        sessionStorage.setItem('token', token);
+      }
 
-      // Navigate to /enterotp page after successful OTP request and pass the phoneNumber
-      navigate('/enterotp', { state: { phoneNumber } });
+      // Navigate to dashboard after login
+      navigate('/dashboard'); 
+
     } catch (error) {
-      // Handle error
-      console.error('Error sending OTP:', error);
-      setError('Failed to send OTP. Please try again.');
+      console.error('Error during login:', error.response?.data || error);
+      setError('Failed to log in. Please check your credentials.');
     } finally {
       setLoading(false);
     }
+  };
+
+  // Handle "Forgot Password" link click
+  const handleForgotPasswordClick = () => {
+    navigate('/forgot'); // Navigate to Forgot Password page
   };
 
   return (
@@ -43,26 +65,46 @@ function Login() {
         <div className="login-logo">
           <img src={logo} alt="Logo" />
         </div>
-        <h2 className='newh2'>Hello!</h2>
-        <p className='newp'>Log in to continue.</p>
+        <h2 className="newh2">Hello!</h2>
+        <p className="newp">Log in to continue.</p>
         <form onSubmit={handleSubmit}>
           <input
-            type="text"
+            type="email"
             className="input-field"
-            placeholder="Phone Number"
-            value={phoneNumber}
-            onChange={handlePhoneChange}
+            placeholder="Email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+          <input
+            type="password"
+            className="input-field"
+            placeholder="Password"
+            value={password}
+            onChange={handlePasswordChange}
             required
           />
           <button type="submit" className="submit-btn" disabled={loading}>
-            {loading ? 'Sending OTP...' : 'Get OTP'}
+            {loading ? 'Logging in...' : 'Log In'}
           </button>
           {error && <p className="error">{error}</p>}
           <div className="options">
             <label>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={keepSignedIn}
+                onChange={handleKeepSignedInChange}
+              />
               Keep me signed in
             </label>
+            {/* Forgot Password link that navigates to the Forgot Password page */}
+            <span 
+              className="forgot-password" 
+              onClick={handleForgotPasswordClick} 
+              style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+            >
+              Forgot Password?
+            </span>
           </div>
         </form>
       </div>

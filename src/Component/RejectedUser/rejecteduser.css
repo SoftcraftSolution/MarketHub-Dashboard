@@ -15,8 +15,9 @@
 }
 
 .expired-title {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .expired-search {
@@ -53,9 +54,10 @@
 }
 
 .expired-th, .expired-td {
-    padding: 12px 15px;
+    padding: 12px 0px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    background-color: #FFFFFF;
 }
 
 .expired-td {
@@ -75,4 +77,17 @@
 .expired-action-img {
     width: 20px;
     height: 20px;
+}
+.tablebg{
+    background-color: #FFFFFF;
+    padding: 5px;
+    border-radius: 10px;
+    padding-left: 15px;
+}
+
+.pagetitle{
+    font-size: 20px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    
 }

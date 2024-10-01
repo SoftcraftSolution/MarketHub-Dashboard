@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 /* Sidebar styles */
 .sidebar {
     width: 200px;
@@ -5,7 +6,7 @@
     padding: 20px;
     border-right: 1px solid #ddd;
     height: 100vh;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .logo {
@@ -35,6 +36,9 @@
     font-family: 'Open Sans', sans-serif;
     padding: 10px 5px;
     cursor:pointer; /* Add padding for better spacing */
+     font-family: 'Poppins', sans-serif;
+    
+    /* Add padding for better spacing */
 }
 
 .icon {
@@ -63,7 +67,7 @@
 .submenu li a {
     color: #555;
     font-size: 14px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 button.menu-item {
@@ -75,7 +79,7 @@ button.menu-item {
     text-align: left;
     color: #333;
     padding: 14px 0; /* Add padding for spacing */
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 button.menu-item:hover {

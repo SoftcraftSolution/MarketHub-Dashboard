@@ -55,6 +55,7 @@
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    white-space: nowrap;
   }
   
   .users-table th {
@@ -96,4 +97,19 @@
   }
   #datteePickeer{
     padding: 20px;
+  }
+
+  .verify-search{
+    display: flex;
+    gap: 10px;
+    padding-left: 50px;
+    align-items: center; 
+  }
+
+  .verify-datepicker{
+    font-family: 'Poppins', sans-serif;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #F2F4F8;
   }
