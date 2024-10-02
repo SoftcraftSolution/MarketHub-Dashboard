@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Sidebar from './Component/Sidebar/Sidebar'; // Adjust the import path as needed
+// Adjust the import path as needed
 import DashboardPage from './Component/UserList/UserList';
 //import LoginPage from './Component/login/login';
 import Login from './Component/Login/login';
@@ -18,13 +18,12 @@ import NewPassword from './Component/NewPassword/newpassword';
 import SuccessPage from './Component/SucessPopup/sucess';
 import AdminDashboard from './Component/AddAdmin/addadmin';
 import MainDashboard from './Component/DashboardMain/maindashboard';
+import UserList from './Component/FreeUser/freeuser';
 
 function App() {
   return (
     <Router>
-      <div style={{ display: 'flex' }}>
-        {/* Render the Sidebar */}
-        <div style={{ flex: 1, padding: '20px' }}>
+
           <Routes>
             <Route path="/userlist" element={<DashboardPage />} />
             <Route path="/" element={<Dashboard />} />
@@ -42,12 +41,12 @@ function App() {
             <Route path="/sucess" element={<SuccessPage />} />
             <Route path="/addadmin" element={<AdminDashboard />} />
             <Route path="/main" element={<MainDashboard />} />
+            <Route path= "/freeuser" element={<UserList/>} />
 
             {/* Add more routes here as needed */}
      
           </Routes>
-        </div>
-      </div>
+
     </Router>
   );
 }
