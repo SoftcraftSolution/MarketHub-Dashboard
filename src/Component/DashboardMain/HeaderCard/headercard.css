@@ -1,27 +1,100 @@
-.header-cards-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
+/* Card Container */
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* width: 400px; */
+  font-family: Arial, sans-serif; /* Added margin to separate the cards */
+}
+
+/* Card Content */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-overflow: ellipsis ;
   
-  .header-card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    flex: 1;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .header-card h2 {
-    margin-top: 10px;
-    color: #333;
-  }
-  
-  .growth {
-    color: green;
-  }
-  
-  .decline {
-    color: red;
-  }
-  
+}
+
+/* Card Header */
+.card-header {
+  font-size: 16px;
+  color: #737373;
+  margin-bottom: 10px;
+  border: 1px soli red;
+  width: 60px;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  /* align-items: flex-start */
+}
+
+.highlight {
+  /* Color is set dynamically via inline styles */
+}
+
+/* Card Body */
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-count {
+  font-size: 48px;
+  margin-right: 20px;
+  color: #000000;
+}
+
+.percentage {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+.percentage.positive {
+  background-color: #e6ffe6;
+  color: #00B74A; /* Green for positive growth */
+}
+
+.percentage.negative {
+  background-color: #ffe6e6;
+  color: #ff3b3b; /* Red for negative growth */
+}
+
+.arrow {
+  font-weight: bold;
+}
+
+.percentage-text {
+  font-size: 18px;
+  margin-left: 5px;
+}
+
+.subtext {
+  color: #b2b2b2;
+  font-size: 14px;
+}
+
+/* Graph */
+.graph {
+  /* margin-left: auto; */
+}
+
+svg {
+  display: block;
+}
+.user-count{
+  font-size: 26px;
+  font-weight: 700;
+}

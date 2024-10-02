@@ -34,7 +34,7 @@ const Dashboard = () => {
     };
   
     return (
-      <div className='hh'>
+      <div className='home-dash'>
         <Sidebar activeIndex={activeIndex} onTabClick={handleTabClick} />
         <div className="dash-content">
           {renderContent()}
