@@ -13,6 +13,7 @@ import SelfNews from '../SelfNews/selfnews.js';
 import CashManagement from '../CashManagement/cashmanagement.js';
 import AdminDashboard from '../AddAdmin/addadmin.js';
 import CircularNews from '../AddCircular/addcircular.js'
+import FreeUser from '../FreeUser/freeuser.js'
 
 
 const Dashboard = () => {
@@ -44,8 +45,14 @@ const Dashboard = () => {
               return <AdminDashboard />;
               case 9:
                 return < CircularNews />;
-                
-                return <ExpiredTrial />;
+                case 10:
+                return <FreeTrial />;
+                case 11:
+                  return <ExpiredTrial />;
+                  case 12:
+                    return <RejectedUserTrial />;
+                    case 13:
+                      return <FreeUser />;
       // You can add more cases for additional components
       default:
         return null;

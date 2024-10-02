@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Use Link for internal navigation and useNavigate for programmatic navigation
+import { Link, useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 import logo from '../../assets/mhublogo.png';
 import homeimg from '../../assets/home.png';
@@ -59,14 +59,43 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
               className="arrow-icon"
             />
           </button>
-          
           {isUserListOpen && (
             <ul className="submenu">
               <li>
-                <Link to="/user-list/free-trial">Free Trial</Link>
+                <Link
+                 
+                  className={`submenu-item ${activeIndex === 10 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(10)}
+                >
+                  Free Trial
+                </Link>
               </li>
               <li>
-                <Link to="/user-list/rejected">Rejected Users</Link>
+                <Link
+                
+                  className={`submenu-item ${activeIndex === 11 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(11)}
+                >
+                  Expired Trial
+                </Link>
+              </li>
+              <li>
+                <Link
+                
+                  className={`submenu-item ${activeIndex === 12 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(12)}
+                >
+                  Rejected Users
+                </Link>
+              </li>
+              <li>
+                <Link
+                 
+                  className={`submenu-item ${activeIndex === 13 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(13)}
+                >
+                  Free Users
+                </Link>
               </li>
             </ul>
           )}
@@ -92,7 +121,6 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           >
             <img src={spot} alt="Spot Price Icon" className="icon" />
             Spot Price
-            <img className="news-icon" />
           </button>
           {isSpotOpen && (
             <ul className="submenu">
@@ -123,29 +151,29 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
             <ul className="submenu">
               <li>
                 <Link
-                 
+              
                   className={`submenu-item ${activeIndex === 6 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(6)}
                 >
-                 Add Self News
+                  Add Self News
                 </Link>
               </li>
-              {<li>
+              <li>
                 <Link
                  
                   className={`submenu-item ${activeIndex === 9 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(9)}
                 >
-                 Add Circular
+                  Add Circular
                 </Link>
-              </li>}
+              </li>
             </ul>
           )}
         </li>
 
         <li>
           <Link
-            // Update to the correct route
+           
             className={`menu-item ${activeIndex === 7 ? 'active' : 'inactive'}`}
             onClick={() => onTabClick(7)}
           >
@@ -156,8 +184,8 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
 
         <li>
           <Link
-         
-            className={`menu-item ${activeIndex === 8 ? 'active' : 'inactive'}`} // Change activeIndex to 8 for Add Admin
+           
+            className={`menu-item ${activeIndex === 8 ? 'active' : 'inactive'}`}
             onClick={() => onTabClick(8)}
           >
             <img src={add} alt="Add Admin Icon" className="icon" />
