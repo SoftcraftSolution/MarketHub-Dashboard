@@ -15,7 +15,7 @@
     padding: 0;
   }
   
-  li {
+  .mostboughtli {
     display: flex;
     justify-content: space-between;
     align-items: center;
