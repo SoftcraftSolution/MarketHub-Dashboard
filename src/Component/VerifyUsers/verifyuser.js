@@ -79,8 +79,10 @@ function VerifyUsers() {
 
   return (
     <div className="verify-users-container">
-      <h2>Verify Users</h2>
+      <h2 className='verify-heading'>Verify Users</h2>
 
+
+    <div className="table-container">
       <div className="top-bar">
         <h3>All Users</h3>
         <div className="verify-search">
@@ -92,7 +94,7 @@ function VerifyUsers() {
         </button>
       </div>
 
-      <div className="table-container">
+  
         <table className="users-table">
           <thead>
             <tr>

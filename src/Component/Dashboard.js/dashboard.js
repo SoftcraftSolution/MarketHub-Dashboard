@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-
-
-
-
+import SpotPrice from '../SpotPrice/spotprice.js';
+import Sidebar from '../Sidebar/Sidebar.js';
 import "./dashboard.css" // Your CSS file for styling
 import VerifyUsers from '../VerifyUsers/verifyuser.js';
 import FreeTrial from '../FreeTrial/freetrial.js';
-import NewsPage from '../News/news.js';
-import RejectedUserTrial from '../RejectedUser/rejecteduser.js';
-import Sidebar from '../Sidebar/Sidebar.js';
+
+import MainDashboard from '../DashboardMain/maindashboard.js';
+
 
 
 const Dashboard = () => {
@@ -21,7 +19,8 @@ const Dashboard = () => {
     const renderContent = () => {
       switch (activeIndex) {
         case 0:
-          return <RejectedUserTrial />;
+          return <MainDashboard />;
+          
         case 1:
           return <VerifyUsers />;
         case 2:
@@ -34,9 +33,9 @@ const Dashboard = () => {
     };
   
     return (
-      <div className='-dashboard'>
+      <div className='home-dash'>
         <Sidebar activeIndex={activeIndex} onTabClick={handleTabClick} />
-        <div className="content">
+        <div className="dash-content">
           {renderContent()}
         </div>
       </div>

@@ -86,3 +86,9 @@ body{
   .datepick{
     margin-left:-19px;
   }
+
+  .freetrial-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+  }

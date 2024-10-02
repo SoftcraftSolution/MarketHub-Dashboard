@@ -1,6 +1,7 @@
 import React from 'react';
 import './expiredtrial.css';  // Import the CSS file for styling
 import actionImg from '../../assets/action.png';  // Placeholder image for action button
+import deleteimg from '../../assets/deleteimg.png';
 
 const ExpiredTrial = () => {
   const users = [
@@ -33,7 +34,7 @@ const ExpiredTrial = () => {
           <tr>
             <th className="expired-th">Full Name</th>
             <th className="expired-th">Phone No</th>
-            <th className="expired-th">Subscription Date</th>
+            <th className="expired-th">Start Date</th>
             <th className="expired-th">Expiration Date</th>
             <th className="expired-th">Extended Days</th>
             <th className="expired-th">Action</th>
@@ -47,9 +48,12 @@ const ExpiredTrial = () => {
               <td className="expired-td">{user.subscriptionDate}</td>
               <td className="expired-td">{user.expirationDate}</td>
               <td className="expired-td">{user.extendedDays}</td>
-              <td className="expired-td">
+              <td className="expired-td" id="expired-buttons">
                 <button className="expired-action-btn">
                   <img src={actionImg} alt="Action" className="expired-action-img" />
+                </button>
+                <button className="expired-action-btn">
+                  <img src={deleteimg} alt="Action" className="expired-action-img" />
                 </button>
               </td>
             </tr>

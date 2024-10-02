@@ -32,6 +32,7 @@
     color: white;
     border: none;
     cursor: pointer;
+    background-color: #FFFFFF;
     font-size: 14px;
   }
   
@@ -112,4 +113,8 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #F2F4F8;
+  }
+
+  .verify-heading{
+    text-align: left;
   }

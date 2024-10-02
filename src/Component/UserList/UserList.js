@@ -7,23 +7,25 @@ import totaluser from '../../asset/totaluser.png';
 import freetrailUser from '../../asset/freetrail.png';
 import subscribedUser from '../../asset/subscribe.png';
 import rejectedUser from '../../asset/rejected.png';
+import action from '../../assets/action.png';
 import visitingcard from '../../asset/visting card.png';
+import deleteimg from '../../assets/deleteimg.png';
 
 const userListData = [
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' },
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024',action:action },
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024',action:action },
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024',action:action },
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: 'Card Image', subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
     // Your user data...
 ];
 
@@ -110,8 +112,10 @@ const DashboardPage = () => {
                             <th className="table-header">City</th>
                             <th className="table-header">State</th>
                             <th className="table-header">Visiting Card</th>
-                            <th className="table-header">Subscription Type</th>
-                            <th className="table-header">Subscription Date</th>
+                            <th className="table-header">Plan Status</th>
+                            <th className="table-header">Start Date</th>
+                            <th className="table-header">Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -128,6 +132,15 @@ const DashboardPage = () => {
                                 </td>
                                 <td className="table-cell">{user.subscriptionType}</td>
                                 <td className="table-cell">{user.subscriptionDate}</td>
+            <td className="expired-td" id='userlist-twobuttons'>
+                <button className="userlist-action-btn">
+                  <img src={action} alt="Action" className="userlist-action-img" />
+                </button>
+                <button className="userlist-action-btn">
+                  <img src={deleteimg} alt="Action" className="userlist-action-img" />
+                </button>
+              </td>
+                                
                             </tr>
                         ))}
                     </tbody>

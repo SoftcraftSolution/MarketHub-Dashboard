@@ -29,15 +29,17 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
 
       <ul className="sidebar-menu">
         <li>
-          <Link
-            to="/userlist"
+        <a
+           
             className={`menu-item ${activeIndex === 0 ? 'active' : 'inactive'}`}
             onClick={() => onTabClick(0)}
           >
             <img src={homeimg} alt="Dashboard Icon" className="icon" />
             Dashboard
-          </Link>
+          </a>
         </li>
+
+
 
         <li>
           <button
@@ -48,13 +50,14 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
             }}
           >
             <img src={userimg} alt="User List Icon" className="icon" />
-            User List
+           <div> User List</div>
             <img
               src={isUserListOpen ? upArrow : downArrow}
               alt="Toggle"
               className="arrow-icon"
             />
           </button>
+          
           {isUserListOpen && (
             <ul className="submenu">
               <li>
@@ -97,7 +100,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           {isSpotOpen && (
             <ul className="submenu">
               <li>
-                <Link to="/news/article-1">Add Spot Price</Link>
+                <Link to="/news/Add Self News">Add Spot Price</Link>
               </li>
             </ul>
           )}
@@ -122,10 +125,10 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           {isNewsOpen && (
             <ul className="submenu">
               <li>
-                <Link to="/news/article-1">Article 1</Link>
+                <Link to="/news/Add Self News">Add Self News</Link>
               </li>
               <li>
-                <Link to="/news/article-2">Article 2</Link>
+                <Link to="/news/article-2">Add Circular News</Link>
               </li>
             </ul>
           )}
@@ -153,6 +156,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           </Link>
         </li>
       </ul>
+
     </div>
   );
 };
