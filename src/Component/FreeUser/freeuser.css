@@ -117,3 +117,9 @@ table td .edit-button {
     background-color: #F2F4F8;
     margin-top: 20px;
 }
+
+.freeuser-buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}

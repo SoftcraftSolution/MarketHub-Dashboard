@@ -38,7 +38,7 @@ const RejectedUserTrial = () => {
             <th className="expired-th">Pin Code</th>
             <th className="expired-th">City</th>
             <th className="expired-th">State</th>
-            <th className="expired-th">Subscription Date</th>
+            <th className="expired-th">Start Date</th>
             <th className="expired-th">Rejection Date</th>
             
             <th className="expired-th">Action</th>

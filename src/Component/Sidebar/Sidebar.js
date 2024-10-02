@@ -43,6 +43,8 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           </a>
         </li>
 
+
+
         <li>
           <button
             className={`menu-item ${activeIndex === 1 ? 'active' : 'inactive'}`}
@@ -59,6 +61,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
               className="arrow-icon"
             />
           </button>
+          
           {isUserListOpen && (
             <ul className="submenu">
               <li>
@@ -193,6 +196,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           </Link>
         </li>
       </ul>
+
     </div>
   );
 };

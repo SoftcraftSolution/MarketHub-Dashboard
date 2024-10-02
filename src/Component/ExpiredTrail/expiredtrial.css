@@ -89,3 +89,9 @@
     width: 20px;
     height: 20px;
 }
+
+#expired-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}

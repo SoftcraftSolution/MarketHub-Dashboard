@@ -1,6 +1,7 @@
 import React from 'react';
 import './freeuser.css';
 import action from '../../assets/action.png';
+import deleteimage from '../../assets/deleteimg.png';
 const UserList = () => {
   const users = [
     { name: 'Shivansh Kumar', phone: '7054378962', pincode: '400039', city: 'Mumbai', state: 'Maharashtra', startDate: '30-12-2024', plan: 'Premium Plan' },
@@ -48,10 +49,13 @@ const UserList = () => {
                 <td>{user.state}</td>
                 <td>{user.startDate}</td>
                 <td className={user.plan.toLowerCase().replace(/\s+/g, '-')}>{user.plan}</td>
-                <td>
+                <td className='freeuser-buttons'>
                 
                   <button className="edit-button">
                     <img src={action} alt='editbutton'/>
+                  </button>
+                  <button className="edit-button">
+                    <img src={deleteimage} alt='editbutton'/>
                   </button>
                 </td>
               </tr>

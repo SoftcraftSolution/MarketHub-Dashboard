@@ -1,6 +1,7 @@
 import React from 'react';
 import './freetrial.css';
 import actionimg from '../../assets/action.png';
+import delimg from '../../assets/deleteimg.png';
 
 const FreeTrial = () => {
   const users = [
@@ -28,7 +29,7 @@ const FreeTrial = () => {
           <tr>
             <th>Full Name</th>
             <th>Phone No</th>
-            <th>Subscription Date</th>
+            <th>Start Date</th>
             <th>Extended Days</th>
             <th>Expiration Date</th>
             <th>Action</th>
@@ -42,8 +43,9 @@ const FreeTrial = () => {
               <td>{user.date}</td>
               <td>{user.extendeddays}</td>
               <td>{user.expirydata}</td>
-              <td>
+              <td className='freetrial-buttons'>
                 <button style={{border:'none',backgroundColor:'#FFFFFF'}}><img src={actionimg}/></button>
+                <button style={{border:'none',backgroundColor:'#FFFFFF'}}><img src={delimg}/></button>
               </td>
             </tr>
           ))}
