@@ -18,6 +18,7 @@ import NewPassword from './Component/NewPassword/newpassword';
 import SuccessPage from './Component/SucessPopup/sucess';
 import AdminDashboard from './Component/AddAdmin/addadmin';
 import MainDashboard from './Component/DashboardMain/maindashboard';
+import Notification from './Component/Notification/notification'
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route path="/sucess" element={<SuccessPage />} />
             <Route path="/addadmin" element={<AdminDashboard />} />
             <Route path="/main" element={<MainDashboard />} />
+            <Route path="/notification" element={<Notification />} />
 
             {/* Add more routes here as needed */}
      

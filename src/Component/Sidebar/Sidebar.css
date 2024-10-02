@@ -17,6 +17,7 @@
 .sidebar-menu {
     list-style-type: none;
     padding: 0;
+    margin-right: 10px;
 }
 
 .sidebar-menu li {
@@ -31,11 +32,9 @@
     align-items: center;
     justify-content: flex-start; /* Add space between icon and arrow */
     color: #333;
+
     text-decoration: none;
     font-size: 16px;
-    font-family: 'Open Sans', sans-serif;
-    padding: 10px 5px;
-    cursor:pointer; /* Add padding for better spacing */
      font-family: 'Poppins', sans-serif;
     
     /* Add padding for better spacing */
@@ -94,5 +93,6 @@ button.menu-item:focus {
 .sidebar-menu li a.active,
 button.menu-item.active {
     color: #ff5722; /* Change color for active items */
-    font-weight: bold; /* Highlight active */
+    font-weight: bold;
+    margin-right:70px; /* Highlight active */
 }
