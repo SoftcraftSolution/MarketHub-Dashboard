@@ -8,7 +8,7 @@
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  /* width: 400px; */
+  width: 28%;
   font-family: Arial, sans-serif; /* Added margin to separate the cards */
 }
 
@@ -17,8 +17,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-start;
   text-overflow: ellipsis ;
   
+}
+.card-space{
+  width: 50px;
 }
 
 /* Card Header */
@@ -41,12 +45,14 @@
 .card-body {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .stats {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  width: 25%;
 }
 
 .user-count {

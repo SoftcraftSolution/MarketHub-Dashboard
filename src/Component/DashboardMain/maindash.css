@@ -12,13 +12,17 @@
   font-size: 20px;
   font-weight: 700;
 }
-
+.dash-total-recent{
+  height: 300px;
+  width: 100%;
+  border: 1px solid red;
+}
 #dash-first
 {
   border: 1px soild black;
   width: 100%;
   display: flex;
-  padding:24px;
+  padding:24px 0px;
   flex-direction: row;
   gap: 20px;
 }

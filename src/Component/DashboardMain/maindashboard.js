@@ -1,11 +1,8 @@
 import React from 'react';
-import HeaderCards from './HeaderCard/headercard';
-import TotalRevenueChart from './TotalRevenue/totalrevenue';
-import RecentCustomers from './RecentCustomer/recentcustomer';
-import MostBoughtPlans from './MostBought/mostbought';
-import RecentNotifications from './RecentNotification/recentnotification';
+
 import './maindash.css';
 import Card from './HeaderCard/headercard';
+import RevenueChart from './TotalRevenue/totalrevenue';
 
 const MainDashboard = () => {
   return (
@@ -21,6 +18,7 @@ const MainDashboard = () => {
       />
       <Card 
         title="Standard Plan" 
+
         count={9000} 
         percentageGrowth={-4.8} 
         color="#FF8A00" 
@@ -33,6 +31,9 @@ const MainDashboard = () => {
         color="#00B74A" 
         graphColor="#00B74A" 
       />
+    </div>
+    <div className='dash-total-recent'>
+      <RevenueChart/>
     </div>
    </div>
   );

@@ -28,8 +28,10 @@ const Card = ({ title, count, percentageGrowth, color, graphColor }) => {
     <div className="card">
       <div className="card-content">
         <div className="card-header">
+          {/* <div>s8yf8n43r89f fewiffet4gdgs54tg</div> */}
           <span>Today Active <span className="highlight" style={{ color }}>{title}</span> Users</span>
         </div>
+       
         <div className="card-body">
           <div className="stats">
             <div className="user-count">{count}</div>
@@ -46,7 +48,8 @@ const Card = ({ title, count, percentageGrowth, color, graphColor }) => {
         </div>
        
       </div>
-      <div className="graph" style={{width:"100px", border:"1px solid red"}}>
+      <div className='card-space'></div>
+      <div className="graph" style={{width:"100px"}}>
           {/* The line graph with random path */}
           <svg height="60" width="60">
             <path d={randomGraphPath} fill="transparent" stroke={graphColor} strokeWidth="3" />
