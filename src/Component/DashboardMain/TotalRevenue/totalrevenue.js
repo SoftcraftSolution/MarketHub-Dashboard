@@ -24,7 +24,7 @@ const RevenueChart = () => {
       <div className="chart-header">
         <div className='revenue-title'>Total Revenue</div>
         <div className="controls">
-          <select 
+          <select style={{fontFamily:"poppins", border:"0px", backgroundColor:"#F0F2F6", fontWeight:"600", padding:"5px 10px"}}
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value)}
           >
@@ -32,6 +32,7 @@ const RevenueChart = () => {
             <option value="Monthly">Monthly</option>
           </select>
           <input 
+          style={{fontFamily:"poppins", border:"0px", backgroundColor:"#F0F2F6", fontWeight:"600", padding:"5px 10px"}}
             type="date" 
             value={selectedDate} 
             onChange={(e) => setSelectedDate(e.target.value)} 

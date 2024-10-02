@@ -5,19 +5,20 @@
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
-  padding: 20px;
+  padding: 14px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 28%;
-  font-family: Arial, sans-serif; /* Added margin to separate the cards */
+ /* Added margin to separate the cards */
 }
 
 /* Card Content */
-.card-content {
+.dash-card-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  gap: 0px;
   text-overflow: ellipsis ;
   
 }
@@ -27,7 +28,7 @@
 
 /* Card Header */
 .card-header {
-  font-size: 16px;
+  font-size: 14px;
   color: #737373;
   margin-bottom: 10px;
   border: 1px soli red;
@@ -64,7 +65,7 @@
 .percentage {
   display: flex;
   align-items: center;
-  padding: 5px 10px;
+  padding: 5px;
   border-radius: 12px;
 }
 
@@ -83,7 +84,7 @@
 }
 
 .percentage-text {
-  font-size: 18px;
+  font-size: 14px;
   margin-left: 5px;
 }
 
@@ -101,6 +102,8 @@ svg {
   display: block;
 }
 .user-count{
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 700;
+  margin: 0px;
+  padding-right: 10px;
 }

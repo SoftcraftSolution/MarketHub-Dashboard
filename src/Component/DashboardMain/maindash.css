@@ -13,9 +13,13 @@
   font-weight: 700;
 }
 .dash-total-recent{
-  height: 300px;
+  /* height: 300px; */
   width: 100%;
   border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
 }
 #dash-first
 {
@@ -25,4 +29,5 @@
   padding:24px 0px;
   flex-direction: row;
   gap: 20px;
+  width: 100%;
 }

@@ -3,6 +3,8 @@ import React from 'react';
 import './maindash.css';
 import Card from './HeaderCard/headercard';
 import RevenueChart from './TotalRevenue/totalrevenue';
+import RecentCustomers from './RecentCustomer/recentcustomer';
+import MostBoughtPlans from './MostBoughtPlan/mostboughtplan';
 
 const MainDashboard = () => {
   return (
@@ -34,6 +36,13 @@ const MainDashboard = () => {
     </div>
     <div className='dash-total-recent'>
       <RevenueChart/>
+      {/* <MostBoughtPlans/> */}
+      <RecentCustomers/>
+    </div>
+    <div className='dash-total-recent'>
+      {/* <RevenueChart/> */}
+      <MostBoughtPlans/>
+      
     </div>
    </div>
   );
