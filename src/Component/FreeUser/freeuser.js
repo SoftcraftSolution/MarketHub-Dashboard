@@ -18,11 +18,11 @@ const UserList = () => {
   return (
     <div className="page-wrapper">
       <div className="user-list-label">
-        <h2>User List</h2>
+        <div>User List</div>
       </div>
       <div className="user-list">
         <div className="user-list-header">
-          <h2>Free Users</h2>
+          <div className='freeuserdiv'>Free Users</div>
           <input type="text" placeholder="Search by name, phone..." className="freeuserlist-input" />
           <input type="date" className="freeuserlist-dateepicker" />
         </div>
