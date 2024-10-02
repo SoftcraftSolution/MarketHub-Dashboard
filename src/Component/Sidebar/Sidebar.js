@@ -17,8 +17,13 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
   const [isUserListOpen, setIsUserListOpen] = useState(false);
   const [isNewsOpen, setIsNewsOpen] = useState(false);
   const [isSpotOpen, setIsSpotOpen] = useState(false);
+
   const toggleUserList = () => {
     setIsUserListOpen(!isUserListOpen);
+  };
+
+  const toggleNewsList = () => {
+    setIsNewsOpen(!isNewsOpen);
   };
 
   return (
@@ -29,8 +34,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
 
       <ul className="sidebar-menu">
         <li>
-        <a
-           
+          <a
             className={`menu-item ${activeIndex === 0 ? 'active' : 'inactive'}`}
             onClick={() => onTabClick(0)}
           >
@@ -38,8 +42,6 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
             Dashboard
           </a>
         </li>
-
-
 
         <li>
           <button
@@ -50,7 +52,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
             }}
           >
             <img src={userimg} alt="User List Icon" className="icon" />
-           <div> User List</div>
+            <div>User List</div>
             <img
               src={isUserListOpen ? upArrow : downArrow}
               alt="Toggle"
@@ -72,9 +74,8 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
 
         <li>
           <Link
-            to="/verify-user"
-            className={`menu-item ${activeIndex === 2 ? 'active' : 'inactive'}`}
-            onClick={() => onTabClick(2)}
+            className={`menu-item ${activeIndex === 3 ? 'active' : 'inactive'}`}
+            onClick={() => onTabClick(3)}
           >
             <img src={verimg} alt="Verify Icon" className="icon" />
             Verify User
@@ -83,24 +84,20 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
 
         <li>
           <button
-            className={`menu-item ${activeIndex === 3 ? 'active' : 'inactive'}`}
+            className={`menu-item ${activeIndex === 4 ? 'active' : 'inactive'}`}
             onClick={() => {
               setIsSpotOpen(!isSpotOpen);
-              onTabClick(3);
+              onTabClick(4);
             }}
           >
-            <img src={spot} alt="News Icon" className="icon" />
+            <img src={spot} alt="Spot Price Icon" className="icon" />
             Spot Price
-            <img
-              src={isSpotOpen ? upArrow : downArrow}
-              alt="Toggle"
-              className="news-icon"
-            />
+            <img className="news-icon" />
           </button>
           {isSpotOpen && (
             <ul className="submenu">
               <li>
-                <Link to="/news/Add Self News">Add Spot Price</Link>
+                {/* Add any sub-links related to Spot Price here */}
               </li>
             </ul>
           )}
@@ -108,10 +105,10 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
 
         <li>
           <button
-            className={`menu-item ${activeIndex === 4 ? 'active' : 'inactive'}`}
+            className={`menu-item ${activeIndex === 5 ? 'active' : 'inactive'}`}
             onClick={() => {
-              setIsNewsOpen(!isNewsOpen);
-              onTabClick(4);
+              toggleNewsList();
+              onTabClick(5);
             }}
           >
             <img src={newsimg} alt="News Icon" className="icon" />
@@ -125,38 +122,49 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           {isNewsOpen && (
             <ul className="submenu">
               <li>
-                <Link to="/news/Add Self News">Add Self News</Link>
+                <Link
+                 
+                  className={`submenu-item ${activeIndex === 6 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(6)}
+                >
+                 Add Self News
+                </Link>
               </li>
-              <li>
-                <Link to="/news/article-2">Add Circular News</Link>
-              </li>
+              {<li>
+                <Link
+                 
+                  className={`submenu-item ${activeIndex === 9 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(9)}
+                >
+                 Add Circular
+                </Link>
+              </li>}
             </ul>
           )}
         </li>
 
         <li>
           <Link
-            to="/add-admin"
-            className={`menu-item ${activeIndex === 5 ? 'active' : 'inactive'}`}
-            onClick={() => onTabClick(5)}
+            // Update to the correct route
+            className={`menu-item ${activeIndex === 7 ? 'active' : 'inactive'}`}
+            onClick={() => onTabClick(7)}
           >
-            <img src={cash} alt="Admin Icon" className="icon" />
+            <img src={cash} alt="Cash Management Icon" className="icon" />
             Cash Management
           </Link>
         </li>             
 
         <li>
           <Link
-            to="/add-admin"
-            className={`menu-item ${activeIndex === 6 ? 'active' : 'inactive'}`}
-            onClick={() => onTabClick(6)}
+         
+            className={`menu-item ${activeIndex === 8 ? 'active' : 'inactive'}`} // Change activeIndex to 8 for Add Admin
+            onClick={() => onTabClick(8)}
           >
-            <img src={add} alt="Admin Icon" className="icon" />
+            <img src={add} alt="Add Admin Icon" className="icon" />
             Add Admin
           </Link>
         </li>
       </ul>
-
     </div>
   );
 };

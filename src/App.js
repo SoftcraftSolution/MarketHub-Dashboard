@@ -13,7 +13,7 @@ import RejectedUser from './Component/RejectedUser/rejecteduser';
 import SelfNews from './Component/SelfNews/selfnews';
 import AddCircular from './Component/AddCircular/addcircular';
 import SpotPrice from './Component/SpotPrice/spotprice';
-import Dashboard from './Component/Dashboard.js/dashboard';
+import Dashboard from './Component/Dashboard/dashboard';
 import ForgotPassword from './Component/ForgotPassword/forgotpassword';
 import NewPassword from './Component/NewPassword/newpassword';
 import SuccessPage from './Component/SucessPopup/sucess';
