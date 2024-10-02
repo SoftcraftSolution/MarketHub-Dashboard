@@ -6,9 +6,10 @@ import SpotPrice from '../SpotPrice/spotprice.js';
 import "./dashboard.css" // Your CSS file for styling
 import VerifyUsers from '../VerifyUsers/verifyuser.js';
 import FreeTrial from '../FreeTrial/freetrial.js';
-
-import MainDashboard from '../DashboardMain/maindashboard.js';
-
+import NewsPage from '../News/news.js';
+import ExpiredTrial from '../ExpiredTrail/expiredtrial.js';
+import RejectedUserTrial from '../RejectedUser/rejecteduser.js';
+import Sidebar from '../Sidebar/Sidebar.js';
 
 
 const Dashboard = () => {
@@ -21,8 +22,8 @@ const Dashboard = () => {
     const renderContent = () => {
       switch (activeIndex) {
         case 0:
-          return <MainDashboard />;
-          
+          return <ExpiredTrial />;
+          return <RejectedUserTrial />;
         case 1:
           return <VerifyUsers />;
         case 2:
@@ -35,9 +36,9 @@ const Dashboard = () => {
     };
   
     return (
-      <div className='home-dash'>
+      <div className='-dashboard'>
         <Sidebar activeIndex={activeIndex} onTabClick={handleTabClick} />
-        <div className="dash-content">
+        <div className="content">
           {renderContent()}
         </div>
       </div>
