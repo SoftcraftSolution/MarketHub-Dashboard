@@ -8,26 +8,7 @@ import './maindash.css';
 
 const MainDashboard = () => {
   return (
-    <div className="dashboard-container">
-      <div className="header-cards">
-        <HeaderCards />
-      </div>
-      <div className="main-content">
-        <div className="chart-section">
-          <TotalRevenueChart />
-        </div>
-        <div className="tables-section">
-          <RecentCustomers />
-         
-        </div>
-        <div>
-        <MostBoughtPlans />
-        </div>
-        <div className="notifications-section">
-          <RecentNotifications />
-        </div>
-      </div>
-    </div>
+   <div className='main-dash-root'></div>
   );
 }
 

@@ -22,9 +22,8 @@ import MainDashboard from './Component/DashboardMain/maindashboard';
 function App() {
   return (
     <Router>
-      <div style={{ display: 'flex' }}>
-        {/* Render the Sidebar */}
-        <div style={{ flex: 1, padding: '20px' }}>
+     
+       
           <Routes>
             <Route path="/userlist" element={<DashboardPage />} />
             <Route path="/" element={<Dashboard />} />
@@ -46,8 +45,8 @@ function App() {
             {/* Add more routes here as needed */}
      
           </Routes>
-        </div>
-      </div>
+      
+    
     </Router>
   );
 }
