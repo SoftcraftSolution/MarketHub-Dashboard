@@ -55,6 +55,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           >
             <img src={userimg} alt="User List Icon" className="icon" />
             <div>User List</div>
+            
             <img
               src={isUserListOpen ? upArrow : downArrow}
               alt="Toggle"

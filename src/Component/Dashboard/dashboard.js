@@ -8,7 +8,7 @@ import ExpiredTrial from '../ExpiredTrail/expiredtrial.js';
 import RejectedUserTrial from '../RejectedUser/rejecteduser.js';
 import Sidebar from '../Sidebar/Sidebar.js';
 import "./dashboard.css"; // Your CSS file for styling
-import UserList from '../FreeUser/freeuser.js';
+import UserList from '../UserList/UserList.js';
 import SelfNews from '../SelfNews/selfnews.js';
 import CashManagement from '../CashManagement/cashmanagement.js';
 import AdminDashboard from '../AddAdmin/addadmin.js';

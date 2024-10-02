@@ -52,7 +52,7 @@ const DashboardPage = () => {
             <Box className="statistics-section">
                 {/* Statistics Cards */}
                 <Card sx={{ borderRadius: '20px' }} className="card">
-                    <CardContent className="card-content">
+                    <CardContent className="usercard-content">
                         <img src={totaluser} alt="Total Users Icon" width="40px" />
                         <Box>
                             <Typography variant="h6" sx={{ fontFamily: 'Poppins, sans-serif' }}>
@@ -63,7 +63,7 @@ const DashboardPage = () => {
                     </CardContent>
                 </Card>
                 <Card sx={{ borderRadius: '20px' }} className="card">
-                    <CardContent className="card-content">
+                    <CardContent className="usercard-content">
                         <img src={freetrailUser} alt="Free Trial Users Icon" width="40px" />
                         <Box>
                             <Typography variant="h6" sx={{ fontFamily: 'Poppins, sans-serif' }} >Free Trial Users</Typography>
@@ -72,7 +72,7 @@ const DashboardPage = () => {
                     </CardContent>
                 </Card>
                 <Card sx={{ borderRadius: '20px' }} className="card">
-                    <CardContent className="card-content">
+                    <CardContent className="usercard-content">
                         <img src={subscribedUser} alt="Subscribed Users Icon" width="40px" />
                         <Box>
 
@@ -82,7 +82,7 @@ const DashboardPage = () => {
                     </CardContent>
                 </Card>    
                 <Card sx={{ borderRadius: '20px' }} className="card">
-                    <CardContent className="card-content">
+                    <CardContent className="usercard-content">
                         <img src={rejectedUser} alt="Rejected Users Icon" width="40px" />
                         <Box>
                             <Typography variant="h6" sx={{ fontFamily: 'Poppins, sans-serif' }}>Rejected Users</Typography>
@@ -122,15 +122,15 @@ const DashboardPage = () => {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th className="table-header">Full Name</th>
-                            <th className="table-header">Phone Number</th>
-                            <th className="table-header">Pincode</th>
-                            <th className="table-header">City</th>
-                            <th className="table-header">State</th>
-                            <th className="table-header">Visiting Card</th>
-                            <th className="table-header">Plan Status</th>
-                            <th className="table-header">Start Date</th>
-                            <th className="table-header">Action</th>
+                            <th className="userlisttable-header">Full Name</th>
+                            <th className="userlisttable-header">Phone Number</th>
+                            <th className="userlisttable-header">Pincode</th>
+                            <th className="userlisttable-header">City</th>
+                            <th className="userlisttable-header">State</th>
+                            <th className="userlisttable-header">Visiting Card</th>
+                            <th className="userlisttable-header">Plan Status</th>
+                            <th className="userlisttable-header">Start Date</th>
+                            <th className="userlisttable-header">Action</th>
                         </tr>
                     </thead>
                     <tbody>
