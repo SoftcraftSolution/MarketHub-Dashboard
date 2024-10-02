@@ -13,7 +13,7 @@ const MostBoughtPlans = () => {
       <h3>Most Bought Plans</h3>
       <ul>
         {plans.map((plan, index) => (
-          <li key={index}>
+          <li key={index} className='mostboughtli'>
             <span>{plan.name}</span>
             <span>{plan.usage}</span>
             <div className="progress-bar" style={{ width: plan.progress }}></div>
