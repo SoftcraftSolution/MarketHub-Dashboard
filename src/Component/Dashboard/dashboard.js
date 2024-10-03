@@ -7,14 +7,14 @@ import NewsPage from '../News/news.js';
 import ExpiredTrial from '../ExpiredTrail/expiredtrial.js';
 import RejectedUserTrial from '../RejectedUser/rejecteduser.js';
 import Sidebar from '../Sidebar/Sidebar.js';
+import Topbar from '../TopBar/topbar.js'; // Import the Topbar component
 import "./dashboard.css"; // Your CSS file for styling
 import UserList from '../FreeUser/freeuser.js';
 import SelfNews from '../SelfNews/selfnews.js';
 import CashManagement from '../CashManagement/cashmanagement.js';
 import AdminDashboard from '../AddAdmin/addadmin.js';
-import CircularNews from '../AddCircular/addcircular.js'
-import FreeUser from '../FreeUser/freeuser.js'
-
+import CircularNews from '../AddCircular/addcircular.js';
+import FreeUser from '../FreeUser/freeuser.js';
 
 const Dashboard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -37,33 +37,35 @@ const Dashboard = () => {
         return <SpotPrice />;
       case 5:
         return <NewsPage />;
-        case 6:
-          return <SelfNews />;
-          case 7:
-            return <CashManagement />;
-            case 8:
-              return <AdminDashboard />;
-              case 9:
-                return < CircularNews />;
-                case 10:
-                return <FreeTrial />;
-                case 11:
-                  return <ExpiredTrial />;
-                  case 12:
-                    return <RejectedUserTrial />;
-                    case 13:
-                      return <FreeUser />;
-      // You can add more cases for additional components
+      case 6:
+        return <SelfNews />;
+      case 7:
+        return <CashManagement />;
+      case 8:
+        return <AdminDashboard />;
+      case 9:
+        return <CircularNews />;
+      case 10:
+        return <FreeTrial />;
+      case 11:
+        return <ExpiredTrial />;
+      case 12:
+        return <RejectedUserTrial />;
+      case 13:
+        return <FreeUser />;
       default:
         return null;
     }
   };
 
   return (
-    <div className='home-dash'>
+    <div className="dashboarddd-container">
       <Sidebar activeIndex={activeIndex} onTabClick={handleTabClick} />
-      <div className="content">
-        {renderContent()}
+      <div className="main-content">
+        <Topbar /> {/* Add the Topbar below the Sidebar */}
+        <div className="content">
+          {renderContent()}
+        </div>
       </div>
     </div>
   );

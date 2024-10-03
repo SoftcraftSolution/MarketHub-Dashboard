@@ -108,7 +108,7 @@ table td .edit-button {
     border-radius: 10px;
     width: 300px; 
     background-color: #F2F4F8;
-    margin-top: 20px;
+
 }
 .freeuserlist-dateepicker{
     font-family: 'Poppins', sans-serif;
@@ -116,7 +116,7 @@ table td .edit-button {
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #F2F4F8;
-    margin-top: 20px;
+  
 }
 
 .freeuser-buttons{

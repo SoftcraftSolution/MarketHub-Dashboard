@@ -15,7 +15,7 @@
 }
 
 .expired-title {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     white-space: nowrap;
 }
@@ -30,7 +30,7 @@
 .expired-input {
     font-family: 'Poppins', sans-serif;
     padding: 8px 12px;
-    border: 1px solid #ccc;
+    border: 0px solid #ccc;
     border-radius: 10px;
     width: 300px; 
     background-color: #F2F4F8;/* Fixed width for search input */
@@ -39,7 +39,7 @@
 .expired-datepicker {
     font-family: 'Poppins', sans-serif;
     padding: 6px 12px;
-    border: 1px solid #ccc;
+    border: 0px solid #ccc;
     border-radius: 10px;
     background-color: #F2F4F8;
 }
@@ -80,9 +80,9 @@
 }
 .tablebg{
     background-color: #FFFFFF;
-    padding: 5px;
+    padding: 15px;
     border-radius: 10px;
-    padding-left: 15px;
+    
 }
 
 .pagetitle{
