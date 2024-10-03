@@ -22,9 +22,9 @@ const ExpiredTrial = () => {
   return (
     <div className='expired-root-container'>
       <div className="expired-title-top">
-        User List
+        Users List
       </div>
-    <div className="expired-container">
+    <div className="expireddd-container">
       <div className="expired-header">
         <div className="expired-title">ExpiredTrail</div>
         <div className="expired-search">
