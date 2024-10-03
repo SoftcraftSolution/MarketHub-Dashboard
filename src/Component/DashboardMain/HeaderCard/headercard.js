@@ -25,11 +25,13 @@ const Card = ({ title, count, percentageGrowth, color, graphColor }) => {
   const randomGraphPath = generateRandomGraphPath(); // Generate random path for the graph
 
   return (
-    <div className="card">
-      <div className="card-content">
+    <div className="dash-card">
+      <div className="dash-card-content">
         <div className="card-header">
+          {/* <div>s8yf8n43r89f fewiffet4gdgs54tg</div> */}
           <span>Today Active <span className="highlight" style={{ color }}>{title}</span> Users</span>
         </div>
+       
         <div className="card-body">
           <div className="stats">
             <div className="user-count">{count}</div>
@@ -42,11 +44,12 @@ const Card = ({ title, count, percentageGrowth, color, graphColor }) => {
               </span>
             </div>
           </div>
-          <p className="subtext" style={{margin:'0px'}}>from yesterday</p>
+          
         </div>
-       
+        <p className="subtext" style={{margin:'0px'}}>from yesterday</p>
       </div>
-      <div className="graph" style={{width:"100px", border:"1px solid red"}}>
+     
+      <div className="graph">
           {/* The line graph with random path */}
           <svg height="60" width="60">
             <path d={randomGraphPath} fill="transparent" stroke={graphColor} strokeWidth="3" />
