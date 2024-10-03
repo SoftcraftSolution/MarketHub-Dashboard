@@ -24,7 +24,7 @@
   }
   
   .main-content {
-    margin-left: 250px; /* Same as the sidebar width */
+    margin-left: 250px; 
     width: calc(100% - 250px); /* Remaining width for the main content */
     display: flex;
     flex-direction: column;
@@ -41,7 +41,7 @@
   }
   
   .content {
-    padding: 20px;
+  
     flex-grow: 1; /* Ensures the content takes up remaining space */
     background-color: #f0f0f0;
     overflow-y: auto; /* Allow scrolling if the content overflows */

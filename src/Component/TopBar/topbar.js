@@ -5,9 +5,6 @@ import pro from '../../assets/profile.png';
 const Topbar = () => {
   return (
     <div className="topbar">
-      <div className="menu-icon">
-        <i className="fas fa-bars"></i>  {/* Font Awesome for hamburger icon */}
-      </div>
       <div className="notification-icon">
         <i className="fas fa-bell"></i>  {/* Font Awesome for bell icon */}
       </div>
