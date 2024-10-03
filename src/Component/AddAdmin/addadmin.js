@@ -2,7 +2,9 @@
     import './addadmin.css';
     import logout from '../../assets/logout.png';
     import pencilIcon from '../../assets/pencil.png';
-    import action from '../../assets/action.png'; // Make sure you import your action image
+    import action from '../../assets/action.png'; 
+    import Pagination from '../Pagination'; 
+    // Make sure you import your action image
 
     const AdminDashboard = () => {
         const [selectedImage, setSelectedImage] = useState(null);
@@ -211,6 +213,7 @@
                             </div>
                             <button className="submit-btn" onClick={handleSubmit}>Continue</button>
                         </div>
+                        <Pagination />
                     </div>
                 )}
 
