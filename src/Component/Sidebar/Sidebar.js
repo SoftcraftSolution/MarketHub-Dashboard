@@ -43,8 +43,6 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           </a>
         </li>
 
-
-
         <li>
           <button
             className={`menu-item ${activeIndex === 1 ? 'active' : 'inactive'}`}
@@ -63,11 +61,9 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
             />
           </button>
           
-          {isUserListOpen && (
-            <ul className="submenu">
+          <ul className={`submenu ${isUserListOpen ? 'submenu-open' : ''}`}>
               <li>
                 <Link
-                 
                   className={`submenu-item ${activeIndex === 10 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(10)}
                 >
@@ -76,7 +72,6 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
               </li>
               <li>
                 <Link
-                
                   className={`submenu-item ${activeIndex === 11 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(11)}
                 >
@@ -85,7 +80,6 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
               </li>
               <li>
                 <Link
-                
                   className={`submenu-item ${activeIndex === 12 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(12)}
                 >
@@ -94,7 +88,6 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
               </li>
               <li>
                 <Link
-                 
                   className={`submenu-item ${activeIndex === 13 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(13)}
                 >
@@ -102,7 +95,6 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
                 </Link>
               </li>
             </ul>
-          )}
         </li>
 
         <li>
@@ -126,13 +118,11 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
             <img src={spot} alt="Spot Price Icon" className="icon" />
             Spot Price
           </button>
-          {isSpotOpen && (
-            <ul className="submenu">
+          <ul className={`submenu ${isSpotOpen ? 'submenu-open' : ''}`}>
               <li>
                 {/* Add any sub-links related to Spot Price here */}
               </li>
             </ul>
-          )}
         </li>
 
         <li>
@@ -151,11 +141,9 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
               className="news-icon"
             />
           </button>
-          {isNewsOpen && (
-            <ul className="submenu">
+          <ul className={`submenu ${isNewsOpen ? 'submenu-open' : ''}`}>
               <li>
                 <Link
-              
                   className={`submenu-item ${activeIndex === 6 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(6)}
                 >
@@ -164,7 +152,6 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
               </li>
               <li>
                 <Link
-                 
                   className={`submenu-item ${activeIndex === 9 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(9)}
                 >
@@ -172,12 +159,10 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
                 </Link>
               </li>
             </ul>
-          )}
         </li>
 
         <li>
           <Link
-           
             className={`menu-item ${activeIndex === 7 ? 'active' : 'inactive'}`}
             onClick={() => onTabClick(7)}
           >
@@ -188,7 +173,6 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
 
         <li>
           <Link
-           
             className={`menu-item ${activeIndex === 8 ? 'active' : 'inactive'}`}
             onClick={() => onTabClick(8)}
           >

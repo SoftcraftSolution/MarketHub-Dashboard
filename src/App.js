@@ -45,7 +45,7 @@ function App() {
             <Route path="/main" element={<MainDashboard />} />
             <Route path="/notification" element={<Notification />} />
             <Route path= "/freeuser" element={<UserList/>} />
-
+            {/* <Route path= "/test" element={<SidebarExample/>} /> */}
             {/* Add more routes here as needed */}
      
           </Routes>
