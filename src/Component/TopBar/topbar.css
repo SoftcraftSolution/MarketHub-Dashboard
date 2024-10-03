@@ -1,0 +1,38 @@
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5; /* Adjust as per your design */
+    padding: 10px 20px;
+    height: 50px;
+    border-bottom: 1px solid #ccc; /* Add a subtle border */
+  }
+  
+  .menu-icon i, .notification-icon i {
+    font-size: 20px;
+    color: #333; /* Adjust color as per your design */
+    cursor: pointer;
+  }
+  
+  .profile-icon img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;  /* Make the image circular */
+    cursor: pointer;
+  }
+  
+  .notification-icon {
+    position: relative;
+  }
+  
+  .notification-icon::after {
+    content: '';  /* Small notification badge */
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+  }
+  
