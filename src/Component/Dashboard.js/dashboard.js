@@ -4,7 +4,7 @@ import Sidebar from '../Sidebar/Sidebar.js';
 import "./dashboard.css" // Your CSS file for styling
 import VerifyUsers from '../VerifyUsers/verifyuser.js';
 import FreeTrial from '../FreeTrial/freetrial.js';
-
+import Notification from '../Notification/notification.js'
 import MainDashboard from '../DashboardMain/maindashboard.js';
 
 
@@ -19,10 +19,10 @@ const Dashboard = () => {
     const renderContent = () => {
       switch (activeIndex) {
         case 0:
-          return <MainDashboard />;
+          return<VerifyUsers />;
           
         case 1:
-          return <VerifyUsers />;
+          return <Notification />;
         case 2:
           return < FreeTrial/>;
           case 3:

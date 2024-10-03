@@ -5,6 +5,7 @@ import tickimg from '../../assets/tickimg.png';
 import delimg from '../../assets/removeimg.png';
 import React, { useState, useEffect } from 'react';
 import visitcard from '../../assets/visitcard.png'
+import Pagination from '../Pagination'; 
 
 function VerifyUsers() {
   const users = [
@@ -133,6 +134,7 @@ function VerifyUsers() {
           </tbody>
         </table>
       </div>
+      <Pagination />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import './freetrial.css';
 import actionimg from '../../assets/action.png';
 import delimg from '../../assets/deleteimg.png';
+import Pagination from '../Pagination'; 
 
 const FreeTrial = () => {
   const users = [
@@ -51,6 +52,8 @@ const FreeTrial = () => {
           ))}
         </tbody>
       </table>
+    <Pagination />
+
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import './freeuser.css';
 import action from '../../assets/action.png';
 import deleteimage from '../../assets/deleteimg.png';
+import Pagination from '../Pagination'; 
 const UserList = () => {
   const users = [
     { name: 'Shivansh Kumar', phone: '7054378962', pincode: '400039', city: 'Mumbai', state: 'Maharashtra', startDate: '30-12-2024', plan: 'Premium Plan' },
@@ -63,6 +64,7 @@ const UserList = () => {
           </tbody>
         </table>
       </div>
+      <Pagination />
     </div>
   );
 };

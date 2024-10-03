@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './news.css';
+import Pagination from '../Pagination';
 
 
 const NewsPage = () => {
@@ -75,6 +76,7 @@ const NewsPage = () => {
     </tbody>
   </table>
 </div>
+<Pagination /> 
     </div>
   );
 };
@@ -94,7 +96,10 @@ const StatBox = ({ title, number, shareCount, color }) => {
         </div>
         </div>
         <div className='news-img' style={{backgroundColor:`${color}`}}>
-            </div>   
+            </div>  
+           
       </div>
+  
     );
+ 
   };

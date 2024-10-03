@@ -5,6 +5,8 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } 
 import righttick from '../../assets/tickimg.png';
 import wrongtick from '../../assets/removeimg.png';
 import filterimg from '../../assets/filter.png';
+import Pagination from '../Pagination'; 
+
 
 function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
   const [openDialog, setOpenDialog] = useState(false);
@@ -147,7 +149,9 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
             </tr>
           ))}
         </tbody>
+     
       </table>
+      <Pagination />
 
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>
@@ -219,6 +223,7 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
           </tbody>
         </table>
       </div>
+      <Pagination />
     </div>
   );
 }

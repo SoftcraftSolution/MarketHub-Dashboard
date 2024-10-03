@@ -11,6 +11,7 @@ import rejectedUser from '../../asset/rejected.png';
 import action from '../../assets/action.png';
 import visitingcard from '../../asset/visting card.png';
 import deleteimg from '../../assets/deleteimg.png';
+import Pagination from '../Pagination'; 
 
 const userListData = [
     { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024',action:action },
@@ -179,6 +180,8 @@ const DashboardPage = () => {
                     <img src={selectedCard} alt="Visiting Card Preview" className="modal-image" />
                 </Box>
             </Modal>
+             {/* Pagination Component if needed */}
+             <Pagination />
         </Box>
     );
 };

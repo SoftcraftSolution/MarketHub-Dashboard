@@ -1,6 +1,7 @@
 import React from 'react';
 import './rejecteduser.css';  // Import the CSS file for styling
-import actionImg from '../../assets/action.png';  // Placeholder image for action button
+import actionImg from '../../assets/action.png';
+import Pagination from '../Pagination';  // Placeholder image for action button
 
 const RejectedUserTrial = () => {
   const users = [
@@ -65,6 +66,7 @@ const RejectedUserTrial = () => {
         </tbody>
       </table>
     </div> 
+    <Pagination />
     </div>
   );
 };

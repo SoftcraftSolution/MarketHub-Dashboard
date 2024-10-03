@@ -1,5 +1,6 @@
 import React from 'react';
-import './cashmanagement.css'; // External CSS file
+import './cashmanagement.css';
+import Pagination from '../Pagination';
 
 const CashManagement = () => {
   return (
@@ -100,12 +101,8 @@ const CashManagement = () => {
           </tbody>
         </table>
         
-        <div className="pagination">
-          <button>‹</button>
-          <span>Page 1 of 10</span>
-          <button>›</button>
-        </div>
       </div>
+      <Pagination />
     </div>
   );
 };
