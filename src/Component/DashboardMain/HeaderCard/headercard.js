@@ -49,7 +49,7 @@ const Card = ({ title, count, percentageGrowth, color, graphColor }) => {
         <p className="subtext" style={{margin:'0px'}}>from yesterday</p>
       </div>
      
-      <div className="graph" style={{width:"100px"}}>
+      <div className="graph">
           {/* The line graph with random path */}
           <svg height="60" width="60">
             <path d={randomGraphPath} fill="transparent" stroke={graphColor} strokeWidth="3" />
