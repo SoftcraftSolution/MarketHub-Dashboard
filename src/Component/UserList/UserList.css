@@ -1,179 +1,82 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-body{
-    font-family: 'Poppins', sans-serif;
-    background-color: #F4F6FA;
-}
 .dashboard-container {
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    padding: 20px;
-    background-color: #f4f5f7;
-  }
-  
-  .statistics-section {
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
-  
-  .card {
-    font-family: 'Poppins', sans-serif;
-    width: 24%;
-    display: flex;
-    align-items: center;
-    padding: 0px;
-    height: 100px; /* Adjust height as needed */
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
-
-  
-.usercard-content {
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Ensure alignment to start */
-    gap: 10px; /* Adjust gap as needed */
-    padding: 10px;
-    flex-direction: row-reverse;
-    /* Add padding for better spacing */
-}
-
-  
-  .card-content img {
-    max-width: 40px; /* Adjust as needed */
-    height: auto; /* Maintain aspect ratio */
-    overflow: hidden; /* Prevent overflow */
-}
-
-  
-  .search-filter-section {
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  
-
-  .table {
-    font-family: 'Poppins', sans-serif;
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 16px;
-  }
-  
-  .userlisttable-header {
-    font-family: 'Poppins', sans-serif;
-    padding: 12px;
-    text-align: left;
-    background-color: #f0f0f0;
-    font-weight: bold;
-  }
-  
-  .table-row {
-    font-family: 'Poppins', sans-serif;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .table-cell {
-    font-family: 'Poppins', sans-serif;
-    padding: 12px;
-  }
-  
-  .userlist-action-img{
-    width: 20px;
-    height: 20px;
-  }
-  .userlist-action-btn{
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-/* Popup Overlay */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+.statistics-section {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999; /* Ensures the popup is on top */
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-/* Popup Box */
-.popup {
-  background-color: white;
+.card {
+  width: 23%;
+  border-radius: 20px;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+}
+
+.icon {
+  width: 40px;
+}
+
+h6 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+h4 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.search-filter-section {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+
+}
+
+.search-input {
+  width: 300px;
+}
+
+.date-input {
+  margin-right: 20px;
+}
+
+.filter-button {
+  margin-right: 20px;
+  background-color: #f9f9f9;
+}
+
+.table-container {
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  width: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 10000;
-  animation: fadeIn 0.3s ease-in-out;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* Popup Overlay */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999; /* Ensures the popup is on top */
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
 }
 
-/* Popup Box */
-.popup {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 10000;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Popup Title */
-
-#userlist-twobuttons{
-  display: flex;
-  flex-direction: row;
-  gap: 12px;
+.visiting-card-img {
+  cursor: pointer;
+  width: 50px;
 }
 
 .modal-box {
@@ -181,38 +84,41 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 450px;
-  background-color: white;
-  box-shadow: 24;
-  padding: 30px;
-  outline: none;
-  padding-bottom: -10px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .modal-image {
   width: 100%;
   height: auto;
-  display: block;
-  margin-top: 20px;
 }
 
+.userlist-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.userlist-action-img {
+  width: 20px;
+}
+.custom-date-picker {
+  display: flex;
+  justify-content: center;  /* Centers the date picker and button horizontally */
+  align-items: center;      /* Centers them vertically if needed */
+  width: 100%;
 
 
+  gap: 60px; 
+  display: flex;        /* Optional: Add some spacing above if necessary */
+}
 
+.date-picker {
+  width: auto;  /* Adjust width as needed */
+  margin-right: 20px; /* Adds space (20px) between the date picker and the filter button */
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.filter-button {
+  margin-left: 0; /* Reset the margin left since the gap is now handled by .date-picker */
+}
