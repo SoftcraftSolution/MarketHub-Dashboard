@@ -5,12 +5,10 @@ body{
 }
 .user-list-container {
 
-    width: 100%;
-    padding: 20px;
-    background-color: #f8f9fc;
-    border-radius: 10px;
-    font-family: 'Poppins', sans-serif;
-    border: 1px solid grey;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
   
   .user-list-header {
@@ -91,4 +89,21 @@ body{
     display: flex;
     flex-direction: row;
     gap: 12px;
+  }
+
+  .freetrial-input{
+    font-family: 'Poppins', sans-serif;
+    padding: 8px 12px;
+    border: 0px solid #FFFFFF;
+    border-radius: 10px;
+    width: 300px; 
+    background-color: #F2F4F8;/* Fixed width for search input */
+  }
+
+  .freetrial-datepicker{
+    font-family: 'Poppins', sans-serif;
+    padding: 6px 12px;
+    border: 0px solid #FFFFFF;
+    border-radius: 10px;
+    background-color: #F2F4F8;
   }

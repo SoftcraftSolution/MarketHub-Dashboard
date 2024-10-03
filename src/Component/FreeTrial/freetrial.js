@@ -21,8 +21,8 @@ const FreeTrial = () => {
     <div className="user-list-container">
       <div className="user-list-header">
         <h2 style={{margin: '0px'}}>Free Trial</h2>
-        <input type="text" placeholder="Search by name, phone..." />
-        <input type="date" className='datepick'/>
+        <input type="text" placeholder="Search by name, phone..." className="freetrial-input" />
+        <input type="date" className="freetrial-datepicker" />
       </div>
 
       <table className="user-list-table">
