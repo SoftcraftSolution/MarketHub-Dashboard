@@ -3,7 +3,7 @@
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  
+  flex: 2;
   width: 680px;
   /* margin: 0 auto; */
   /* height: 300px; */

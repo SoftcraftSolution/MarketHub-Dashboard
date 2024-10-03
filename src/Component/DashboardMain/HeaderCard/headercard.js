@@ -25,7 +25,7 @@ const Card = ({ title, count, percentageGrowth, color, graphColor }) => {
   const randomGraphPath = generateRandomGraphPath(); // Generate random path for the graph
 
   return (
-    <div className="card">
+    <div className="dash-card">
       <div className="dash-card-content">
         <div className="card-header">
           {/* <div>s8yf8n43r89f fewiffet4gdgs54tg</div> */}

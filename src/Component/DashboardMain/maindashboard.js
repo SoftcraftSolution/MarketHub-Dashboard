@@ -5,6 +5,7 @@ import Card from './HeaderCard/headercard';
 import RevenueChart from './TotalRevenue/totalrevenue';
 import RecentCustomers from './RecentCustomer/recentcustomer';
 import MostBoughtPlans from './MostBoughtPlan/mostboughtplan';
+import NotificationList from './RecentNotification/recentnotification'
 
 const MainDashboard = () => {
   return (
@@ -35,13 +36,14 @@ const MainDashboard = () => {
       />
     </div>
     <div className='dash-total-recent'>
-      <RevenueChart/>
+      <RevenueChart />
       {/* <MostBoughtPlans/> */}
       <RecentCustomers/>
     </div>
     <div className='dash-total-recent'>
       {/* <RevenueChart/> */}
       <MostBoughtPlans/>
+      <NotificationList/>
       
     </div>
    </div>

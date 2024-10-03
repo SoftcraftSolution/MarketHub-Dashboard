@@ -1,9 +1,9 @@
 .customer-table-container {
   background-color: #fff;
   border-radius: 10px;
-  padding: 25px;
+  padding: 20px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  width: 500px;
+  flex:1
 }
 
 .recent-table-header {
