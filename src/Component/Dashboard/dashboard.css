@@ -20,12 +20,11 @@
   .sidebar {
     width: 250px; /* Width of the sidebar */;
     height: 100%;
-    position: fixed;
+    /* position: fixed; */
   }
   
   .main-content {
-    margin-left: 250px; /* Same as the sidebar width */
-    width: calc(100% - 250px); /* Remaining width for the main content */
+     /* Remaining width for the main content */
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -40,8 +39,8 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   }
   
-  .content {
-    padding: 20px;
+  .home-content {
+    /* padding: 20px; */
     flex-grow: 1; /* Ensures the content takes up remaining space */
     background-color: #f0f0f0;
     overflow-y: auto; /* Allow scrolling if the content overflows */
