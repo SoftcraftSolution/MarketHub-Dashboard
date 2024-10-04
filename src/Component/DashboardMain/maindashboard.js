@@ -37,7 +37,6 @@ const MainDashboard = () => {
     </div>
     <div className='dash-total-recent'>
       <RevenueChart />
-      {/* <MostBoughtPlans/> */}
       <RecentCustomers/>
     </div>
     <div className='dash-total-recent'>
