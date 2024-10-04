@@ -30,14 +30,14 @@ const UserList = () => {
         <table>
           <thead>
             <tr>
-              <th>Full Name</th>
-              <th>Phone No</th>
-              <th>Pincode</th>
-              <th>City</th>
-              <th>State</th>
-              <th>Start Date</th>
-              <th>Plan Status</th>
-              <th>Action</th>
+              <th className='tableheadingfont'>Full Name</th>
+              <th className='tableheadingfont'>Phone No</th>
+              <th className='tableheadingfont'>Pincode</th>
+              <th className='tableheadingfont'>City</th>
+              <th className='tableheadingfont'>State</th>
+              <th className='tableheadingfont'>Start Date</th>
+              <th className='tableheadingfont'>Plan Status</th>
+              <th className='tableheadingfont'>Action</th>
             </tr>
           </thead>
           <tbody>

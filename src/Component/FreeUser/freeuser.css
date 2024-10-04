@@ -28,11 +28,11 @@ body {
 
 
 .user-list {
-  background-color: #f7f8fa;
+  background-color: #FFFFFF;
   border-radius: 10px;
-  padding: 5px;
+  padding: 18px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding-left: 15px;
+  
 }
 
 .user-list-header {
@@ -63,10 +63,11 @@ table th, table td {
   padding: 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  color: #696969;
 }
 
 table th {
-  background-color: #f0f0f0;
+  background-color: #FFFFFF;
   font-weight: 500;
 }
 
@@ -86,15 +87,17 @@ table td .edit-button {
 }
 
 .premium-plan {
-  color: #ff69b4;
+  color: #BF1D91  ;
 }
 
 .standard-plan {
-  color: #1e90ff;
+  color: #1837BC;
+  ;
 }
 
 .basic-plan {
-  color: #ffa500;
+  color: #FDA861;
+  ;
 }
 
 .basic-plan-expired {
@@ -103,7 +106,7 @@ table td .edit-button {
 
 .freeuserlist-input{
     font-family: 'Poppins', sans-serif;
-    padding: 8px 12px;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 10px;
     width: 300px; 
@@ -112,7 +115,7 @@ table td .edit-button {
 }
 .freeuserlist-dateepicker{
     font-family: 'Poppins', sans-serif;
-    padding: 6px 12px;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #F2F4F8;
@@ -125,6 +128,12 @@ table td .edit-button {
   gap: 12px;
 }
 .freeuserdiv{
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.tableheadingfont{
+  font-weight: 500;
+  font-size: 16px;
+  color: #000000;
 }
