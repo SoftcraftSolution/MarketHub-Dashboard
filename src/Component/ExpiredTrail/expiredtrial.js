@@ -37,12 +37,12 @@ const ExpiredTrial = () => {
         <table className="expired-table">
           <thead className="expired-thead">
             <tr>
-              <th className="expired-th">Full Name</th>
-              <th className="expired-th">Phone No</th>
-              <th className="expired-th">Start Date</th>
-              <th className="expired-th">Expiration Date</th>
-              <th className="expired-th">Extended Days</th>
-              <th className="expired-th">Action</th>
+              <th className="expired-th" id='headingexpired'>Full Name</th>
+              <th className="expired-th" id='headingexpired'>Phone No</th>
+              <th className="expired-th" id='headingexpired'>Start Date</th>
+              <th className="expired-th" id='headingexpired'>Expiration Date</th>
+              <th className="expired-th" id='headingexpired'>Extended Days</th>
+              <th className="expired-th" id='headingexpired'>Action</th>
             </tr>
           </thead>
           <tbody>

@@ -91,3 +91,14 @@
     padding-bottom: 10px;
     
 }
+
+#flexbuttons{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+#tableheadingreject{
+    font-weight: 600;
+    color: #000000;
+}

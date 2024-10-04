@@ -75,6 +75,7 @@
 
 .expired-td {
     background-color: #fff;
+    color: #696969;
 }
 
 .expired-row:hover {
@@ -96,4 +97,8 @@
     display: flex;
     flex-direction: row;
     gap: 12px;
+}
+
+#headingexpired{
+    color: #000000;
 }
