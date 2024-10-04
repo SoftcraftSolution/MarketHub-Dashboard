@@ -5,7 +5,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } 
 import righttick from '../../assets/tickimg.png';
 import wrongtick from '../../assets/removeimg.png';
 import filterimg from '../../assets/filter.png';
-import Pagination from '../Pagination'; 
+import Pagination from '../Pagination';
 
 
 function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
@@ -93,10 +93,10 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
 
   return (
     <div className="spot-price-table">
-    <div className='spot-verify-heading'>
-      <div className='spot-verify-title'>Verify Users</div>
-      {/* Search Input */}
-      <input
+      <div className='spot-verify-heading'>
+        <div className='spot-verify-title'>Verify Users</div>
+        {/* Search Input */}
+        <input
           type="text"
           placeholder="Search"
           className="search-bar-verify-user-list "
@@ -104,9 +104,9 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        
-      <button className="spotprice-filter-btn">
-          <img src={filterimg} alt="filter" />  
+
+        <button className="spotprice-filter-btn">
+          <img src={filterimg} alt="filter" />
         </button>
       </div>
       <table>
@@ -134,7 +134,7 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
               <td>{item.dateTime}</td>
               <td>
                 <button
-                  style={{ border: 'none' }}
+                  style={{ border: 'none', marginRight: '10px' }} // Adds gap between buttons
                   onClick={() => handleDialogOpen(item, 'verify')} // Opens dialog for verification
                 >
                   <img src={righttick} alt="Verify" />
@@ -145,11 +145,12 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
                 >
                   <img src={wrongtick} alt="Reject" />
                 </button>
+
               </td>
             </tr>
           ))}
         </tbody>
-     
+
       </table>
       <Pagination />
 
@@ -174,27 +175,27 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
 
       {/* PriceList Table with DatePicker and Search */}
       <div className="spot-price-table">
-      {/* Container for search bar and date picker */}
-      <div className="search-and-datepicker-container">
-        <div className='spot-title'>Price list</div>
-        <input
-          type="text"
-          placeholder="Search"
-          className="search-bar-price-list "
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        {/* Container for search bar and date picker */}
+        <div className="search-and-datepicker-container">
+          <div className='spot-title'>Price list</div>
+          <input
+            type="text"
+            placeholder="Search"
+            className="search-bar-price-list "
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
 
-        <input
-          type="date"
-          className="expired-price-list-datepicker"
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)} // Update selected date
-        />
-         <button className="filter-btn">
-          <img src={filterimg} alt="filter" />  
-        </button>
-      </div>
+          <input
+            type="date"
+            className="expired-price-list-datepicker"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)} // Update selected date
+          />
+          <button className="filter-btn">
+            <img src={filterimg} alt="filter" />
+          </button>
+        </div>
 
 
         {/* PriceList Table */}
