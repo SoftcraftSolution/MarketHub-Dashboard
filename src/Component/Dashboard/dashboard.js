@@ -63,7 +63,7 @@ const Dashboard = () => {
       <Sidebar activeIndex={activeIndex} onTabClick={handleTabClick} />
       <div className="main-content">
         <Topbar /> {/* Add the Topbar below the Sidebar */}
-        <div className="content">
+        <div className="home-content">
           {renderContent()}
         </div>
       </div>
