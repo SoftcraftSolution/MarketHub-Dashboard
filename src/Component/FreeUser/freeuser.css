@@ -64,6 +64,7 @@ table th, table td {
   text-align: left;
   border-bottom: 1px solid #ddd;
   color: #696969;
+  white-space: nowrap;
 }
 
 table th {
@@ -136,4 +137,5 @@ table td .edit-button {
   font-weight: 500;
   font-size: 16px;
   color: #000000;
+  white-space: nowrap;
 }

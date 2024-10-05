@@ -85,10 +85,9 @@ function VerifyUsers() {
 
     <div className="table-container">
       <div className="top-bar">
-        <h3>All Users</h3>
+        <h3 style={{paddingTop:'10px'}}>Verify Users</h3>
         <div className="verify-search">
           <input type="text" placeholder="Search by name, phone..." className="expired-input" />
-          <input type="date" className="verify-datepicker" />
         </div>
         <button className="filter-btn">
           <img src={filterimg} alt="filter" />  
@@ -99,6 +98,7 @@ function VerifyUsers() {
         <table className="users-table">
           <thead>
             <tr>
+            <th>Action</th>
               <th>Full Name</th>
               <th>Phone No</th>
               <th>Pincode</th>
@@ -106,12 +106,16 @@ function VerifyUsers() {
               <th>State</th>
               <th>Visiting Card</th>
               <th>Date & Time</th>
-              <th>Action</th>
+            
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
               <tr key={index}>
+               <td className='buttonsverify'>
+                  <button className="edit-btn"><img src={tickimg}/></button>
+                  <button className="delete-btn"><img src={delimg}/></button>
+                </td>
                 <td>{user.name}</td>
                 <td>{user.phone}</td>
                 <td>{user.pincode}</td>
@@ -125,10 +129,7 @@ function VerifyUsers() {
                   )}
                 </td>
                 <td>{user.dateTime}</td>
-                <td>
-                  <button className="edit-btn"><img src={tickimg}/></button>
-                  <button className="delete-btn"><img src={delimg}/></button>
-                </td>
+
               </tr>
             ))}
           </tbody>
