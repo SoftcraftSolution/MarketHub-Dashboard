@@ -75,7 +75,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+
 }
 
 .search-bar {
@@ -97,12 +97,14 @@
   padding: 10px;
   border-bottom: 1px solid #ddd;
   text-align: left;
+  white-space: normal;
+
 }
 
 .news-list th {
   background-color: #f4f6fa;
   font-weight: bold;
-  white-space: nowrap;
+  white-space: normal;
   background-color: #FFFFFF;
 }
 
@@ -137,7 +139,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: 'Poppins', sans-serif;
   color: gray;
-  margin-right: 800px;
+
   margin-bottom: 20px;
 }
 
@@ -163,7 +165,10 @@
 }
 
 .news-close{
-  margin-bottom: -25px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
 }
 
 .stat-header {
@@ -190,4 +195,18 @@
   background-position: center;
   height: 50px;
   width: 50px;
+}
+
+.newsfilter{
+  color: white;
+  border: none;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  font-size: 14px;
+}
+
+.newstitle{
+  font-weight: 600;
+  font-size: 16px;
+  padding-top: 15px;
 }

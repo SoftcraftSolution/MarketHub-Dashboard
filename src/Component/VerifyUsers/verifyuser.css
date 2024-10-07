@@ -13,7 +13,7 @@
   .top-bar {
     display: flex;
     gap: 15px;
-    margin-bottom: 20px;
+  
     flex-direction: row;
   }
   
@@ -121,5 +121,5 @@
   .buttonsverify{
     display: flex;
     flex-direction: row;
-    gap: 19px;
+    gap: 1px;
   }

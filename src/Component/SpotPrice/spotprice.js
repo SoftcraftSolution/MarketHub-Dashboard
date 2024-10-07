@@ -93,8 +93,9 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
 
   return (
     <div className="spot-price-table">
-    <div className='spot-verify-heading'>
       <div className='spot-verify-title'>Verify Users</div>
+    <div className='spot-verify-heading'>
+      
       {/* Search Input */}
       <input
           type="text"

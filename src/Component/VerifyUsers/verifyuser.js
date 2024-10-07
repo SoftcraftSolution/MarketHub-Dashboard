@@ -85,7 +85,7 @@ function VerifyUsers() {
 
     <div className="table-container">
       <div className="top-bar">
-        <h3 style={{paddingTop:'10px'}}>Verify Users</h3>
+        <div style={{paddingTop:'10px',fontSize:"16px",fontWeight:"600"}}>Verify Users</div>
         <div className="verify-search">
           <input type="text" placeholder="Search by name, phone..." className="expired-input" />
         </div>
