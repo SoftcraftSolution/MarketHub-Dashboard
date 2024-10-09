@@ -21,7 +21,7 @@
     font-family: 'Poppins', sans-serif;
     flex: 1;
     margin: 0 10px;
-    padding: 0px 10px 20px 2px;
+    padding: 16px 20px 20px 20px;
     border-radius: 8px;
     background-color: #f4f4f4;
     text-align: center;
@@ -37,6 +37,8 @@
   .analytics-card p {
     font-family: 'Poppins', sans-serif;
     margin: 0;
+    white-space: nowrap;
+    padding-top: 5px;
   }
   
   .basic {
@@ -60,15 +62,18 @@
   }
   
   .increase {
-    color: #66bc46;
+    color: #038041;
+    ;
   }
   
   .no-change {
-    color: #e3a19c;
+    color: #C29200;
+    ;
   }
   
   .decrease {
-    color: #f35b5b;
+    color:  #EE1C25;
+    ;
   }
   
   .user-table {
@@ -82,30 +87,33 @@
     margin-bottom: 10px;
     background-color: #FFFFFF;
     gap: 20px;
+    align-items: center;
+    padding-left: 10px;
+    padding-top:15px
   }
   
   .table-header input[type="text"] {
     
-    padding: 10px;
-    border-radius: 4px;
+    padding: 5px;
+    border-radius: 10px;
     border: 1px solid #ccc;
     margin-right: 10px;
     width: 40%;
   }
   
   .table-header input[type="date"] {
-    padding: 10px;
-    border-radius: 4px;
+    padding: 5px;
+    border-radius: 10px;
     border: 1px solid #ccc;
   }
   
   .table-header .filter-sort {
-    padding: 10px;
-    background-color: #305890;
+ 
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    background: none;
   }
   
   table {
@@ -160,5 +168,27 @@
   .newnew{
     padding-top: 18px;
     padding-left: 35px;
-    font-weight: 700;
+    font-weight: 500;
+  }
+
+  .cashnumbers{
+    font-size: 28px;
+    font-weight: 500;
+
+  }
+
+  .cashplan{
+    color: #000000;
+    font-weight: 500;
+  }
+
+  .cashtopbarforsearch{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 500px;
+    padding-top: 7px;
+  }
+  .cashtableheading{
+    color: #000000;
   }

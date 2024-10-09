@@ -1,52 +1,63 @@
 import React from 'react';
 import './cashmanagement.css';
 import Pagination from '../Pagination';
+import filterbutton from '../../assets/filter.png';
 
 const CashManagement = () => {
   return (
     <div className="cash-management-container">
+      <div style={{paddingBottom:"17px",fontWeight:"700",fontSize:"18px"}}>Cash Management</div>
     <div className='divnew'>
+    <div className='cashtopbarforsearch'>
       <div className='newnew'>Analytics Overview</div>  
+  
+    
+      <input type="date" className="freeuserlist-dateepicker" />
+      </div>
+
       <div className="analytics-overview">
         <div className="analytics-card basic">
-          <h2>8.4k</h2>
-          <p>Basic Plan Revenue</p>
+          <div className='cashnumbers'>8.4k</div>
+          <p className="cashplan">Basic Plan Revenue</p>
           <p className="increase">10% Increase from Last Month</p>
         </div>
         <div className="analytics-card standard">
-          <h2>14.9k</h2>
-          <p>Standard Plan Revenue</p>
+          <div className='cashnumbers'>14.9k</div>
+          <p className="cashplan" >Standard Plan Revenue</p>
           <p className="no-change">No Change from Last Month</p>
         </div>
         <div className="analytics-card premium">
-          <h2>201.4k</h2>
-          <p>Premium Plan Revenue</p>
+          <div className='cashnumbers'>201.4k</div>
+          <p className="cashplan">Premium Plan Revenue</p>
           <p className="increase">3% Increase from Last Month</p>
         </div>
         <div className="analytics-card total">
-          <h2>225.8k</h2>
-          <p>Total Revenue</p>
+          <div className='cashnumbers'>225.8k</div>
+          <p className="cashplan"> Total Revenue</p>
           <p className="decrease">16% Decrease from Last Month</p>
         </div>
       </div>
     </div> 
       <div className="user-table">
         <div className="table-header">
-          <div>All Users</div>
-          <input type="text" placeholder="Search by name, phone..." />
-          <input type="date" />
-          <button className="filter-sort">Filter & Sort</button>
+          <div style={{fontWeight:"600"}}>All Users</div>
+            <input type="text" placeholder="Search by name, phone..." className="freeuserlist-input" />
+          <input type="date" className="freeuserlist-dateepicker" />
+          <button className="filter-sort">
+            < img src={filterbutton} alt='filt'/>
+          </button>
+        
         </div>
         
         <table>
           <thead>
             <tr>
-              <th>Full Name</th>
-              <th>Phone No</th>
-              <th>Subscription Type</th>
-              <th>Subscription Date</th>
-              <th>Payment Method</th>
-              <th>Amount</th>
+              <th className='cashtableheading'>Full Name</th>
+              <th className='cashtableheading'>Phone No</th>
+              <th className='cashtableheading'>Subscription Type</th>
+              <th className='cashtableheading'>Subscription Date</th>
+              <th className='cashtableheading'>Payment Method</th>
+              <th className='cashtableheading'>Amount</th>
             </tr>
           </thead>
           <tbody>

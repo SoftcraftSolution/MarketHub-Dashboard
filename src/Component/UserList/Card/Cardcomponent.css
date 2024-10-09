@@ -1,0 +1,61 @@
+.cards-container {
+  display: flex;
+  font-family: 'Poppins', sans-serif;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+.card {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 22%;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-icon-container {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px; /* Adjust based on your image size */
+  height: 50px; /* Adjust based on your image size */
+  margin-bottom: 15px;
+}
+
+.card-icon {
+  width: 100%; /* Responsive width */
+  height: auto; /* Keep aspect ratio */
+}
+
+.card-info h3 {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  font-size: 28px;
+  color: #333;
+}
+
+.card-info p {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  color: #666;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/* Custom colors for the cards */
+.total-users { background-color: #FFFFFF; } /* Soft blue */
+.free-trial { background-color: #FFFFFF; } /* Soft yellow */
+.subscribed { background-color: #FFFFFF; } /* Soft green */
+.rejected { background-color: #FFFFFF; } /* Soft red */

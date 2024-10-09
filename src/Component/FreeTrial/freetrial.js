@@ -18,6 +18,7 @@ const FreeTrial = () => {
   ];
 
   return (
+    
     <div className="user-list-container">
       <div className="user-list-header">
         <h2 style={{margin: '0px'}}>Free Trial</h2>

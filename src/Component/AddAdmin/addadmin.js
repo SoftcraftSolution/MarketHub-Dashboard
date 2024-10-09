@@ -4,6 +4,7 @@
     import pencilIcon from '../../assets/pencil.png';
     import action from '../../assets/action.png'; 
     import Pagination from '../Pagination'; 
+    import deleteimg from '../../assets/deleteimg.png';
     // Make sure you import your action image
 
     const AdminDashboard = () => {
@@ -13,11 +14,11 @@
         const [adminDetails, setAdminDetails] = useState({ fullName: '', phoneNumber: '+91 ', email: '', accessLevel: '' });
 
         const admins = [
-            { name: 'Shantanu Dixit', mobile: '7689898034', email: 'Shantanu@xyzmail.com', access: 'Spot Price', date: '12-04-2024', action: action },
-            { name: 'Abhishek Mishra', mobile: '7689898055', email: 'AbhiMishra@gmail.com', access: 'Spot Price', date: '26-03-2023', action: action },
-            { name: 'Niraj Prakash', mobile: '7689898040', email: 'nirajPrakash@workmail.com', access: 'Spot Price', date: '28-05-2024', action: action },
-            { name: 'Parmeshwar Kadam', mobile: '7689898049', email: 'parmeshwarKadam@xyzmail.com', access: 'Spot Price', date: '08-12-2023', action: action },
-            { name: 'Niraj Prakash', mobile: '7689898050', email: 'Keshav@Niraj123@gmail.com', access: 'Spot Price', date: '27-01-2024', action: action }
+            { name: 'Shantanu Dixit', mobile: '7689898034', email: 'Shantanu@xyzmail.com', access: 'Spot Price', date: '12-04-2024', action: action,delete:deleteimg },
+            { name: 'Abhishek Mishra', mobile: '7689898055', email: 'AbhiMishra@gmail.com', access: 'Spot Price', date: '26-03-2023', action: action,delete:deleteimg },
+            { name: 'Niraj Prakash', mobile: '7689898040', email: 'nirajPrakash@workmail.com', access: 'Spot Price', date: '28-05-2024', action: action,delete:deleteimg },
+            { name: 'Parmeshwar Kadam', mobile: '7689898049', email: 'parmeshwarKadam@xyzmail.com', access: 'Spot Price', date: '08-12-2023', action: action ,delete:deleteimg},
+            { name: 'Niraj Prakash', mobile: '7689898050', email: 'Keshav@Niraj123@gmail.com', access: 'Spot Price', date: '27-01-2024', action: action,delete:deleteimg }
         ];
 
         const handleImageChange = (e) => {
@@ -73,6 +74,7 @@
 
         return (
             <div className="admin-dashboard">
+                <div style={{fontWeight:"800",fontSize :"18px",paddingBottom:"12px"}}>Add Admin</div>
                 <div className="admin-header">
                     <div className="admin-details">
                         <div className="admin-details-1">
@@ -103,8 +105,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div>Name - Raj Deep</div>
-                        <div>Mobile - +91 7098567389</div>
+                        <div className='admindetailslatest'>
+    <div>
+        <span style={{ color: "#696969" }}>Name - </span>
+        <strong>Raj Deep</strong>
+    </div>
+    <div style={{ paddingTop: "22px" }}>
+        <span style={{ color: "#696969" }}>Mobile - </span>
+        <strong>+91 7098567389</strong>
+    </div>
+</div>
+ 
                     </div>
                     <div className='admin-buttonflex'>
                         <button className="add-admin-btn" onClick={handleOpenPopup}>Add Admin</button>
@@ -113,16 +124,16 @@
                 </div>
 
                 <div className="admin-list">
-                    <h3>List of admins</h3>
+                    <div style={{fontSize:"17px",fontWeight:"600"}}>List of admins</div>
                     <table>
                         <thead>
                             <tr>
-                                <th>Admin Name</th>
-                                <th>Mobile Number</th>
-                                <th>Email</th>
-                                <th>Access</th>
-                                <th>Creation Date</th>
-                                <th>Action</th>
+                                <th className="admin-headingtable">Admin Name</th>
+                                <th className="admin-headingtable">Mobile Number</th>
+                                <th className="admin-headingtable"> Email ID</th>
+                                <th className="admin-headingtable">Access</th>
+                                <th className="admin-headingtable">Creation Date</th>
+                                <th className="admin-headingtable">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -140,7 +151,16 @@
                                             className="action-icon" 
                                             onClick={() => console.log(`Action clicked for ${admin.name}`)}
                                         />
+                                       <button style={{border:"none"}}>
+                                        <img 
+                                            src={admin.delete} 
+                                            alt="Action" 
+                                            className="action-icon" 
+                                            onClick={() => console.log(`Action clicked for ${admin.name}`)}
+                                        />
+                                        </button>
                                     </td>
+
                                 </tr>
                             ))}
                         </tbody>

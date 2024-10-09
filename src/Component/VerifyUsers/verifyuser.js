@@ -11,7 +11,8 @@ function VerifyUsers() {
   const users = [
     {
       name: 'Bhavesh Kumar',
-      phone: '7838392384',
+      phone: '+91 7838392384',
+      alterno:'+91 7838392384',
       pincode: '400089',
       city: 'Mumbai',
       state: 'Maharashtra',
@@ -20,7 +21,8 @@ function VerifyUsers() {
     },
     {
       name: 'Ravi Sandeep',
-      phone: '7859923183',
+      phone: '+91 7859923183',
+      alterno:'+91 7838392384',
       pincode: '400020',
       city: 'Gurgaon',
       state: 'Haryana',
@@ -29,7 +31,8 @@ function VerifyUsers() {
     },
     {
       name: 'Mumtaz Singh',
-      phone: '7894932883',
+      phone: '+91 7894932883',
+      alterno:'+91 7838392384',
       pincode: '400200',
       city: 'Kolkata',
       state: 'West Bengal',
@@ -38,7 +41,8 @@ function VerifyUsers() {
     },
     {
       name: 'Gauri Prashad',
-      phone: '9857292345',
+      phone: '+91 9857292345',
+      alterno:'+91 7838392384',
       pincode: '600023',
       city: 'Chennai',
       state: 'Tamil Nadu',
@@ -47,7 +51,8 @@ function VerifyUsers() {
     },
     {
       name: 'Poonam Kaleesh',
-      phone: '9948482323',
+      phone: '+91 9948482323',
+      alterno:'+91 7838392384',
       pincode: '700029',
       city: 'Vizag',
       state: 'Andhra Pradesh',
@@ -56,7 +61,8 @@ function VerifyUsers() {
     },
     {
       name: 'Bhavesh Kumar',
-      phone: '7838392384',
+      phone: '+91 7838392384',
+      alterno:'+91 7838392384',
       pincode: '400089',
       city: 'Madurai',
       state: 'Tamil Nadu',
@@ -80,7 +86,7 @@ function VerifyUsers() {
 
   return (
     <div className="verify-users-container">
-      <h2 className='verify-heading'>Verify Users</h2>
+      <div className='verify-heading'>Verify Users</div>
 
 
     <div className="table-container">
@@ -100,7 +106,8 @@ function VerifyUsers() {
             <tr>
             <th>Action</th>
               <th>Full Name</th>
-              <th>Phone No</th>
+              <th>WhatsApp No</th>
+              <th>Alternate No</th>
               <th>Pincode</th>
               <th>City</th>
               <th>State</th>
@@ -118,6 +125,7 @@ function VerifyUsers() {
                 </td>
                 <td>{user.name}</td>
                 <td>{user.phone}</td>
+                <td>{user.alterno}</td>
                 <td>{user.pincode}</td>
                 <td>{user.city}</td>
                 <td>{user.state}</td>

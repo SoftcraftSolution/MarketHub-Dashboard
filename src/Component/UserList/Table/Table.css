@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+.userlisttable-container {
+    overflow-x: auto;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .userlisttable {
+    width: 100%;
+    border-collapse: collapse;
+   
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .userlisthead, .userlistdata {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .userlisthead {
+    background-color: #FFFFFF;
+    color: #495057;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .userlistdata {
+    color: #6c757d;
+    font-family: 'Poppins', sans-serif;
+  }
+  .usertablehead{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 10px;
+    gap: 10px;
+
+  }
+
+
+ .usertable-input{ font-family: 'Poppins', sans-serif;
+    padding: 8px 12px;
+    border: 0px solid #FFFFFF;
+    border-radius: 10px;
+    width: 300px; 
+    background-color: #F2F4F8;}
+
+    #userlistdatteePickeer input {
+        width: 150px;
+        height: 30px;
+        padding: 5px;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-family: 'Poppins', sans-serif;
+        color: gray;
+    
+      }
+      
+      #userlistdatteePickeer {
+        padding: 0 0 0 20px;
+      }

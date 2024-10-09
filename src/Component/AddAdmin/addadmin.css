@@ -4,25 +4,25 @@
 .admin-dashboard {
     padding: 20px;
     font-family: 'Poppins', sans-serif;
+    padding-top: 20px;
 }
 
 .admin-header {
     
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
     margin-bottom: 20px;
     background-color: #FFFFFF;
-    padding: 20px;
+    padding: 14px;
     border-radius: 10px;
 }
 
 .admin-details {
     display: flex;
     flex-direction: column; /* Changed to column */
-    align-items: center;
-    text-align: center;
-    
+    padding-bottom: 10px;
+
 }
 .admin-details-1
 {
@@ -45,13 +45,13 @@
 }
 
 .admin-role {
-    color: gray;
+    color: #000000;
     font-size: 14px;
     margin-bottom: 10px;
 }
 
 .add-admin-btn, .logout-btn {
-    padding: 10px 25px;
+    padding: 8px 8px;
     background-color: #E76821;
     font-family: 'Poppins', sans-serif;
     color: white;
@@ -112,6 +112,7 @@ tr:hover {
     display: flexbox;
     flex-direction: column;
     font: optional;
+    padding-bottom: 15px;
 }
 
 .admin-buttonflex{
@@ -120,11 +121,13 @@ tr:hover {
     flex-direction: column;
     justify-content: space-around;
     padding-right: 20px;
-    gap: 40px;
+    gap: 90px;
+    padding-top: 12px;
 }
 
 .admin-name{
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 18px
 }
 .admin-avatar-wrapper {
     position: relative;
@@ -152,17 +155,18 @@ tr:hover {
 
 .admin-avatar {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
 }
 
 .edit-icon {
     position: absolute;
     bottom: 5px;
-    right: 5px;
+    right: 1px;
     width: 20px;
     height: 20px;
     cursor: pointer;
+    padding-bottom: 10px;
 }
 
 .delete-image-btn {
@@ -344,4 +348,13 @@ tr:hover {
     display: flex;
     text-align: left;
     padding-left: 5px;
+}
+
+.admindetailslatest{
+    padding-left: 15px;
+    padding-top: 10px;
+}
+.admin-headingtable{
+    font-weight: 700;
+    color: #000000;
 }

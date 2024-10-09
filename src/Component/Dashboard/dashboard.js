@@ -15,6 +15,7 @@ import CashManagement from '../CashManagement/cashmanagement.js';
 import AdminDashboard from '../AddAdmin/addadmin.js';
 import CircularNews from '../AddCircular/addcircular.js';
 import FreeUser from '../FreeUser/freeuser.js';
+import UserListPage from '../UserList/UserList.js';
 
 const Dashboard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -28,7 +29,7 @@ const Dashboard = () => {
       case 0:
         return <MainDashboard />;
       case 1:
-        return <UserList />;
+        return <UserListPage />;
       case 2:
         return <FreeTrial />;
       case 3:
