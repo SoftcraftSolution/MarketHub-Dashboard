@@ -1,33 +1,44 @@
-import React from 'react';
-import './expiredtrial.css';  // Import the CSS file for styling
-import actionImg from '../../assets/action.png';  // Placeholder image for action button
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './expiredtrial.css'; // Import the CSS file for styling
+import actionImg from '../../assets/action.png'; // Placeholder image for action button
 import deleteimg from '../../assets/deleteimg.png';
 import Pagination from '../Pagination';
 
 const ExpiredTrial = () => {
-  const users = [
-    { name: 'Bhavesh Kumar', phone: '7690839130', subscriptionDate: '12-04-2024', expirationDate: '19-04-2024', extendedDays: '0' },
-    { name: 'Ram Bandhu', phone: '8290839130', subscriptionDate: '30-12-2024', expirationDate: '30-12-2024', extendedDays: '3' },
-    { name: 'Manmohan Singh', phone: '7890878780', subscriptionDate: '12-09-2024', expirationDate: '19-09-2024', extendedDays: '5' },
-    { name: 'Ekal Prasad Raj', phone: '7690839130', subscriptionDate: '29-11-2024', expirationDate: '06-12-2024', extendedDays: '7' },
-    { name: 'Parvati Rakesh', phone: '8290839130', subscriptionDate: '12-04-2024', expirationDate: '19-04-2024', extendedDays: '9' },
-    { name: 'Ankit sharma', phone: '8290839130', subscriptionDate: '12-04-2024', expirationDate: '19-04-2024', extendedDays: '9' },
-    { name: 'Gaurav prajapati', phone: '8290839130', subscriptionDate: '12-04-2024', expirationDate: '19-04-2024', extendedDays: '9' },
-    { name: 'karan nair', phone: '8290839130', subscriptionDate: '12-04-2024', expirationDate: '19-04-2024', extendedDays: '9' },
-    { name: 'Rohit singh ', phone: '8290839130', subscriptionDate: '12-04-2024', expirationDate: '19-04-2024', extendedDays: '9' },
-    { name: 'Sumit jha', phone: '8290839130', subscriptionDate: '12-04-2024', expirationDate: '19-04-2024', extendedDays: '17' },
-    { name: 'Aditya singh', phone: '8290839130', subscriptionDate: '12-04-2024', expirationDate: '19-04-2024', extendedDays: '13' },
-    { name: 'Chandan pal', phone: '8290839130', subscriptionDate: '12-04-2024', expirationDate: '19-04-2024', extendedDays: '11' },
-  ];
+  const [users, setUsers] = useState([]); // State to store user data
+  const [loading, setLoading] = useState(true); // State to manage loading state
+  const [error, setError] = useState(null); // State to manage error
+
+  useEffect(() => {
+    const fetchExpiredUsers = async () => {
+      try {
+        const response = await axios.get('https://market-hub-backend-kappa.vercel.app/user/expired-trail-user-list');
+        if (response.data.success) {
+          const expiredUsers = response.data.data.filter(user => new Date(user.planEndDate) < new Date());
+          setUsers(expiredUsers); // Set the expired users in state
+        } else {
+          setError('Failed to fetch users');
+        }
+      } catch (error) {
+        setError('An error occurred while fetching data');
+      } finally {
+        setLoading(false); // Set loading to false after fetching data
+      }
+    };
+
+    fetchExpiredUsers();
+  }, []);
+
+  if (loading) return <div>Loading...</div>; // Show loading indicator while fetching data
+  if (error) return <div>{error}</div>; // Show error message if there's an error
 
   return (
     <div className='expired-root-container'>
-      <div className="expired-title-top">
-        Users List
-      </div>
+      <div className="expired-title-top">Users List</div>
       <div className="expireddd-container">
         <div className="expired-header">
-          <div className="expired-title">ExpiredTrail</div>
+          <div className="expired-title">Expired Trial</div>
           <div className="expired-search">
             <input type="text" placeholder="Search by name, phone..." className="expired-input" />
             <input type="date" className="expired-datepicker" />
@@ -47,12 +58,12 @@ const ExpiredTrial = () => {
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <tr key={index} className="expired-row">
-                <td className="expired-td">{user.name}</td>
-                <td className="expired-td">{user.phone}</td>
-                <td className="expired-td">{user.subscriptionDate}</td>
-                <td className="expired-td">{user.expirationDate}</td>
-                <td className="expired-td">{user.extendedDays}</td>
+              <tr key={user._id} className="expired-row">
+                <td className="expired-td">{user.fullName}</td>
+                <td className="expired-td">{user.phoneNumber}</td>
+                <td className="expired-td">{new Date(user.planStartDate).toLocaleDateString()}</td>
+                <td className="expired-td">{new Date(user.planEndDate).toLocaleDateString()}</td>
+                <td className="expired-td">{user.extendendDays}</td>
                 <td className="expired-td" id="expired-buttons">
                   <button className="expired-action-btn">
                     <img src={actionImg} alt="Action" className="expired-action-img" />

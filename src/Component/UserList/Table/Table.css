@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 .userlisttable-container {
-    overflow-x: auto;
+ 
     font-family: 'Poppins', sans-serif;
   }
   
@@ -12,7 +12,7 @@
   }
   
   .userlisthead, .userlistdata {
-    padding: 12px;
+    padding: 10px 10px 10px 15px;
     text-align: left;
     border-bottom: 1px solid #dee2e6;
     font-family: 'Poppins', sans-serif;
@@ -20,8 +20,9 @@
   
   .userlisthead {
     background-color: #FFFFFF;
-    color: #495057;
+    color: #000000;
     font-family: 'Poppins', sans-serif;
+    font-weight: 500;
   }
   
   tbody tr:nth-child(even) {
@@ -38,8 +39,8 @@
     flex-direction: row;
     align-items: center;
     background-color: #FFFFFF;
-    padding: 10px;
-    gap: 10px;
+    padding:17px 10px 10px 15px;
+    gap: 25px;
 
   }
 
@@ -66,3 +67,31 @@
       #userlistdatteePickeer {
         padding: 0 0 0 20px;
       }
+
+
+    
+      .visiting-card-image{
+        border-radius: 5px;
+        object-fit: contain;
+      }
+
+
+      .userlist-buttons{
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+      }
+
+      .userlist-action-btn{
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+      
+
+      .userlist-action-img{
+        width: 20px;
+        height: 20px;
+      }
+
+      

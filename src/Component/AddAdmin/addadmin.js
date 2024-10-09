@@ -151,7 +151,7 @@
                                             className="action-icon" 
                                             onClick={() => console.log(`Action clicked for ${admin.name}`)}
                                         />
-                                       <button style={{border:"none"}}>
+                                       <button style={{border:"none",backgroundColor:"#FFFFFF"} }>
                                         <img 
                                             src={admin.delete} 
                                             alt="Action" 

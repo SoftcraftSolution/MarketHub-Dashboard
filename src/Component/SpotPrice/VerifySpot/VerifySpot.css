@@ -1,0 +1,54 @@
+.spotverify-users {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .spotverifytitle {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .spotverifytable-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .table-controls input {
+    padding: 8px;
+    margin-right: 10px;
+  }
+  
+  .spotverifytable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .spotverifyheading, .spotverifydata{
+    padding: 10px;
+   
+    text-align: left;
+  }
+  
+ 
+   .spotverify-input
+  { font-family: 'Poppins', sans-serif;
+    padding: 4px 4px 4px 10px;
+    border: 0px solid #FFFFFF;
+    border-radius: 10px;
+    width: 300px; 
+    background-color: #F2F4F8;}
+
+    .spotverifyheadingfunctions{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 30px;
+        padding-bottom: 10px;
+    }
+
+    .spotverifyheading{
+        border-bottom: 1px solid #e0e0e0;
+    }

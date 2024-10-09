@@ -44,13 +44,13 @@ const UserList = () => {
           <tbody>
             {users.map((user, index) => (
               <tr key={index}>
-                <td>{user.name}</td>
-                <td>{user.whatsappno}</td>
-                <td>{user.phone}</td>
-                <td>{user.pincode}</td>
-                <td>{user.city}</td>
-                <td>{user.state}</td>
-                <td>{user.startDate}</td>
+                <td className='freeuserdata'>{user.name}</td>
+                <td className='freeuserdata'>{user.whatsappno}</td>
+                <td className='freeuserdata'>{user.phone}</td>
+                <td className='freeuserdata'>{user.pincode}</td>
+                <td className='freeuserdata'>{user.city}</td>
+                <td className='freeuserdata'>{user.state}</td>
+                <td className='freeuserdata'>{user.startDate}</td>
                 <td className={user.plan.toLowerCase().replace(/\s+/g, '-')}>{user.plan}</td>
                 <td className='freeuser-buttons'>
                 

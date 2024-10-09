@@ -1,42 +1,42 @@
 .cards-container {
   display: flex;
   font-family: 'Poppins', sans-serif;
-  justify-content: space-between;
   margin-bottom: 20px;
-  gap: 15px;
+  gap: 19px;
 }
 
 .card {
   font-family: 'Poppins', sans-serif;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 19px;
   background-color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 22%;
+  width: 17%;
   text-align: center;
   transition: transform 0.2s;
+  justify-content: space-between;
+  flex: 1;
 }
 
 .card:hover {
-  transform: scale(1.05);
+ 
 }
 
 .card-icon-container {
-  font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px; /* Adjust based on your image size */
-  height: 50px; /* Adjust based on your image size */
-  margin-bottom: 15px;
+  width: 60px; 
+  height: 60px;
+  border-radius: 40%; /* Make the icon background circular */
 }
 
 .card-icon {
-  width: 100%; /* Responsive width */
-  height: auto; /* Keep aspect ratio */
+  width: 60%; /* Adjust size of the icon within the container */
+  height: auto; /* Maintain aspect ratio */
 }
 
 .card-info h3 {
@@ -44,6 +44,8 @@
   margin: 0;
   font-size: 28px;
   color: #333;
+  padding-top: 5px;
+  text-align: left;
 }
 
 .card-info p {
@@ -55,7 +57,14 @@
 }
 
 /* Custom colors for the cards */
-.total-users { background-color: #FFFFFF; } /* Soft blue */
-.free-trial { background-color: #FFFFFF; } /* Soft yellow */
-.subscribed { background-color: #FFFFFF; } /* Soft green */
-.rejected { background-color: #FFFFFF; } /* Soft red */
+.total-users { background-color: #FFFFFF; }
+.free-trial { background-color: #FFFFFF; }
+.subscribed { background-color: #FFFFFF; }
+.rejected { background-color: #FFFFFF; }
+
+.cards-title{
+  color: #222227;
+  font-weight: 800;
+  font-size: 18px;
+  padding-bottom: 10px;
+}
