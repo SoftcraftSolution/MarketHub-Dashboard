@@ -1,4 +1,3 @@
-
 import './verifyuser.css'; // Import external CSS
 import filterimg from '../../assets/filter.png';
 import tickimg from '../../assets/tickimg.png';

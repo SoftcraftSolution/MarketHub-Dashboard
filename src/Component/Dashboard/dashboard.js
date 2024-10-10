@@ -16,6 +16,8 @@ import AdminDashboard from '../AddAdmin/addadmin.js';
 import CircularNews from '../AddCircular/addcircular.js';
 import FreeUser from '../FreeUser/freeuser.js';
 import UserListPage from '../UserList/UserList.js';
+import AddNews from '../SelfNews/selfnews.js';
+import AddCircularNews from '../AddCircular/addcircular.js';
 
 const Dashboard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -39,13 +41,13 @@ const Dashboard = () => {
       case 5:
         return <NewsPage />;
       case 6:
-        return <SelfNews />;
+        return <AddNews />;
       case 7:
         return <CashManagement />;
       case 8:
         return <AdminDashboard />;
       case 9:
-        return <CircularNews />;
+        return <AddCircularNews/>;
       case 10:
         return <FreeTrial />;
       case 11:

@@ -1,156 +1,173 @@
 import React, { useState } from 'react';
-import './selfnews.css';
-import imagepreview from '../../assets/imagepreview.png';
+import './selfnews.css'; // Importing external CSS
+import preview from '../../assets/previewimg.png';
 
-const NewsForm = () => {
-    const [addTitle, setAddTitle] = useState('');
-    const [addContent, setAddContent] = useState('');
-    const [addLink, setAddLink] = useState('');
-    const [image, setImage] = useState(null);
-    const [imagePreviewURL, setImagePreviewURL] = useState(imagepreview); // Default preview image
-    const [adminPhoneNumber, setAdminPhoneNumber] = useState("+917905333486"); // Static value; modify as needed
-    const [selectedUsers, setSelectedUsers] = useState([]);
-    const [responseMessage, setResponseMessage] = useState('');
-    const [uploadedNews, setUploadedNews] = useState(null);
+const AddNews = () => {
+  const [formData, setFormData] = useState({
+    title: '',
+    content: '',
+    link: '',
+    image: null,
+    imagePreview: preview, // Default placeholder path
+    shareWith: {
+      freeTrial: true,
+      extendedTrial: true,
+      basic: false,
+      standard: false,
+      premium: false,
+    }
+  });
 
-    const handleTitleChange = (event) => setAddTitle(event.target.value);
-    const handleContentChange = (event) => setAddContent(event.target.value);
-    const handleLinkChange = (event) => setAddLink(event.target.value);
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    if (type === 'checkbox') {
+      setFormData({
+        ...formData,
+        shareWith: {
+          ...formData.shareWith,
+          [name]: checked,
+        },
+      });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            setImage(file);
-            setImagePreviewURL(URL.createObjectURL(file)); // Preview selected image
-        }
-    };
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({
+          ...formData,
+          image: file,
+          imagePreview: reader.result, // Set uploaded image preview
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-    const handleUserChange = (event) => {
-        const user = event.target.value;
-        if (event.target.checked) {
-            setSelectedUsers([...selectedUsers, user]);
-        } else {
-            setSelectedUsers(selectedUsers.filter((u) => u !== user));
-        }
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission
+    console.log(formData);
+  };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+  return (
+    <div className="selfnewsbiggestcontainer">
+      <div className='selfnewstoptitle'>News</div>
+      <div className="selfnews-container">
+        <div className="selfnews-heading">Add Self News</div>
+        <form className="selfnews-form" onSubmit={handleSubmit}>
+          <div className="selfnewsinput-group">
+            <input
+              type="text"
+              name="title"
+              placeholder="Add Title"
+              value={formData.title}
+              onChange={handleChange}
+              className="selfnewsinput-field"
+            />
+            <input
+              type="text"
+              name="content"
+              placeholder="Add Content"
+              value={formData.content}
+              onChange={handleChange}
+              className="selfnewsinput-field"
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              name="link"
+              placeholder="Add Link (optional)"
+              value={formData.link}
+              onChange={handleChange}
+              className="selfnewsoptionalfield"
+            />
+          </div>
+          <div style={{ paddingTop: "25px" }}>
+  <span style={{ fontWeight: "500" }}>Upload Image </span> 
+  <span className="optional-text">(optional)</span>
+</div>
 
-        const formData = new FormData();
-        formData.append('addTitle', addTitle);
-        formData.append('addContent', addContent);
-        formData.append('addLink', addLink);
-        formData.append('image', image);
-        formData.append('adminPhoneNumber', adminPhoneNumber);
-        formData.append('shareNews', JSON.stringify(selectedUsers));
-
-        try {
-            const response = await fetch('https://market-hub-backend-kappa.vercel.app/admin/add-self-news', {
-                method: 'POST',
-                body: formData,
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                setUploadedNews(data.addSelfNews);
-                setResponseMessage(data.message);
-            } else {
-                setResponseMessage(data.message || 'Failed to upload news');
-                setUploadedNews(null);
-            }
-        } catch (error) {
-            console.error('Error uploading news:', error);
-            setResponseMessage('An error occurred while uploading news');
-            setUploadedNews(null);
-        }
-    };
-
-    return (
-        <div className="container">
-            <h2>Add Self News</h2>
-            {responseMessage && <p className="response-message">{responseMessage}</p>}
-            <form onSubmit={handleSubmit}>
-                <div className='news-top'>
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="addTitle"
-                            value={addTitle}
-                            onChange={handleTitleChange}
-                            placeholder="Enter the title"
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <textarea
-                            className="form-control-content"
-                            id="addContent"
-                            value={addContent}
-                            onChange={handleContentChange}
-                            placeholder="Enter the content"
-                            required
-                        />
-                    </div>
-                </div>
-                
-                <div className="form-group">
-                    <input
-                        type="text"
-                        className="form-control-1"
-                        id="addLink"
-                        value={addLink}
-                        onChange={handleLinkChange}
-                        placeholder="Enter the link"
-                    />
-                </div>
-                
-                <div style={{ marginTop: "30px" }}>
-                    <label htmlFor="image" style={{ paddingTop: "50px", marginBottom: "10px" }}>Upload Image (optional):</label>
-                    
-                    <div className='preview'>
-                        <div className='image-preview'>
-                            <img src={imagePreviewURL} alt="Image Preview" style={{ width: '100px', margin: '10px' }} />
-                        </div>  
-                        <div className='upload'>
-                            <div className="divtitle" style={{ marginLeft: '120px' }}>Please upload a JPG or PNG File size less than 2MB</div>  
-                            <input
-                                type="file"
-                                className="form-control-file"
-                                id="image"
-                                accept="image/jpeg, image/png"
-                                onChange={handleImageChange}
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <h4>Share With:</h4>
-                <div className="form-group">
-                    {['freeTrialUsers', 'extendedTrialUsers', 'standardTrialUsers', 'premiumTrialUsers', 'basicTrialUsers'].map((userType) => (
-                        <div key={userType} className="form-check">
-                            <input
-                                type="checkbox"
-                                className="form-check-input"
-                                id={userType}
-                                value={userType}
-                                onChange={handleUserChange}
-                            />
-                            <label className="form-check-label" htmlFor={userType}>
-                                {userType.split(/(?=[A-Z])/).join(' ')}
-                            </label>
-                        </div>
-                    ))}
-                </div>
-                
-                <button type="submit" className="btn btn-primary custom-button">
-                    Upload
-                </button>
-            </form>
-        </div>
-    );
+    <div className='fullpreviewflex'>      
+          <div className='textbuttonflex'> 
+            <div className="file-upload-info" style={{paddingLeft:"10px",paddingTop:"10px"}}>Please upload a JPG or PNG file less than 2MB</div>
+            <div className="selfnewsfile-upload">
+            <label htmlFor="file-upload" className="custom-file-upload">
+              Choose File
+            </label>
+            <input
+              id="file-upload"
+              type="file"
+              onChange={handleFileChange}
+              accept="image/jpeg,image/png"
+              className="file-input" // Hide the default file input
+            />
+            </div>  
+            </div>   
+        
+          <div className='selfnewspreviewflex'> 
+ 
+            <div className="image-preview-container">
+              <img src={formData.imagePreview} alt="Preview" className="image-preview" />
+              </div>
+            </div>
+   
+    </div>
+          <div className="selfnewscheckbox-group">
+            <label style={{fontWeight:"700"}}>Share With</label>
+            <div className="selfnewscheckboxes">
+              <label>
+                <input
+                  type="checkbox"
+                  name="freeTrial"
+                  checked={formData.shareWith.freeTrial}
+                  onChange={handleChange}
+                /> Free Trial Users
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="extendedTrial"
+                  checked={formData.shareWith.extendedTrial}
+                  onChange={handleChange}
+                /> Extended Trial Users
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="basic"
+                  checked={formData.shareWith.basic}
+                  onChange={handleChange}
+                /> Basic Users
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="standard"
+                  checked={formData.shareWith.standard}
+                  onChange={handleChange}
+                /> Standard Users
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="premium"
+                  checked={formData.shareWith.premium}
+                  onChange={handleChange}
+                /> Premium Users
+              </label>
+            </div>
+          </div>
+          <button type="submit" className="selfnewssubmit-btn">Post</button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
-export default NewsForm;
+export default AddNews;
