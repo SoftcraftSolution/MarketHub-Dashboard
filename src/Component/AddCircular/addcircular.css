@@ -152,4 +152,57 @@ body {
     color: gray; /* Change this to whatever color you like */
   }
   
-  
+  .circularpdfbuttonflex{
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    gap: 10px;
+    padding-right: 12%;
+  }
+
+  .circularpdffile-upload-info{
+    font-size: 12px;
+    color: #000000;
+    font-style:italic;
+  }
+
+  .circularnewspdffile-upload{
+    margin-bottom: 20px;
+  }
+
+  .circularpdf-file-upload{
+    background-color: #FFFFFF;
+    border: 1px solid;
+    color: #1918BC;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .circularpdffile-input{
+    display: none;
+  }
+
+  .circularnewspdfpreviewflex{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .circularimage-preview-containerpdf{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .circularnewsimage-previewpdf{
+    max-width: 150px;
+    max-height: 150px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    object-fit: cover;
+  }

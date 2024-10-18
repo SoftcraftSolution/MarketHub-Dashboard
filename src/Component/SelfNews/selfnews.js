@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './selfnews.css'; // Importing external CSS
 import preview from '../../assets/previewimg.png';
+import axios from 'axios'; // Import Axios for HTTP requests
 
 const AddNews = () => {
   const [formData, setFormData] = useState({
@@ -48,10 +49,39 @@ const AddNews = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+
+    const shareNews = Object.keys(formData.shareWith).filter(
+      (key) => formData.shareWith[key]
+    );
+
+    const newsData = new FormData();
+    newsData.append('addTitle', formData.title);
+    newsData.append('addContent', formData.content);
+    newsData.append('addLink', formData.link);
+    if (formData.image) {
+      newsData.append('image', formData.image); // Append the file if it exists
+    }
+    newsData.append('shareNews', JSON.stringify(shareNews));
+
+    try {
+      const response = await axios.post(
+        'https://market-hub-backend-kappa.vercel.app/admin/add-self-news',
+        newsData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
+      console.log('Response:', response.data);
+      alert(response.data.message);
+    } catch (error) {
+      console.error('Error submitting the news:', error);
+      alert('There was an error posting the news. Please try again.');
+    }
   };
 
   return (
@@ -89,35 +119,34 @@ const AddNews = () => {
             />
           </div>
           <div style={{ paddingTop: "25px" }}>
-  <span style={{ fontWeight: "500" }}>Upload Image </span> 
-  <span className="optional-text">(optional)</span>
-</div>
+            <span style={{ fontWeight: "500" }}>Upload Image </span> 
+            <span className="optional-text">(optional)</span>
+          </div>
 
-    <div className='fullpreviewflex'>      
-          <div className='textbuttonflex'> 
-            <div className="file-upload-info" style={{paddingLeft:"10px",paddingTop:"10px"}}>Please upload a JPG or PNG file less than 2MB</div>
-            <div className="selfnewsfile-upload">
-            <label htmlFor="file-upload" className="custom-file-upload">
-              Choose File
-            </label>
-            <input
-              id="file-upload"
-              type="file"
-              onChange={handleFileChange}
-              accept="image/jpeg,image/png"
-              className="file-input" // Hide the default file input
-            />
-            </div>  
+          <div className='fullpreviewflex'>      
+            <div className='textbuttonflex'> 
+              <div className="file-upload-info" style={{paddingLeft:"10px",paddingTop:"10px"}}>Please upload a JPG or PNG file less than 2MB</div>
+              <div className="selfnewsfile-upload">
+                <label htmlFor="file-upload" className="custom-file-upload">
+                  Choose File
+                </label>
+                <input
+                  id="file-upload"
+                  type="file"
+                  onChange={handleFileChange}
+                  accept="image/jpeg,image/png"
+                  className="file-input" // Hide the default file input
+                />
+              </div>  
             </div>   
         
-          <div className='selfnewspreviewflex'> 
- 
-            <div className="image-preview-container">
-              <img src={formData.imagePreview} alt="Preview" className="image-preview" />
+            <div className='selfnewspreviewflex'> 
+              <div className="image-preview-container">
+                <img src={formData.imagePreview} alt="Preview" className="image-preview" />
               </div>
             </div>
-   
-    </div>
+          </div>
+
           <div className="selfnewscheckbox-group">
             <label style={{fontWeight:"700"}}>Share With</label>
             <div className="selfnewscheckboxes">

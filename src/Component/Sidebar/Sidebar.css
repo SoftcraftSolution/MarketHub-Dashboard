@@ -106,7 +106,7 @@ button.menu-item:focus {
 button.menu-item.active {
     color: #ff5722; 
     font-weight: bold;
-    border-left: 10px solid #ff5722; /* Active border on the left */
+    border-left: 4px solid #ff5722; /* Active border on the left */
 }
 
 .submenu-open {

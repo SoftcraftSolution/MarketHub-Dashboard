@@ -1,0 +1,54 @@
+.headercomponent-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #FFFFFF;
+    padding: 10px;
+}
+
+.headercomponenttabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    background-color: #FFFFFF;
+}
+
+.headercomponenttab-button {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.categoryupdate-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.categorytable-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.categorytable {
+    border-collapse: collapse;
+    width: 80%;
+}
+
+.headingcategory, .datacategory {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.headingcategory {
+    background-color: #f2f2f2;
+    text-align: left;
+}

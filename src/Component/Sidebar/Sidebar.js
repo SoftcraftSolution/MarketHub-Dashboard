@@ -64,18 +64,10 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           <ul className={`submenu ${isUserListOpen ? 'submenu-open' : ''}`}>
               <li>
                 <Link
-                  className={`submenu-item ${activeIndex === 10 ? 'active' : 'inactive'}`}
-                  onClick={() => onTabClick(10)}
-                >
-                  Free Trial
-                </Link>
-              </li>
-              <li>
-                <Link
                   className={`submenu-item ${activeIndex === 11 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(11)}
                 >
-                  Expired Trial
+                  Free Trial
                 </Link>
               </li>
               <li>
@@ -83,13 +75,21 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
                   className={`submenu-item ${activeIndex === 12 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(12)}
                 >
-                  Rejected Users
+                  Expired Trial
                 </Link>
               </li>
               <li>
                 <Link
                   className={`submenu-item ${activeIndex === 13 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(13)}
+                >
+                  Rejected Users
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`submenu-item ${activeIndex === 14 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(14)}
                 >
                   Free Users
                 </Link>
@@ -120,17 +120,22 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           </button>
           <ul className={`submenu ${isSpotOpen ? 'submenu-open' : ''}`}>
               <li>
-                {/* Add any sub-links related to Spot Price here */}
+              <Link
+                  className={`submenu-item ${activeIndex === 5 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(5)}
+                >
+                  Add Spot Price
+                </Link>
               </li>
             </ul>
         </li>
 
         <li>
           <button
-            className={`menu-item ${activeIndex === 5 ? 'active' : 'inactive'}`}
+            className={`menu-item ${activeIndex === 6 ? 'active' : 'inactive'}`}
             onClick={() => {
               toggleNewsList();
-              onTabClick(5);
+              onTabClick(6);
             }}
           >
             <img src={newsimg} alt="News Icon" className="icon" />
@@ -144,16 +149,16 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           <ul className={`submenu ${isNewsOpen ? 'submenu-open' : ''}`}>
               <li>
                 <Link
-                  className={`submenu-item ${activeIndex === 6 ? 'active' : 'inactive'}`}
-                  onClick={() => onTabClick(6)}
+                  className={`submenu-item ${activeIndex === 7 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(7)}
                 >
                   Add Self News
                 </Link>
               </li>
               <li>
                 <Link
-                  className={`submenu-item ${activeIndex === 9 ? 'active' : 'inactive'}`}
-                  onClick={() => onTabClick(9)}
+                  className={`submenu-item ${activeIndex === 10 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(10)}
                 >
                   Add Circular
                 </Link>
@@ -163,8 +168,8 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
 
         <li>
           <Link
-            className={`menu-item ${activeIndex === 7 ? 'active' : 'inactive'}`}
-            onClick={() => onTabClick(7)}
+            className={`menu-item ${activeIndex === 8 ? 'active' : 'inactive'}`}
+            onClick={() => onTabClick(8)}
           >
             <img src={cash} alt="Cash Management Icon" className="icon" />
             Cash Management
@@ -173,8 +178,8 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
 
         <li>
           <Link
-            className={`menu-item ${activeIndex === 8 ? 'active' : 'inactive'}`}
-            onClick={() => onTabClick(8)}
+            className={`menu-item ${activeIndex === 9 ? 'active' : 'inactive'}`}
+            onClick={() => onTabClick(9)}
           >
             <img src={add} alt="Add Admin Icon" className="icon" />
             Add Admin

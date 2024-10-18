@@ -95,7 +95,7 @@ const AddCircularNews = () => {
 
     <div className='circularfullpreviewflex'>      
           <div className='circulartextbuttonflex'> 
-            <div className="circularfile-upload-info" style={{paddingLeft:"10px",paddingTop:"10px"}}>Please upload a JPG or PNG file less than 2MB</div>
+            <div className="circularfile-upload-info" style={{paddingLeft:"10px",paddingTop:"10px"}}>Please upload a PDF</div>
             <div className="circularnewsfile-upload">
             <label htmlFor="file-upload" className="circular-file-upload">
               Choose File
@@ -115,7 +115,37 @@ const AddCircularNews = () => {
             <div className="circularimage-preview-container">
               <img src={formData.imagePreview} alt="Preview" className="circularnewsimage-preview" />
               </div>
+              
             </div>
+            
+
+            <div className='circularpdfbuttonflex'> 
+              
+            <div className="circularpdffile-upload-info" style={{paddingLeft:"10px",paddingTop:"10px"}}>Please upload a JPG or PNG, size less than 2mb</div>
+            <div className="circularnewspdffile-upload">
+            <label htmlFor="file-upload" className="circularpdf-file-upload">
+              Choose File
+            </label>
+            <input
+              id="file-upload"
+              type="file"
+              onChange={handleFileChange}
+              accept="image/jpeg,image/png"
+              className="circularpdffile-input" // Hide the default file input
+            />
+            </div>  
+            </div>   
+        
+          <div className='circularnewspdfpreviewflex'> 
+ 
+            <div className="circularimage-preview-containerpdf">
+              <img src={formData.imagePreview} alt="Preview" className="circularnewsimage-previewpdf" />
+              </div>
+              
+            </div>
+
+
+            
    
     </div>
           <div className="circularnewscheckbox-group">

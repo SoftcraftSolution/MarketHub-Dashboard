@@ -43,8 +43,7 @@ function Login() {
         sessionStorage.setItem('token', token);
       }
 
-      // Navigate to dashboard after login
-      navigate('/dashboard'); 
+      navigate('/'); 
 
     } catch (error) {
       console.error('Error during login:', error.response?.data || error);

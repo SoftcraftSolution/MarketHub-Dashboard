@@ -21,6 +21,7 @@ import AdminDashboard from './Component/AddAdmin/addadmin';
 import MainDashboard from './Component/DashboardMain/maindashboard';
 import Notification from './Component/Notification/notification'
 import UserList from './Component/FreeUser/freeuser';
+import AddSpotPrice from './Component/AddSpot/AddSpot';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             <Route path="/main" element={<MainDashboard />} />
             <Route path="/notification" element={<Notification />} />
             <Route path= "/freeuser" element={<UserList/>} />
+            <Route path= "/addspot" element={<AddSpotPrice/>} />
             {/* <Route path= "/test" element={<SidebarExample/>} /> */}
             {/* Add more routes here as needed */}
      

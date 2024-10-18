@@ -18,6 +18,7 @@ import FreeUser from '../FreeUser/freeuser.js';
 import UserListPage from '../UserList/UserList.js';
 import AddNews from '../SelfNews/selfnews.js';
 import AddCircularNews from '../AddCircular/addcircular.js';
+import AddSpotPrice from '../AddSpot/AddSpot.js';
 
 const Dashboard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -39,22 +40,24 @@ const Dashboard = () => {
       case 4:
         return <SpotPrice />;
       case 5:
-        return <NewsPage />;
+          return <AddSpotPrice />;  
       case 6:
-        return <AddNews />;
+        return <NewsPage />;
       case 7:
-        return <CashManagement />;
+        return <AddNews />;
       case 8:
-        return <AdminDashboard />;
+        return <CashManagement />;
       case 9:
-        return <AddCircularNews/>;
+        return <AdminDashboard />;
       case 10:
-        return <FreeTrial />;
+        return <AddCircularNews/>;
       case 11:
-        return <ExpiredTrial />;
+        return <FreeTrial />;
       case 12:
-        return <RejectedUserTrial />;
+        return <ExpiredTrial />;
       case 13:
+        return <RejectedUserTrial />;
+      case 14:
         return <FreeUser />;
       default:
         return null;
