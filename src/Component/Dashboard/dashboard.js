@@ -6,6 +6,7 @@ import FreeTrial from '../FreeTrial/freetrial.js';
 import NewsPage from '../News/news.js';
 import ExpiredTrial from '../ExpiredTrail/expiredtrial.js';
 import RejectedUserTrial from '../RejectedUser/rejecteduser.js';
+import Updates from '../Updates/Updates.js';
 import Sidebar from '../Sidebar/Sidebar.js';
 import Topbar from '../TopBar/topbar.js'; // Import the Topbar component
 import "./dashboard.css"; // Your CSS file for styling
@@ -19,6 +20,9 @@ import UserListPage from '../UserList/UserList.js';
 import AddNews from '../SelfNews/selfnews.js';
 import AddCircularNews from '../AddCircular/addcircular.js';
 import AddSpotPrice from '../AddSpot/AddSpot.js';
+import AddUpdate from '../AddUpdate/AddUpdate.js';
+import AddLocation from '../AddLocation/AddLocation.js';
+import Feedback from '../Feedback/Feedback.js';
 
 const Dashboard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -46,9 +50,9 @@ const Dashboard = () => {
       case 7:
         return <AddNews />;
       case 8:
-        return <CashManagement />;
+        return <Feedback/>;
       case 9:
-        return <AdminDashboard />;
+        return <AddUpdate/>;
       case 10:
         return <AddCircularNews/>;
       case 11:

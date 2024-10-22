@@ -35,12 +35,14 @@ function Login() {
         password: password,
       });
       
-      // Store the JWT token
+      // Store the JWT token and email
       const token = response.data.token;
       if (keepSignedIn) {
         localStorage.setItem('token', token);
+        localStorage.setItem('email', email); // Store email in localStorage
       } else {
         sessionStorage.setItem('token', token);
+        sessionStorage.setItem('email', email); // Store email in sessionStorage
       }
 
       navigate('/'); 

@@ -33,6 +33,20 @@ const NewsPage = () => {
     setSelectedDate(date);
     console.log(date);
   };
+  const openModal = (index) => {
+    setSelectedNewsIndex(index);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const handleDelete = () => {
+    console.log('Delete news item:', selectedNewsIndex);
+    setShowModal(false);
+    // Perform deletion here, e.g., update the state or make an API call
+  };
 
   const getStringDate = (date) => {
     if (!(date instanceof Date)) {
@@ -42,6 +56,8 @@ const NewsPage = () => {
   };
 
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showModal, setShowModal] = useState(false); // State to show/hide the modal
+  const [selectedNewsIndex, setSelectedNewsIndex] = useState(null);
 
   return (
     <div className="news-page">
@@ -92,7 +108,7 @@ const NewsPage = () => {
                 <td>{news.pdf ? <img src="/pdf-icon.png" alt="PDF" /> : '-'}</td>
                 <td>{news.uploadDate}</td>
                 <td>
-                  <button style={{border:"none",backgroundColor:"#FFFFFF"}} onClick={() => console.log('Delete news', index)} className="delete-button">
+                  <button style={{border:"none",backgroundColor:"#FFFFFF"}} onClick={() => openModal(index)} className="delete-button">
                     <img src={deleteIcon} alt="delete" />
                   </button>
                 </td>
@@ -103,6 +119,19 @@ const NewsPage = () => {
       </div>
 
       <Pagination /> 
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close-button" onClick={closeModal}>&times;</span>
+            <div className='deletepopup-heading'>Delete News</div>
+            <div className='deletepopup-message'>Are you sure you want to continue?</div>
+            <div className="modal-actions">
+              <button onClick={handleDelete} className="modal-delete-button">No</button>
+              <button onClick={closeModal} className="modal-cancel-button">Yes</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

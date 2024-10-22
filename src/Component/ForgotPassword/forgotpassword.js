@@ -20,7 +20,7 @@ const ForgotPassword = () => {
 
     try {
       // Make API call to send reset code to the user's email
-      const response = await axios.post('https://market-hub-backend-kappa.vercel.app/admin/forgot-password', {
+      const response = await axios.post('https://market-hub-backend-dashboard.vercel.app/admin/forgot-password', {
         email,
       });
 

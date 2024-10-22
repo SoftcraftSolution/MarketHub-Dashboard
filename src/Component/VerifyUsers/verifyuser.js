@@ -2,16 +2,20 @@ import './verifyuser.css'; // Import external CSS
 import filterimg from '../../assets/filter.png';
 import tickimg from '../../assets/tickimg.png';
 import delimg from '../../assets/removeimg.png';
-import React, { useState, useEffect } from 'react';
-import visitcard from '../../assets/visitcard.png'
-import Pagination from '../Pagination'; 
+import visitcard from '../../assets/visitcard.png';
+import React, { useState } from 'react';
+import Pagination from '../Pagination';
 
 function VerifyUsers() {
+  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false); // Accept Modal visibility state
+  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false); // Reject Modal visibility state
+  const [selectedUser, setSelectedUser] = useState(null); // To store selected user for confirmation
+
   const users = [
     {
       name: 'Bhavesh Kumar',
       phone: '+91 7838392384',
-      alterno:'+91 7838392384',
+      alterno: '+91 7838392384',
       pincode: '400089',
       city: 'Mumbai',
       state: 'Maharashtra',
@@ -21,89 +25,62 @@ function VerifyUsers() {
     {
       name: 'Ravi Sandeep',
       phone: '+91 7859923183',
-      alterno:'+91 7838392384',
+      alterno: '+91 7838392384',
       pincode: '400020',
       city: 'Gurgaon',
       state: 'Haryana',
       visitingCard: visitcard,
       dateTime: '29-Sep-2024, 14:55',
     },
-    {
-      name: 'Mumtaz Singh',
-      phone: '+91 7894932883',
-      alterno:'+91 7838392384',
-      pincode: '400200',
-      city: 'Kolkata',
-      state: 'West Bengal',
-      visitingCard: '',
-      dateTime: '28-Sep-2024, 11:40',
-    },
-    {
-      name: 'Gauri Prashad',
-      phone: '+91 9857292345',
-      alterno:'+91 7838392384',
-      pincode: '600023',
-      city: 'Chennai',
-      state: 'Tamil Nadu',
-      visitingCard: visitcard,
-      dateTime: '29-Sep-2024, 15:15',
-    },
-    {
-      name: 'Poonam Kaleesh',
-      phone: '+91 9948482323',
-      alterno:'+91 7838392384',
-      pincode: '700029',
-      city: 'Vizag',
-      state: 'Andhra Pradesh',
-      visitingCard: '', // No card available
-      dateTime: '30-Sep-2024, 12:00',
-    },
-    {
-      name: 'Bhavesh Kumar',
-      phone: '+91 7838392384',
-      alterno:'+91 7838392384',
-      pincode: '400089',
-      city: 'Madurai',
-      state: 'Tamil Nadu',
-      visitingCard: visitcard,
-      dateTime: '30-Sep-2024, 14:45',
-    },
+    // Add other users here...
   ];
-  const handleDateChange = (event) => {
-    const date = new Date(event.target.value);
-    setSelectedDate(date);
-    console.log(date);
+
+  const handleTickClick = (user) => {
+    setSelectedUser(user);
+    setIsAcceptModalOpen(true);
   };
 
-  const getStringDate = (date) => {
-    // Ensure date is a Date object
-    if (!(date instanceof Date)) {
-      throw new Error("Input must be a Date object");
-    }
-  }
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const handleRejectClick = (user) => {
+    setSelectedUser(user);
+    setIsRejectModalOpen(true);
+  };
+
+  const handleConfirm = () => {
+    console.log('User accepted:', selectedUser);
+    setIsAcceptModalOpen(false); // Close the modal after confirmation
+    // Add your logic here for accepting the user
+  };
+
+  const handleRejectConfirm = () => {
+    console.log('User rejected:', selectedUser);
+    setIsRejectModalOpen(false); // Close the reject modal after confirmation
+    // Add your logic here for rejecting the user
+  };
+
+  const handleCancel = () => {
+    setIsAcceptModalOpen(false); // Close the accept modal without action
+    setIsRejectModalOpen(false); // Close the reject modal without action
+  };
 
   return (
     <div className="verify-users-container">
-      <div className='verify-heading'>Verify Users</div>
+      <div className="verify-heading">Verify Users</div>
 
-
-    <div className="table-container">
-      <div className="top-bar">
-        <div style={{paddingTop:'10px',fontSize:"16px",fontWeight:"600"}}>Verify Users</div>
-        <div className="verify-search">
-          <input type="text" placeholder="Search by name, phone..." className="expired-input" />
+      <div className="table-container">
+        <div className="top-bar">
+          <div style={{ paddingTop: '10px', fontSize: "16px", fontWeight: "600" }}>Verify Users</div>
+          <div className="verify-search">
+            <input type="text" placeholder="Search by name, phone..." className="expired-input" />
+          </div>
+          <button className="filter-btn">
+            <img src={filterimg} alt="filter" />
+          </button>
         </div>
-        <button className="filter-btn">
-          <img src={filterimg} alt="filter" />  
-        </button>
-      </div>
 
-  
         <table className="users-table">
           <thead>
             <tr>
-            <th>Action</th>
+              <th>Action</th>
               <th>Full Name</th>
               <th>WhatsApp No</th>
               <th>Alternate No</th>
@@ -112,15 +89,18 @@ function VerifyUsers() {
               <th>State</th>
               <th>Visiting Card</th>
               <th>Date & Time</th>
-            
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
               <tr key={index}>
-               <td className='buttonsverify'>
-                  <button className="edit-btn"><img src={tickimg}/></button>
-                  <button className="delete-btn"><img src={delimg}/></button>
+                <td className='buttonsverify'>
+                  <button className="edit-btn" onClick={() => handleTickClick(user)}>
+                    <img src={tickimg} alt="accept" />
+                  </button>
+                  <button className="delete-btn" onClick={() => handleRejectClick(user)}>
+                    <img src={delimg} alt="reject" />
+                  </button>
                 </td>
                 <td>{user.name}</td>
                 <td>{user.phone}</td>
@@ -136,13 +116,41 @@ function VerifyUsers() {
                   )}
                 </td>
                 <td>{user.dateTime}</td>
-
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
       <Pagination />
+
+      {/* Accept Modal Popup */}
+      {isAcceptModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content accept-modal">
+            <div className='modal-title'>Add User</div>
+            <div className='modal-confirmation-message'>Are you sure you want to accept the user?</div>
+            <div className="modal-actions">
+              <button className="modal-btn modal-cancel" onClick={handleCancel}>No</button>
+              <button className="modal-btn modal-confirm" onClick={handleConfirm}>Yes</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reject Modal Popup */}
+      {isRejectModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content reject-modal">
+            <div className='modal-title-reject'>Reject User</div>
+            <div className='modal-confirmation-message-reject'>Are you sure you want to reject the user?</div>
+            <div className="modal-actions-reject">
+              <button className="modal-reject-btn modal-reject-cancel" onClick={handleCancel}>No</button>
+              <button className="modal-reject-btn modal-reject-confirm" onClick={handleRejectConfirm}>Yes</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
