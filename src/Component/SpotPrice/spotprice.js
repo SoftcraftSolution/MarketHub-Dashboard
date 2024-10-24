@@ -1,3 +1,9 @@
+
+import React from 'react';
+import VerifyUsersTable from './VerifySpot/VerifySpot';
+import PriceListTable from './PriceList/PriceList';
+import './spotprice.css'; // External CSS for the page
+
 import React, { useState } from 'react';
 import './spotprice.css'; // Importing the CSS file
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
@@ -91,7 +97,17 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
     handleCloseDialog();
   };
 
+
+const SpotPrice = () => {
   return (
+
+    <div className="spot-price-container">
+      <div className='spotpagemaintitle'>Spot Price</div>
+      <div className="verify-users-section">
+        <VerifyUsersTable />
+      </div>
+      <div className="price-list-section">
+        <PriceListTable />
     <div className="spot-price-table">
       <div className='spot-verify-heading'>
         <div className='spot-verify-title'>Verify Users</div>
@@ -224,9 +240,8 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
           </tbody>
         </table>
       </div>
-      <Pagination />
     </div>
   );
-}
+};
 
-export default SpotPriceTable;
+export default SpotPrice;

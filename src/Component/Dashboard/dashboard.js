@@ -6,6 +6,7 @@ import FreeTrial from '../FreeTrial/freetrial.js';
 import NewsPage from '../News/news.js';
 import ExpiredTrial from '../ExpiredTrail/expiredtrial.js';
 import RejectedUserTrial from '../RejectedUser/rejecteduser.js';
+import Updates from '../Updates/Updates.js';
 import Sidebar from '../Sidebar/Sidebar.js';
 import Topbar from '../TopBar/topbar.js'; // Import the Topbar component
 import "./dashboard.css"; // Your CSS file for styling
@@ -15,6 +16,15 @@ import CashManagement from '../CashManagement/cashmanagement.js';
 import AdminDashboard from '../AddAdmin/addadmin.js';
 import CircularNews from '../AddCircular/addcircular.js';
 import FreeUser from '../FreeUser/freeuser.js';
+import UserListPage from '../UserList/UserList.js';
+import AddNews from '../SelfNews/selfnews.js';
+import AddCircularNews from '../AddCircular/addcircular.js';
+import AddSpotPrice from '../AddSpot/AddSpot.js';
+import AddUpdate from '../AddUpdate/AddUpdate.js';
+import AddLocation from '../AddLocation/AddLocation.js';
+import Feedback from '../Feedback/Feedback.js';
+import AddSBI from '../AddSBIREFERENCE/AddSbi.js';
+
 
 const Dashboard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -28,7 +38,7 @@ const Dashboard = () => {
       case 0:
         return <MainDashboard />;
       case 1:
-        return <UserList />;
+        return <UserListPage />;
       case 2:
         return <FreeTrial />;
       case 3:
@@ -36,23 +46,33 @@ const Dashboard = () => {
       case 4:
         return <SpotPrice />;
       case 5:
-        return <NewsPage />;
+          return <AddSpotPrice />;  
       case 6:
-        return <SelfNews />;
+        return <NewsPage />;
       case 7:
-        return <CashManagement />;
+        return <AddNews />;
       case 8:
-        return <AdminDashboard />;
+        return <AddLocation/>;
       case 9:
-        return <CircularNews />;
+        return <AdminDashboard/>;
       case 10:
-        return <FreeTrial />;
+        return <AddCircularNews/>;
       case 11:
-        return <ExpiredTrial />;
+        return <FreeTrial />;
       case 12:
-        return <RejectedUserTrial />;
+        return <ExpiredTrial />;
       case 13:
+        return <RejectedUserTrial />;
+      case 14:
         return <FreeUser />;
+        case 15:
+          return <AddSBI />;
+          case 16:
+            return <Updates />;
+           case 17:
+              return <Feedback />;  
+              case 18:
+                return <AddUpdate />;   
       default:
         return null;
     }

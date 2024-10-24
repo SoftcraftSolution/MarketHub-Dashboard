@@ -75,7 +75,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+
 }
 
 .search-bar {
@@ -97,12 +97,14 @@
   padding: 10px;
   border-bottom: 1px solid #ddd;
   text-align: left;
+  white-space: normal;
+
 }
 
 .news-list th {
   background-color: #f4f6fa;
   font-weight: bold;
-  white-space: nowrap;
+  white-space: normal;
   background-color: #FFFFFF;
 }
 
@@ -137,7 +139,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: 'Poppins', sans-serif;
   color: gray;
-  margin-right: 800px;
+
   margin-bottom: 20px;
 }
 
@@ -163,7 +165,10 @@
 }
 
 .news-close{
-  margin-bottom: -25px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
 }
 
 .stat-header {
@@ -190,4 +195,94 @@
   background-position: center;
   height: 50px;
   width: 50px;
+}
+
+.newsfilter{
+  color: white;
+  border: none;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  font-size: 14px;
+}
+
+.newstitle{
+  font-weight: 600;
+  font-size: 16px;
+  padding-top: 15px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  width: 350px;
+  text-align: center;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+.modal-actions {
+  margin-top: 20px;
+}
+
+.modal-delete-button {
+  background-color: #FFFFFF;
+  color: #696969;
+  border: 1px solid grey;
+  padding: 12px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.modal-cancel-button {
+  background-color:#FF0000;
+  
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.modal-delete-button:hover,
+.modal-cancel-button:hover {
+  opacity: 0.8;
+}
+
+.deletepopup-heading{
+  text-align: left;
+  padding-bottom: 15px;
+  font-weight: 800;
+  font-size: 20px;
+  padding-left: 15px;
+}
+
+.deletepopup-message{
+  text-align: left;
+  color:#696969;
+  padding-left: 15px;
+  
 }

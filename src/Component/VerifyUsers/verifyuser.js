@@ -1,123 +1,127 @@
-
 import './verifyuser.css'; // Import external CSS
 import filterimg from '../../assets/filter.png';
 import tickimg from '../../assets/tickimg.png';
 import delimg from '../../assets/removeimg.png';
-import React, { useState, useEffect } from 'react';
-import visitcard from '../../assets/visitcard.png'
-import Pagination from '../Pagination'; 
+import visitcard from '../../assets/visitcard.png';
+import React, { useState } from 'react';
+import axios from 'axios'; // Import Axios
+import Pagination from '../Pagination';
 
 function VerifyUsers() {
-  const users = [
+  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false); // Accept Modal visibility state
+  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false); // Reject Modal visibility state
+  const [selectedUser, setSelectedUser] = useState(null); // To store selected user for confirmation
+  const [users, setUsers] = useState([ // Initialize users in state
     {
       name: 'Bhavesh Kumar',
-      phone: '7838392384',
+      phone: '+91 7838392384',
+      alterno: '+91 7838392384',
       pincode: '400089',
       city: 'Mumbai',
       state: 'Maharashtra',
       visitingCard: visitcard, // Image path or URL
       dateTime: '30-Sep-2024, 10:23',
+      id: 1, // Add an ID for each user
     },
     {
       name: 'Ravi Sandeep',
-      phone: '7859923183',
+      phone: '+91 7859923183',
+      alterno: '+91 7838392384',
       pincode: '400020',
       city: 'Gurgaon',
       state: 'Haryana',
       visitingCard: visitcard,
       dateTime: '29-Sep-2024, 14:55',
+      id: 2, // Add an ID for each user
     },
-    {
-      name: 'Mumtaz Singh',
-      phone: '7894932883',
-      pincode: '400200',
-      city: 'Kolkata',
-      state: 'West Bengal',
-      visitingCard: '',
-      dateTime: '28-Sep-2024, 11:40',
-    },
-    {
-      name: 'Gauri Prashad',
-      phone: '9857292345',
-      pincode: '600023',
-      city: 'Chennai',
-      state: 'Tamil Nadu',
-      visitingCard: visitcard,
-      dateTime: '29-Sep-2024, 15:15',
-    },
-    {
-      name: 'Poonam Kaleesh',
-      phone: '9948482323',
-      pincode: '700029',
-      city: 'Vizag',
-      state: 'Andhra Pradesh',
-      visitingCard: '', // No card available
-      dateTime: '30-Sep-2024, 12:00',
-    },
-    {
-      name: 'Bhavesh Kumar',
-      phone: '7838392384',
-      pincode: '400089',
-      city: 'Madurai',
-      state: 'Tamil Nadu',
-      visitingCard: visitcard,
-      dateTime: '30-Sep-2024, 14:45',
-    },
-  ];
-  const handleDateChange = (event) => {
-    const date = new Date(event.target.value);
-    setSelectedDate(date);
-    console.log(date);
+    // Add other users here...
+  ]);
+
+  const handleTickClick = (user) => {
+    setSelectedUser(user);
+    setIsAcceptModalOpen(true);
   };
 
-  const getStringDate = (date) => {
-    // Ensure date is a Date object
-    if (!(date instanceof Date)) {
-      throw new Error("Input must be a Date object");
+  const handleRejectClick = (user) => {
+    setSelectedUser(user);
+    setIsRejectModalOpen(true);
+  };
+
+  const handleConfirm = () => {
+    console.log('User accepted:', selectedUser);
+    setIsAcceptModalOpen(false); // Close the modal after confirmation
+    // Add your logic here for accepting the user
+  };
+
+  const handleRejectConfirm = async () => {
+    try {
+      const response = await axios.post('https://markethub-app-backend.onrender.com/user/reject-user', {
+        userId: selectedUser.id, // Ensure you send the user ID here
+      });
+  
+      if (response.data.success) {
+        console.log('User rejected:', selectedUser);
+        // Remove the user from the state
+        setUsers((prevUsers) => prevUsers.filter(user => user.id !== selectedUser.id));
+      } else {
+        console.error('Failed to reject user:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error rejecting user:', error.response?.data || error.message);
+    } finally {
+      setIsRejectModalOpen(false); // Close the reject modal after confirmation
     }
-  }
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  };
+  
+
+  const handleCancel = () => {
+    setIsAcceptModalOpen(false); // Close the accept modal without action
+    setIsRejectModalOpen(false); // Close the reject modal without action
+  };
 
   return (
     <div className="verify-users-container">
-      <h2 className='verify-heading'>Verify Users</h2>
+      <div className="verify-heading">Verify Users</div>
 
-
-    <div className="table-container">
-      <div className="top-bar">
-        <h3 style={{paddingTop:'10px'}}>Verify Users</h3>
-        <div className="verify-search">
-          <input type="text" placeholder="Search by name, phone..." className="expired-input" />
+      <div className="table-container">
+        <div className="top-bar">
+          <div style={{ paddingTop: '10px', fontSize: "16px", fontWeight: "600" }}>Verify Users</div>
+          <div className="verify-search">
+            <input type="text" placeholder="Search by name, phone..." className="expired-input" />
+          </div>
+          <button className="filter-btn">
+            <img src={filterimg} alt="filter" />
+          </button>
         </div>
-        <button className="filter-btn">
-          <img src={filterimg} alt="filter" />  
-        </button>
-      </div>
 
-  
         <table className="users-table">
           <thead>
             <tr>
-            <th>Action</th>
+              <th>Action</th>
               <th>Full Name</th>
-              <th>Phone No</th>
+              <th>WhatsApp No</th>
+              <th>Alternate No</th>
               <th>Pincode</th>
               <th>City</th>
               <th>State</th>
               <th>Visiting Card</th>
               <th>Date & Time</th>
-            
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
               <tr key={index}>
-               <td className='buttonsverify'>
-                  <button className="edit-btn"><img src={tickimg}/></button>
-                  <button className="delete-btn"><img src={delimg}/></button>
+                <td className='buttonsverify'>
+                  <button className="edit-btn" onClick={() => handleTickClick(user)}>
+                    <img src={tickimg} alt="accept" />
+                  </button>
+                  <button className="delete-btn" onClick={() => handleRejectClick(user)}>
+                    <img src={delimg} alt="reject" />
+                  </button>
                 </td>
                 <td>{user.name}</td>
                 <td>{user.phone}</td>
+                <td>{user.alterno}</td>
                 <td>{user.pincode}</td>
                 <td>{user.city}</td>
                 <td>{user.state}</td>
@@ -129,13 +133,41 @@ function VerifyUsers() {
                   )}
                 </td>
                 <td>{user.dateTime}</td>
-
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
       <Pagination />
+
+      {/* Accept Modal Popup */}
+      {isAcceptModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content accept-modal">
+            <div className='modal-title'>Add User</div>
+            <div className='modal-confirmation-message'>Are you sure you want to accept the user?</div>
+            <div className="modal-actions">
+              <button className="modal-btn modal-cancel" onClick={handleCancel}>No</button>
+              <button className="modal-btn modal-confirm" onClick={handleConfirm}>Yes</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reject Modal Popup */}
+      {isRejectModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content reject-modal">
+            <div className='modal-title-reject'>Reject User</div>
+            <div className='modal-confirmation-message-reject'>Are you sure you want to reject the user?</div>
+            <div className="modal-actions-reject">
+              <button className="modal-reject-btn modal-reject-cancel" onClick={handleCancel}>No</button>
+              <button className="modal-reject-btn modal-reject-confirm" onClick={handleRejectConfirm}>Yes</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

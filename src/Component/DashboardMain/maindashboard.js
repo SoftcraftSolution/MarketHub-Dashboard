@@ -10,7 +10,7 @@ import NotificationList from './RecentNotification/recentnotification'
 const MainDashboard = () => {
   return (
    <div className='main-dash-root'>
-    <div id="dash-header">DashBoard</div>
+    <div id="dash-header">Dashboard</div>
     <div id="dash-first">
     <Card 
         title="Basic Plan" 

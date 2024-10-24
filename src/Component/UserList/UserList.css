@@ -1,3 +1,9 @@
+
+.user-list-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
 .dashboard-container {
   padding: 20px;
   background-color: #f9f9f9;
@@ -122,3 +128,4 @@ h4 {
 .filter-button {
   margin-left: 0; /* Reset the margin left since the gap is now handled by .date-picker */
 }
+

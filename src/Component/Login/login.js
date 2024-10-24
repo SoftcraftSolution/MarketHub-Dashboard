@@ -30,21 +30,22 @@ function Login() {
     setError('');
 
     try {
-      const response = await axios.post('https://market-hub-backend-kappa.vercel.app/admin/login', {
+      const response = await axios.post('https://markethub-backend-ceka.onrender.com/admin/login', {
         email: email,
         password: password,
       });
       
-      // Store the JWT token
+      // Store the JWT token and email
       const token = response.data.token;
       if (keepSignedIn) {
         localStorage.setItem('token', token);
+        localStorage.setItem('email', email); // Store email in localStorage
       } else {
         sessionStorage.setItem('token', token);
+        sessionStorage.setItem('email', email); // Store email in sessionStorage
       }
 
-      // Navigate to dashboard after login
-      navigate('/dashboard'); 
+      navigate('/'); 
 
     } catch (error) {
       console.error('Error during login:', error.response?.data || error);
