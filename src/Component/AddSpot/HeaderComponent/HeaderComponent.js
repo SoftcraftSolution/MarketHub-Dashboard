@@ -10,7 +10,7 @@ const HeaderComponent = () => {
   // Replace with your Google Sheet ID and API key
   const SPREADSHEET_ID = '12hag257BMMd-W5fNlZE-ZDiBF6p6GRgrpsp3DK6VLIk';  // Your Google Sheet ID here
   const API_KEY = 'AIzaSyBptm1vobOT7ZpirWR9RClZIKa3dHrnF5o';                // Your Google API key here
-  const RANGE = 'DELHI';  // Adjust the range based on your sheet
+  const RANGE = 'OTHER CITY';  // Adjust the range based on your sheet
 
   useEffect(() => {
     const fetchSheetData = async () => {
@@ -47,7 +47,7 @@ const HeaderComponent = () => {
       <div className="headercomponent-container">
         <div className='topheading-addspot'>Add Spot Price</div>
         <div className="headercomponenttabs">
-          {['Sheet 7', 'Delhi', 'Copy', 'Pest', 'Other Rate', 'All India MSG'].map((tab) => (
+          {['Base Metal', 'Steel', 'Minor Metal', 'BME'].map((tab) => (
             <button 
               key={tab}
               className={`headercomponenttab-button ${activeTab === tab ? 'active' : ''}`}
@@ -57,9 +57,9 @@ const HeaderComponent = () => {
             </button>
           ))}
         </div>
-        <button className="categoryupdate-button">Update</button>
 
-        {/* Google Sheet Data */}
+        {/* Removed Google Sheet Data display */}
+        {/* 
         <div className="google-sheet-table">
           <table>
             <thead>
@@ -92,6 +92,7 @@ const HeaderComponent = () => {
             </tbody>
           </table>
         </div>
+        */}
       </div>
     </div>
   );

@@ -11,12 +11,16 @@ import downArrow from '../../assets/downarrow.png';
 import upArrow from '../../assets/uparrow.png';
 import cash from '../../assets/cash.png';
 import spot from '../../assets/spot.png';
+import updateslogo from '../../assets/updateslogo.png';
+import feed from '../../assets/feed.png';
+import logoutadmin from '../../assets/logoutadmin.png';
 
 const Sidebar = ({ activeIndex, onTabClick }) => {
   const navigate = useNavigate();
   const [isUserListOpen, setIsUserListOpen] = useState(false);
   const [isNewsOpen, setIsNewsOpen] = useState(false);
   const [isSpotOpen, setIsSpotOpen] = useState(false);
+  const [isUpdatesOpen, setIsUpdatesOpen] = useState(false);  // Added state for updates
 
   const toggleUserList = () => {
     setIsUserListOpen(!isUserListOpen);
@@ -109,6 +113,29 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
 
         <li>
           <button
+            className={`menu-item ${activeIndex === 16 ? 'active' : 'inactive'}`}
+            onClick={() => {
+              setIsUpdatesOpen(!isUpdatesOpen); // Fixed usage of state here
+              onTabClick(16);
+            }}
+          >
+            <img src={updateslogo} alt="Spot Price Icon" className="icon" />
+            Updates
+          </button>
+          <ul className={`submenu ${isUpdatesOpen ? 'submenu-open' : ''}`}>
+              <li>
+              <Link
+                  className={`submenu-item ${activeIndex === 18 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(18)}
+                >
+                  Add Update
+                </Link>
+              </li>
+            </ul>
+        </li>
+
+        <li>
+          <button
             className={`menu-item ${activeIndex === 4 ? 'active' : 'inactive'}`}
             onClick={() => {
               setIsSpotOpen(!isSpotOpen);
@@ -125,6 +152,15 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
                   onClick={() => onTabClick(5)}
                 >
                   Add Spot Price
+                </Link>
+              </li>
+
+              <li>
+              <Link
+                  className={`submenu-item ${activeIndex === 8 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(8)}
+                >
+                  Add Location
                 </Link>
               </li>
             </ul>
@@ -149,7 +185,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
           <ul className={`submenu ${isNewsOpen ? 'submenu-open' : ''}`}>
               <li>
                 <Link
-                  className={`submenu-item ${activeIndex === 7 ? 'active' : 'inactive'}`}
+                  className={`submenu-item ${activeIndex === 10 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(7)}
                 >
                   Add Self News
@@ -157,7 +193,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
               </li>
               <li>
                 <Link
-                  className={`submenu-item ${activeIndex === 10 ? 'active' : 'inactive'}`}
+                  className={`submenu-item ${activeIndex === 11 ? 'active' : 'inactive'}`}
                   onClick={() => onTabClick(10)}
                 >
                   Add Circular
@@ -168,11 +204,11 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
 
         <li>
           <Link
-            className={`menu-item ${activeIndex === 8 ? 'active' : 'inactive'}`}
-            onClick={() => onTabClick(8)}
+            className={`menu-item ${activeIndex === 17 ? 'active' : 'inactive'}`}
+            onClick={() => onTabClick(17)}
           >
-            <img src={cash} alt="Cash Management Icon" className="icon" />
-            Cash Management
+            <img src={feed} alt="Cash Management Icon" className="icon" />
+            Feedback
           </Link>
         </li>             
 
@@ -185,8 +221,17 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
             Add Admin
           </Link>
         </li>
+        
+        <li>
+          <Link
+            className={`menu-item ${activeIndex === 14 ? 'active' : 'inactive'}`}
+            onClick={() => onTabClick(9)}
+          >
+            <img src={logoutadmin} alt="Add Admin Icon" className="icon" />
+            Logout
+          </Link>
+        </li>
       </ul>
-
     </div>
   );
 };

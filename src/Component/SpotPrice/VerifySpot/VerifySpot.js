@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './VerifySpot.css'; // External CSS for this component
 import filter from '../../../assets/filter.png';
 import tick from '../../../assets/tickimg.png';
@@ -27,6 +27,37 @@ const userData = [
 ];
 
 const VerifyUsersTable = () => {
+  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
+  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleTickClick = (user) => {
+    setSelectedUser(user);
+    setIsAcceptModalOpen(true);
+  };
+
+  const handleRejectClick = (user) => {
+    setSelectedUser(user);
+    setIsRejectModalOpen(true);
+  };
+
+  const handleConfirm = () => {
+    console.log('User accepted:', selectedUser);
+    setIsAcceptModalOpen(false);
+    // Add your logic here for accepting the user
+  };
+
+  const handleRejectConfirm = () => {
+    console.log('User rejected:', selectedUser);
+    setIsRejectModalOpen(false);
+    // Add your logic here for rejecting the user
+  };
+
+  const handleCancel = () => {
+    setIsAcceptModalOpen(false);
+    setIsRejectModalOpen(false);
+  };
+
   return (
     <div className="spotverify-users">
       <div className='spotverifyheadingfunctions'>
@@ -62,13 +93,45 @@ const VerifyUsersTable = () => {
               <td className='spotverifydata'>{user.currentAmt}</td>
               <td className='spotverifydata'>{user.dateTime}</td>
               <td className='spotverifydata'>
-                <button style={{border:"none",backgroundColor:"#FFFFFF"}}><img src={tick} alt='tick' /></button>
-                <button style={{border:"none",backgroundColor:"#FFFFFF"}}><img src={untic} alt='deny' /></button>
+                <button style={{ border: "none", backgroundColor: "#FFFFFF" }} onClick={() => handleTickClick(user)}>
+                  <img src={tick} alt='tick' />
+                </button>
+                <button style={{ border: "none", backgroundColor: "#FFFFFF" }} onClick={() => handleRejectClick(user)}>
+                  <img src={untic} alt='deny' />
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {/* Accept Modal Popup */}
+      {isAcceptModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content accept-modal">
+            <div className='modal-title'>Add User</div>
+            <div className='modal-confirmation-message'>Are you sure you want to accept the user?</div>
+            <div className="modal-actions">
+              <button className="modal-btn modal-cancel" onClick={handleCancel}>No</button>
+              <button className="modal-btn modal-confirm" onClick={handleConfirm}>Yes</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reject Modal Popup */}
+      {isRejectModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content reject-modal">
+            <div className='modal-title-reject'>Reject User</div>
+            <div className='modal-confirmation-message-reject'>Are you sure you want to reject the user?</div>
+            <div className="modal-actions-reject">
+              <button className="modal-reject-btn modal-reject-cancel" onClick={handleCancel}>No</button>
+              <button className="modal-reject-btn modal-reject-confirm" onClick={handleRejectConfirm}>Yes</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

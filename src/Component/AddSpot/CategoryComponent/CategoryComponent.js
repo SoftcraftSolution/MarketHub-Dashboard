@@ -1,24 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CategoryComponent.css';
 
 const CategoriesComponent = () => {
+    const [activeCategory, setActiveCategory] = useState('COPPER');
+
+    const handleCategoryClick = (category) => {
+        setActiveCategory(category);
+    };
+
     return (
         <div className="categories-container">
-            <div>Categories to show in App</div>
             <div className="category-buttons">
-                <button className="category-button">COPPER</button>
-                <button className="category-button">Aluminum</button>
-                <button className="category-button">Zinc</button>
-                <button className="category-button">Brass</button>
-                <button className="category-button">Gun Metal</button>
-                <button className="category-button">Nickel Cathode</button>
-                <button className="category-button">Tin</button>
-                <button className="category-button">Lead</button>
+                <button
+                    className={`category-button ${activeCategory === 'COPPER' ? 'active' : ''}`}
+                    onClick={() => handleCategoryClick('COPPER')}
+                >
+                    Copper
+                </button>
+                <button
+                    className={`category-button ${activeCategory === 'Aluminum' ? 'active' : ''}`}
+                    onClick={() => handleCategoryClick('Aluminum')}
+                >
+                    Aluminum
+                </button>
+                <button
+                    className={`category-button ${activeCategory === 'Zinc' ? 'active' : ''}`}
+                    onClick={() => handleCategoryClick('Zinc')}
+                >
+                    Zinc
+                </button>
+                <button
+                    className={`category-button ${activeCategory === 'Brass' ? 'active' : ''}`}
+                    onClick={() => handleCategoryClick('Brass')}
+                >
+                    Brass
+                </button>
+                <button
+                    className={`category-button ${activeCategory === 'Gun Metal' ? 'active' : ''}`}
+                    onClick={() => handleCategoryClick('Gun Metal')}
+                >
+                    Gun Metal
+                </button>
+                <button
+                    className={`category-button ${activeCategory === 'Nickel Cathode' ? 'active' : ''}`}
+                    onClick={() => handleCategoryClick('Nickel Cathode')}
+                >
+                    Nickel Cathode
+                </button>
+                <button
+                    className={`category-button ${activeCategory === 'Tin' ? 'active' : ''}`}
+                    onClick={() => handleCategoryClick('Tin')}
+                >
+                    Tin
+                </button>
+                <button
+                    className={`category-button ${activeCategory === 'Lead' ? 'active' : ''}`}
+                    onClick={() => handleCategoryClick('Lead')}
+                >
+                    Lead
+                </button>
             </div>
-            <button className="categoryfilter-button">Filter by city</button>
-            <button className="categoryupdate-button">Update</button>
         </div>
     );
 };
 
 export default CategoriesComponent;
+    

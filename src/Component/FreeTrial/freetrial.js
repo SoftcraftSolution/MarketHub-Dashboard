@@ -9,12 +9,14 @@ const FreeTrial = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showDeletePopup, setShowDeletePopup] = useState(false);  // State to control delete popup visibility
+  const [selectedUser, setSelectedUser] = useState(null);  // State to store the selected user for deletion
 
   useEffect(() => {
     // Fetch data from the API
     const fetchFreeTrialUsers = async () => {
       try {
-        const response = await axios.get('https://market-hub-backend-kappa.vercel.app/user/free-trail-user-list');
+        const response = await axios.get('https://markethub-app-backend.onrender.com/user/free-trail-user-list');
         if (response.data.success) {
           // Filter users where isInTrial is true
           const trialUsers = response.data.data.filter(user => user.isInTrail);
@@ -31,6 +33,24 @@ const FreeTrial = () => {
 
     fetchFreeTrialUsers();
   }, []);
+
+  const handleDeleteClick = (user) => {
+    setSelectedUser(user);  // Set the user to be deleted
+    setShowDeletePopup(true);  // Show the delete confirmation popup
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      // Call your delete API here
+      await axios.delete(`https://market-hub-backend-kappa.vercel.app/user/delete/${selectedUser._id}`);
+      // Remove the user from the list after successful deletion
+      setUsers(users.filter(user => user._id !== selectedUser._id));
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    } finally {
+      setShowDeletePopup(false);  // Close the popup
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -60,7 +80,7 @@ const FreeTrial = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => (
+          {users.map((user) => (
             <tr key={user._id}>
               <td>{user.fullName}</td>
               <td>{user.phoneNumber}</td>
@@ -69,7 +89,12 @@ const FreeTrial = () => {
               <td>{new Date(user.planEndDate).toLocaleDateString()}</td>
               <td className='freetrial-buttons'>
                 <button style={{ border: 'none', backgroundColor: '#FFFFFF' }}><img src={actionimg} alt="action"/></button>
-                <button style={{ border: 'none', backgroundColor: '#FFFFFF' }}><img src={delimg} alt="delete"/></button>
+                <button 
+                  style={{ border: 'none', backgroundColor: '#FFFFFF' }} 
+                  onClick={() => handleDeleteClick(user)}  // Show popup on delete button click
+                >
+                  <img src={delimg} alt="delete"/>
+                </button>
               </td>
             </tr>
           ))}
@@ -77,6 +102,20 @@ const FreeTrial = () => {
       </table>
 
       <Pagination />
+
+      {/* Delete confirmation popup */}
+      {showDeletePopup && (
+        <div className="delete-popup">
+          <div className="delete-popup-content">
+            <div className='freetrial-deletepopupheading'></div>
+            <div>Are you sure you want to continue?</div>
+            <div className="popup-actions">
+              <button className="popup-button" onClick={() => setShowDeletePopup(false)}>No</button>
+              <button className="popup-button popup-button-confirm" onClick={handleConfirmDelete}>Yes</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

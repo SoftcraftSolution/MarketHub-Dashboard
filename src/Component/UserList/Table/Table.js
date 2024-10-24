@@ -7,13 +7,17 @@ import filter from '../../../assets/filter.png';
 
 const TableComponent = () => {
   const [users, setUsers] = useState([]);
+  const [isCustomPopupOpen, setIsCustomPopupOpen] = useState(false);
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
+  const [customPopupContent, setCustomPopupContent] = useState(null);
+  const [userToDelete, setUserToDelete] = useState(null);
 
   useEffect(() => {
     // Fetch user data from API
-    axios.get('https://market-hub-backend-kappa.vercel.app/user/get-user-list')
+    axios.get('https://markethub-app-backend.onrender.com/user/get-user-list')
       .then(response => {
         if (response.data.success) {
-          // Map the response data to the structure needed for display
           const mappedUsers = response.data.data.map(user => ({
             name: user.fullName,
             whatsapp: user.whatsappNumber,
@@ -35,6 +39,31 @@ const TableComponent = () => {
       });
   }, []);
 
+  const openCustomPopup = (content) => {
+    setCustomPopupContent(content);
+    setIsCustomPopupOpen(true);
+  };
+
+  const openDeletePopup = (user) => {
+    setUserToDelete(user);
+    setIsDeletePopupOpen(true);
+  };
+
+  const closeCustomPopup = () => {
+    setIsCustomPopupOpen(false);
+    setSelectedImage('');
+    setCustomPopupContent(null);
+    setIsDeletePopupOpen(false); // Close delete popup as well
+  };
+
+  const handleDeleteUser = () => {
+    // Perform delete action here, e.g., call delete API
+    console.log(`Deleting user: ${userToDelete.name}`);
+    // Reset states after delete
+    setUserToDelete(null);
+    setIsDeletePopupOpen(false);
+  };
+
   return (
     <div className="userlisttable-container">
       <div className="usertablehead">
@@ -43,7 +72,7 @@ const TableComponent = () => {
         <div id="userlistdatteePickeer">
           <input type="date" id="birthday" name="birthday" className="date-picker-input" />
         </div>
-        <button style={{border:"none",backgroundColor:"#FFFFFF"}}>
+        <button style={{ border: "none", backgroundColor: "#FFFFFF" }}>
           <img src={filter} alt="filter" />
         </button>
       </div>
@@ -77,21 +106,51 @@ const TableComponent = () => {
                 <td className="userlistdata">{user.country}</td>
                 <td className="userlistdata">
                   {user.visitingcard ? (
-                    <img 
-                      src={user.visitingcard} 
-                      alt={`${user.name}'s visiting card`} 
-                      className="visiting-card-image" 
-                      style={{ width: "50px", height: "auto" }}
+                    <img
+                      src={user.visitingcard}
+                      alt={`${user.name}'s visiting card`}
+                      className="visiting-card-image"
+                      style={{ width: "50px", height: "auto", cursor: "pointer" }}
+                      onClick={() => openCustomPopup(<img src={user.visitingcard} alt="Visiting Card" />)}
                     />
                   ) : "No Card"}
                 </td>
                 <td className="userlistdata">{user.plan}</td>
                 <td className="userlistdata">{user.startdate}</td>
                 <td className="expired-td" id="userlist-buttons">
-                  <button className="userlist-action-btn">
+                  <button className="userlist-action-btn" onClick={() => openCustomPopup(
+                    <div style={{backgroundColor:"white",padding:"15px"}}className="custom-action-popup">
+                      <h3>Action</h3>
+                      <select>
+                        <option>Free</option>
+                        <option>Extend Trial</option>
+                        <option>Change Plan</option>
+                      </select>
+                      <div>
+                        <div className="custom-radioheading">Allow Access to</div>
+                        <div className="custom-options"> 
+                          <input type="radio" id="basic" name="plan" value="Basic Plan" />
+                          <label htmlFor="basic">Basic Plan</label>
+                          <input type="radio" id="standard" name="plan" value="Standard Plan" />
+                          <label htmlFor="standard">Standard Plan</label>
+                          <input type="radio" id="premium" name="plan" value="Premium Plan" />
+                          <label htmlFor="premium">Premium Plan</label>
+                        </div>  
+                      </div>
+                      <div>
+                        <select>
+                          <option>No of Days</option>
+                          <option>30 Days</option>
+                          <option>60 Days</option>
+                          <option>90 Days</option>
+                        </select>
+                      </div>
+                      <button className="custom-continue-btn">Continue</button>
+                    </div>
+                  )}>
                     <img src={actionImg} alt="Action" className="userlist-action-img" />
                   </button>
-                  <button className="userlist-action-btn">
+                  <button className="userlist-action-btn" onClick={() => openDeletePopup(user)}>
                     <img src={deleteimg} alt="Delete" className="userlist-action-img" />
                   </button>
                 </td>
@@ -100,6 +159,29 @@ const TableComponent = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Custom Popup for Actions or Image Preview */}
+      {isCustomPopupOpen && (
+        <div className="custom-popup-overlay">
+          <div className="custom-popup-contentimage">
+            <button className="custom-close-popup" onClick={closeCustomPopup}>✖</button>
+            {customPopupContent}
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Popup */}
+      {isDeletePopupOpen && (
+        <div className="custom-popup-overlay">
+          <div className="custom-popup-content-delete">
+            <div className="userdelete-headingpopup">Are you sure you want to delete?</div>
+            <div className="delete-confirmation-buttons">
+              <button className="custom-continue-btn" onClick={handleDeleteUser}>Yes</button>
+              <button className="custom-no-btn" onClick={closeCustomPopup}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

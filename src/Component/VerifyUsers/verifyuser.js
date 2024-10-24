@@ -4,14 +4,14 @@ import tickimg from '../../assets/tickimg.png';
 import delimg from '../../assets/removeimg.png';
 import visitcard from '../../assets/visitcard.png';
 import React, { useState } from 'react';
+import axios from 'axios'; // Import Axios
 import Pagination from '../Pagination';
 
 function VerifyUsers() {
   const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false); // Accept Modal visibility state
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false); // Reject Modal visibility state
   const [selectedUser, setSelectedUser] = useState(null); // To store selected user for confirmation
-
-  const users = [
+  const [users, setUsers] = useState([ // Initialize users in state
     {
       name: 'Bhavesh Kumar',
       phone: '+91 7838392384',
@@ -21,6 +21,7 @@ function VerifyUsers() {
       state: 'Maharashtra',
       visitingCard: visitcard, // Image path or URL
       dateTime: '30-Sep-2024, 10:23',
+      id: 1, // Add an ID for each user
     },
     {
       name: 'Ravi Sandeep',
@@ -31,9 +32,10 @@ function VerifyUsers() {
       state: 'Haryana',
       visitingCard: visitcard,
       dateTime: '29-Sep-2024, 14:55',
+      id: 2, // Add an ID for each user
     },
     // Add other users here...
-  ];
+  ]);
 
   const handleTickClick = (user) => {
     setSelectedUser(user);
@@ -51,11 +53,26 @@ function VerifyUsers() {
     // Add your logic here for accepting the user
   };
 
-  const handleRejectConfirm = () => {
-    console.log('User rejected:', selectedUser);
-    setIsRejectModalOpen(false); // Close the reject modal after confirmation
-    // Add your logic here for rejecting the user
+  const handleRejectConfirm = async () => {
+    try {
+      const response = await axios.post('https://markethub-app-backend.onrender.com/user/reject-user', {
+        userId: selectedUser.id, // Ensure you send the user ID here
+      });
+  
+      if (response.data.success) {
+        console.log('User rejected:', selectedUser);
+        // Remove the user from the state
+        setUsers((prevUsers) => prevUsers.filter(user => user.id !== selectedUser.id));
+      } else {
+        console.error('Failed to reject user:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error rejecting user:', error.response?.data || error.message);
+    } finally {
+      setIsRejectModalOpen(false); // Close the reject modal after confirmation
+    }
   };
+  
 
   const handleCancel = () => {
     setIsAcceptModalOpen(false); // Close the accept modal without action

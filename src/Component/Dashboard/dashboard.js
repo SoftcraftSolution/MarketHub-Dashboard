@@ -23,6 +23,8 @@ import AddSpotPrice from '../AddSpot/AddSpot.js';
 import AddUpdate from '../AddUpdate/AddUpdate.js';
 import AddLocation from '../AddLocation/AddLocation.js';
 import Feedback from '../Feedback/Feedback.js';
+import AddSBI from '../AddSBIREFERENCE/AddSbi.js';
+
 
 const Dashboard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -50,9 +52,9 @@ const Dashboard = () => {
       case 7:
         return <AddNews />;
       case 8:
-        return <Feedback/>;
+        return <AddLocation/>;
       case 9:
-        return <AddUpdate/>;
+        return <AdminDashboard/>;
       case 10:
         return <AddCircularNews/>;
       case 11:
@@ -63,6 +65,14 @@ const Dashboard = () => {
         return <RejectedUserTrial />;
       case 14:
         return <FreeUser />;
+        case 15:
+          return <AddSBI />;
+          case 16:
+            return <Updates />;
+           case 17:
+              return <Feedback />;  
+              case 18:
+                return <AddUpdate />;   
       default:
         return null;
     }

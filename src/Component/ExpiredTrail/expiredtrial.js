@@ -9,11 +9,13 @@ const ExpiredTrial = () => {
   const [users, setUsers] = useState([]); // State to store user data
   const [loading, setLoading] = useState(true); // State to manage loading state
   const [error, setError] = useState(null); // State to manage error
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false); // State for delete popup
+  const [userToDelete, setUserToDelete] = useState(null); // State to store user to delete
 
   useEffect(() => {
     const fetchExpiredUsers = async () => {
       try {
-        const response = await axios.get('https://market-hub-backend-kappa.vercel.app/user/expired-trail-user-list');
+        const response = await axios.get('https://markethub-app-backend.onrender.com/user/expired-trail-user-list');
         if (response.data.success) {
           const expiredUsers = response.data.data.filter(user => new Date(user.planEndDate) < new Date());
           setUsers(expiredUsers); // Set the expired users in state
@@ -29,6 +31,28 @@ const ExpiredTrial = () => {
 
     fetchExpiredUsers();
   }, []);
+
+  const openDeletePopup = (user) => {
+    setUserToDelete(user);
+    setIsDeletePopupOpen(true);
+  };
+
+  const closeDeletePopup = () => {
+    setIsDeletePopupOpen(false);
+    setUserToDelete(null); // Reset the user to delete
+  };
+
+  const handleDeleteUser = async () => {
+    try {
+      // Perform delete action here, e.g., call delete API
+      await axios.delete(`https://markethub-app-backend.onrender.com/user/delete-user/${userToDelete._id}`);
+      setUsers(users.filter(user => user._id !== userToDelete._id)); // Update the users list
+      closeDeletePopup(); // Close the delete popup
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      closeDeletePopup(); // Close the popup even if there's an error
+    }
+  };
 
   if (loading) return <div>Loading...</div>; // Show loading indicator while fetching data
   if (error) return <div>{error}</div>; // Show error message if there's an error
@@ -68,8 +92,8 @@ const ExpiredTrial = () => {
                   <button className="expired-action-btn">
                     <img src={actionImg} alt="Action" className="expired-action-img" />
                   </button>
-                  <button className="expired-action-btn">
-                    <img src={deleteimg} alt="Action" className="expired-action-img" />
+                  <button className="expired-action-btn" onClick={() => openDeletePopup(user)}>
+                    <img src={deleteimg} alt="Delete" className="expired-action-img" />
                   </button>
                 </td>
               </tr>
@@ -78,6 +102,19 @@ const ExpiredTrial = () => {
         </table>
       </div>
       <Pagination />
+
+      {/* Delete Confirmation Popup */}
+      {isDeletePopupOpen && (
+        <div className="custom-popup-overlay">
+          <div className="custom-popup-content-delete">
+            <div className="userdelete-headingpopup">Are you sure you want to delete?</div>
+            <div className="delete-confirmation-buttons">
+              <button className="custom-continue-btn" onClick={handleDeleteUser}>Yes</button>
+              <button className="custom-no-btn" onClick={closeDeletePopup}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

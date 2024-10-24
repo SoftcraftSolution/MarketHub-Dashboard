@@ -33,7 +33,7 @@ const NewPassword = () => {
     }
 
     try {
-      const response = await axios.post('https://market-hub-backend-kappa.vercel.app/admin/reset-password', {
+      const response = await axios.post('https://markethub-backend-ceka.onrender.com/admin/reset-password', {
         email: email,
         newPassword: password // Send new password to API
       });

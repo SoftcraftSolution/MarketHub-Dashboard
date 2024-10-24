@@ -73,3 +73,13 @@
     font-weight: 600;
     padding-bottom: 15px;
 }
+
+.pricesearchbox{
+    flex: 1 1;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    width: 46.5%;
+}

@@ -30,7 +30,7 @@ function Login() {
     setError('');
 
     try {
-      const response = await axios.post('https://market-hub-backend-kappa.vercel.app/admin/login', {
+      const response = await axios.post('https://markethub-backend-ceka.onrender.com/admin/login', {
         email: email,
         password: password,
       });
