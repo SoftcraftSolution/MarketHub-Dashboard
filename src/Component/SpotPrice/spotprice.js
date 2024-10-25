@@ -92,41 +92,124 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
     handleCloseDialog();
   };
 
-  const SpotPrice = () => {
-    return (
-      <div className="spot-price-container">
-        <div className='spotpagemaintitle'>Spot Price</div>
-        <div className="verify-users-section">
-          <VerifyUsersTable />
-        </div>
-        <div className="price-list-section">
-          <PriceListTable />
+  return ( // Ensure the return statement is properly used
+    <div className="spot-price-container">
+      <div className='spotpagemaintitle'>Spot Price</div>
+      <div className="verify-users-section">
+        <VerifyUsersTable />
+      </div>
+      <div className="price-list-section">
+        <PriceListTable />
+        <div className="spot-price-table">
+          <div className='spot-verify-heading'>
+            <div className='spot-verify-title'>Verify Users</div>
+            {/* Search Input */}
+            <input
+              type="text"
+              placeholder="Search"
+              className="search-bar-verify-user-list "
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button className="spotprice-filter-btn">
+              <img src={filterimg} alt="filter" />
+            </button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Posted by</th>
+                <th>Commodity</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Previous Amt</th>
+                <th>Current Amt</th>
+                <th>Date & Time</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredData.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.postedBy}</td>
+                  <td>{item.commodity}</td>
+                  <td>{item.city}</td>
+                  <td>{item.country}</td>
+                  <td>{item.previousAmt}</td>
+                  <td>{item.currentAmt}</td>
+                  <td>{item.dateTime}</td>
+                  <td>
+                    <button
+                      style={{ border: 'none', marginRight: '10px' }} // Adds gap between buttons
+                      onClick={() => handleDialogOpen(item, 'verify')} // Opens dialog for verification
+                    >
+                      <img src={righttick} alt="Verify" />
+                    </button>
+                    <button
+                      style={{ border: 'none' }}
+                      onClick={() => handleDialogOpen(item, 'reject')} // Opens dialog for rejection
+                    >
+                      <img src={wrongtick} alt="Reject" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Pagination />
+
+          <Dialog open={openDialog} onClose={handleCloseDialog}>
+            <DialogTitle>
+              {selectedItem ? `Action for ${selectedItem.postedBy}` : ''}
+            </DialogTitle>
+            <DialogContent>
+              <p>
+                Are you sure you want to continue {actionType === 'verify' ? 'verify' : 'reject'} the {selectedItem?.commodity}?
+              </p>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDialog} color="primary">
+                No
+              </Button>
+              <Button onClick={handleConfirm} color="primary">
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+          {/* PriceList Table with DatePicker and Search */}
           <div className="spot-price-table">
-            <div className='spot-verify-heading'>
-              <div className='spot-verify-title'>Verify Users</div>
-              {/* Search Input */}
+            {/* Container for search bar and date picker */}
+            <div className="search-and-datepicker-container">
+              <div className='spot-title'>Price list</div>
               <input
                 type="text"
                 placeholder="Search"
-                className="search-bar-verify-user-list "
+                className="search-bar-price-list "
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <button className="spotprice-filter-btn">
+              <input
+                type="date"
+                className="expired-price-list-datepicker"
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)} // Update selected date
+              />
+              <button className="filter-btn">
                 <img src={filterimg} alt="filter" />
               </button>
             </div>
+
+            {/* PriceList Table */}
             <table>
               <thead>
                 <tr>
                   <th>Posted by</th>
                   <th>Commodity</th>
                   <th>City</th>
-                  <th>Country</th>
                   <th>Previous Amt</th>
                   <th>Current Amt</th>
                   <th>Date & Time</th>
-                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -135,102 +218,18 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
                     <td>{item.postedBy}</td>
                     <td>{item.commodity}</td>
                     <td>{item.city}</td>
-                    <td>{item.country}</td>
                     <td>{item.previousAmt}</td>
                     <td>{item.currentAmt}</td>
                     <td>{item.dateTime}</td>
-                    <td>
-                      <button
-                        style={{ border: 'none', marginRight: '10px' }} // Adds gap between buttons
-                        onClick={() => handleDialogOpen(item, 'verify')} // Opens dialog for verification
-                      >
-                        <img src={righttick} alt="Verify" />
-                      </button>
-                      <button
-                        style={{ border: 'none' }}
-                        onClick={() => handleDialogOpen(item, 'reject')} // Opens dialog for rejection
-                      >
-                        <img src={wrongtick} alt="Reject" />
-                      </button>
-                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <Pagination />
-
-            <Dialog open={openDialog} onClose={handleCloseDialog}>
-              <DialogTitle>
-                {selectedItem ? `Action for ${selectedItem.postedBy}` : ''}
-              </DialogTitle>
-              <DialogContent>
-                <p>
-                  Are you sure you want to continue {actionType === 'verify' ? 'verify' : 'reject'} the {selectedItem?.commodity}?
-                </p>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleCloseDialog} color="primary">
-                  No
-                </Button>
-                <Button onClick={handleConfirm} color="primary">
-                  Yes
-                </Button>
-              </DialogActions>
-            </Dialog>
-
-            {/* PriceList Table with DatePicker and Search */}
-            <div className="spot-price-table">
-              {/* Container for search bar and date picker */}
-              <div className="search-and-datepicker-container">
-                <div className='spot-title'>Price list</div>
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="search-bar-price-list "
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <input
-                  type="date"
-                  className="expired-price-list-datepicker"
-                  value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)} // Update selected date
-                />
-                <button className="filter-btn">
-                  <img src={filterimg} alt="filter" />
-                </button>
-              </div>
-
-              {/* PriceList Table */}
-              <table>
-                <thead>
-                  <tr>
-                    <th>Posted by</th>
-                    <th>Commodity</th>
-                    <th>City</th>
-                    <th>Previous Amt</th>
-                    <th>Current Amt</th>
-                    <th>Date & Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredData.map((item) => (
-                    <tr key={item.id}>
-                      <td>{item.postedBy}</td>
-                      <td>{item.commodity}</td>
-                      <td>{item.city}</td>
-                      <td>{item.previousAmt}</td>
-                      <td>{item.currentAmt}</td>
-                      <td>{item.dateTime}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           </div>
         </div>
       </div>
-    );
-  };
+    </div>
+  );
+}
 
-  export default SpotPrice;
+export default SpotPriceTable; // Ensure the export is outside the function
