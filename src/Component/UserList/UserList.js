@@ -1,21 +1,3 @@
-
-// UserListPage.js
-
-import CardsComponent from "./Card/Cardcomponent";
-import TableComponent from "./Table/Table";
-import './UserList.css';
-
-const UserListPage = () => {
-  return (
-    <div className="user-list-page">
-      <CardsComponent />
-      <TableComponent />
-    </div>
-  );
-};
-
-export default UserListPage;
-
 import React, { useState } from 'react';
 import { Box, TextField, Button, Card, CardContent } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -31,20 +13,20 @@ import visitingcard from '../../asset/visting card.png';
 import deleteimg from '../../assets/deleteimg.png';
 
 const userListData = [
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024',action:action },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024',action:action },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024',action:action },
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
-    { fullName: 'Ram Bandhu', phoneNumber: '8290839130', pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024',action:action },
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024',action:action },
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024',action:action },
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
+    { fullName: 'Ram Bandhu',whatsappNumber: '8290839130',alternateNo:"7905222396", pincode: '480023', city: 'Gurgaon', state: 'Haryana', visitingCard: visitingcard, subscriptionType: 'Standard Plan', subscriptionDate: '30-12-2024' ,action:action},
     // ... more user data
 ];
 
@@ -136,7 +118,8 @@ const DashboardPage = () => {
                     <thead>
                         <tr>
                             <th>Full Name</th>
-                            <th>Phone Number</th>
+                            <th>whatsappNumber</th>
+                            <th>alternateNo</th>
                             <th>Pincode</th>
                             <th>City</th>
                             <th>State</th>
@@ -150,7 +133,8 @@ const DashboardPage = () => {
                         {userListData.map((user, index) => (
                             <tr key={index}>
                                 <td>{user.fullName}</td>
-                                <td>{user.phoneNumber}</td>
+                                <td>{user.whatsappNumber}</td>
+                                <td>{user.alternateNo}</td>
                                 <td>{user.pincode}</td>
                                 <td>{user.city}</td>
                                 <td>{user.state}</td>
@@ -196,4 +180,3 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
-
