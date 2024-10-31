@@ -3,7 +3,6 @@ import VerifyUsersTable from './VerifySpot/VerifySpot';
 import PriceListTable from './PriceList/PriceList';
 import './spotprice.css'; // External CSS for the page
 
-import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
 
 import React, { useState } from 'react'; // Combined import statement
