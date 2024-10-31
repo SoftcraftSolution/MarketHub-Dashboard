@@ -2,16 +2,9 @@
 import VerifyUsersTable from './VerifySpot/VerifySpot';
 import PriceListTable from './PriceList/PriceList';
 import './spotprice.css'; // External CSS for the page
-
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
-
 import React, { useState } from 'react'; // Combined import statement
-import VerifyUsersTable from './VerifySpot/VerifySpot';
-import PriceListTable from './PriceList/PriceList';
-import './spotprice.css'; // External CSS for the page
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
 // import { DatePicker } from '@mui/lab'; // Import DatePicker from MUI Lab
-
 import righttick from '../../assets/tickimg.png';
 import wrongtick from '../../assets/removeimg.png';
 import filterimg from '../../assets/filter.png';
