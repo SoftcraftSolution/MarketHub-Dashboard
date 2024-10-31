@@ -40,15 +40,18 @@ const FreeTrial = () => {
   };
 
   const handleConfirmDelete = async () => {
-    try {
-      // Call your delete API here
-      await axios.delete(`https://market-hub-backend-kappa.vercel.app/user/delete/${selectedUser._id}`);
-      // Remove the user from the list after successful deletion
-      setUsers(users.filter(user => user._id !== selectedUser._id));
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    } finally {
-      setShowDeletePopup(false);  // Close the popup
+    if (selectedUser) {
+      try {
+        // Call the delete API using the user's email
+        await axios.delete(`https://markethub-app-backend.onrender.com/user/delete-user?email=${encodeURIComponent(selectedUser.email)}`);
+        // Remove the user from the list after successful deletion
+        setUsers(users.filter(user => user._id !== selectedUser._id));
+      } catch (error) {
+        console.error('Error deleting user:', error);
+      } finally {
+        setShowDeletePopup(false);  // Close the popup
+        setSelectedUser(null);  // Reset selected user
+      }
     }
   };
 
@@ -88,7 +91,7 @@ const FreeTrial = () => {
               <td>{user.extendendDays}</td>
               <td>{new Date(user.planEndDate).toLocaleDateString()}</td>
               <td className='freetrial-buttons'>
-                <button style={{ border: 'none', backgroundColor: '#FFFFFF' }}><img src={actionimg} alt="action"/></button>
+                
                 <button 
                   style={{ border: 'none', backgroundColor: '#FFFFFF' }} 
                   onClick={() => handleDeleteClick(user)}  // Show popup on delete button click
@@ -101,7 +104,7 @@ const FreeTrial = () => {
         </tbody>
       </table>
 
-      <Pagination />
+      
 
       {/* Delete confirmation popup */}
       {showDeletePopup && (

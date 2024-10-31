@@ -13,9 +13,10 @@ const EditableTable = () => {
         const response = await axios.get('https://markethub-app-backend.onrender.com/user/get-all-item');
         // Map the response data to match your table structure
         const formattedData = response.data.map(item => ({
+          id: item._id, // Assuming your items have an `_id` field for the unique identifier
           type: item.type,
           category: item.category,
-          name: item.subcategory, 
+          name: item.subcategory,
           price: item.price,
         }));
         setData(formattedData);
@@ -33,9 +34,21 @@ const EditableTable = () => {
     setData(newData);
   };
 
-  const handleUpdate = () => {
-    console.log('Updated Data:', data);
-    alert('Data has been updated!');
+  const handleUpdate = async () => {
+    // Prepare the data for the update request
+    const updatedPrices = data.map(item => ({
+      id: item.id, // Use the unique identifier
+      price: parseFloat(item.price), // Ensure price is a float
+    }));
+
+    try {
+      // Send the updated data to the API
+      await axios.post('https://markethub-app-backend.onrender.com/user/price-update', updatedPrices);
+      
+    } catch (error) {
+      console.error('Error updating data:', error);
+      alert('Failed to update data.');
+    }
   };
 
   const handleCellClick = (rowIndex, column) => {

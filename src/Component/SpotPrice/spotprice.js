@@ -1,9 +1,18 @@
+
+import VerifyUsersTable from './VerifySpot/VerifySpot';
+import PriceListTable from './PriceList/PriceList';
+import './spotprice.css'; // External CSS for the page
+
+import React, { useState } from 'react';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
+
 import React, { useState } from 'react'; // Combined import statement
 import VerifyUsersTable from './VerifySpot/VerifySpot';
 import PriceListTable from './PriceList/PriceList';
 import './spotprice.css'; // External CSS for the page
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
 // import { DatePicker } from '@mui/lab'; // Import DatePicker from MUI Lab
+
 import righttick from '../../assets/tickimg.png';
 import wrongtick from '../../assets/removeimg.png';
 import filterimg from '../../assets/filter.png';
@@ -12,11 +21,10 @@ import Pagination from '../Pagination';
 function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [actionType, setActionType] = useState(null); // State for action type
-  const [searchTerm, setSearchTerm] = useState(''); // State for search term
-  const [selectedDate, setSelectedDate] = useState(null); // State for selected date in DatePicker
+  const [actionType, setActionType] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
 
-  // Example data to show when no data is passed
   const exampleData = [
     {
       id: 1,
@@ -62,7 +70,6 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
 
   const displayedData = data.length > 0 ? data : exampleData;
 
-  // Filter data based on search term
   const filteredData = displayedData.filter(item =>
     item.commodity.toLowerCase().includes(searchTerm.toLowerCase()) ||
     item.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -71,35 +78,55 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
 
   const handleDialogOpen = (item, action) => {
     setSelectedItem(item);
-    setActionType(action); // Set action type (verify or reject)
+    setActionType(action);
     setOpenDialog(true);
   };
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
     setSelectedItem(null);
-    setActionType(null); // Reset action type
+    setActionType(null);
   };
 
   const handleConfirm = () => {
     if (selectedItem) {
       if (actionType === 'verify') {
-        onVerifyUser(selectedItem.id); // Handle verify action
+        onVerifyUser(selectedItem.id);
       } else if (actionType === 'reject') {
-        onAddSpotPrice(selectedItem.id); // Handle reject action
+        onAddSpotPrice(selectedItem.id);
       }
     }
     handleCloseDialog();
   };
 
+  return (
+
   return ( // Ensure the return statement is properly used
+
     <div className="spot-price-container">
       <div className='spotpagemaintitle'>Spot Price</div>
+
       <div className="verify-users-section">
         <VerifyUsersTable />
       </div>
+
       <div className="price-list-section">
         <PriceListTable />
+
+
+        <div className="spot-price-table">
+          <div className='spot-verify-heading'>
+            <div className='spot-verify-title'>Verify Users</div>
+            
+            <input
+              type="text"
+              placeholder="Search"
+              className="search-bar-verify-user-list"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+
+
         <div className="spot-price-table">
           <div className='spot-verify-heading'>
             <div className='spot-verify-title'>Verify Users</div>
@@ -111,10 +138,14 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+
             <button className="spotprice-filter-btn">
               <img src={filterimg} alt="filter" />
             </button>
           </div>
+
+
+
           <table>
             <thead>
               <tr>
@@ -140,14 +171,23 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
                   <td>{item.dateTime}</td>
                   <td>
                     <button
+
+                      style={{ border: 'none', marginRight: '10px' }}
+                      onClick={() => handleDialogOpen(item, 'verify')}
+
                       style={{ border: 'none', marginRight: '10px' }} // Adds gap between buttons
                       onClick={() => handleDialogOpen(item, 'verify')} // Opens dialog for verification
+
                     >
                       <img src={righttick} alt="Verify" />
                     </button>
                     <button
                       style={{ border: 'none' }}
+
+                      onClick={() => handleDialogOpen(item, 'reject')}
+
                       onClick={() => handleDialogOpen(item, 'reject')} // Opens dialog for rejection
+
                     >
                       <img src={wrongtick} alt="Reject" />
                     </button>
@@ -156,6 +196,10 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
               ))}
             </tbody>
           </table>
+
+          
+
+
           <Pagination />
 
           <Dialog open={openDialog} onClose={handleCloseDialog}>
@@ -164,7 +208,11 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
             </DialogTitle>
             <DialogContent>
               <p>
+
+                Are you sure you want to {actionType} the {selectedItem?.commodity}?
+
                 Are you sure you want to continue {actionType === 'verify' ? 'verify' : 'reject'} the {selectedItem?.commodity}?
+
               </p>
             </DialogContent>
             <DialogActions>
@@ -177,15 +225,23 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
             </DialogActions>
           </Dialog>
 
+
+          <div className="spot-price-table">
+
           {/* PriceList Table with DatePicker and Search */}
           <div className="spot-price-table">
             {/* Container for search bar and date picker */}
+
             <div className="search-and-datepicker-container">
               <div className='spot-title'>Price list</div>
               <input
                 type="text"
                 placeholder="Search"
+
+                className="search-bar-price-list"
+
                 className="search-bar-price-list "
+
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -193,14 +249,21 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
                 type="date"
                 className="expired-price-list-datepicker"
                 value={selectedDate}
+
+                onChange={(e) => setSelectedDate(e.target.value)}
+
                 onChange={(e) => setSelectedDate(e.target.value)} // Update selected date
+
               />
               <button className="filter-btn">
                 <img src={filterimg} alt="filter" />
               </button>
             </div>
 
+
+
             {/* PriceList Table */}
+
             <table>
               <thead>
                 <tr>
@@ -232,4 +295,5 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
   );
 }
 
-export default SpotPriceTable; // Ensure the export is outside the function
+
+export default SpotPriceTable;

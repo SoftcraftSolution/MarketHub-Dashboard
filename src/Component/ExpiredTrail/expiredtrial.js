@@ -44,9 +44,11 @@ const ExpiredTrial = () => {
 
   const handleDeleteUser = async () => {
     try {
-      // Perform delete action here, e.g., call delete API
-      await axios.delete(`https://markethub-app-backend.onrender.com/user/delete-user/${userToDelete._id}`);
-      setUsers(users.filter(user => user._id !== userToDelete._id)); // Update the users list
+      // Construct the delete API URL using the user's email
+      await axios.delete(`https://markethub-app-backend.onrender.com/user/delete-user?email=${userToDelete.email}`);
+      
+      // Update the users list by filtering out the deleted user
+      setUsers(users.filter(user => user._id !== userToDelete._id)); // This will still use user ID for state management
       closeDeletePopup(); // Close the delete popup
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -81,7 +83,7 @@ const ExpiredTrial = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {users.map((user) => (
               <tr key={user._id} className="expired-row">
                 <td className="expired-td">{user.fullName}</td>
                 <td className="expired-td">{user.phoneNumber}</td>
@@ -89,9 +91,7 @@ const ExpiredTrial = () => {
                 <td className="expired-td">{new Date(user.planEndDate).toLocaleDateString()}</td>
                 <td className="expired-td">{user.extendendDays}</td>
                 <td className="expired-td" id="expired-buttons">
-                  <button className="expired-action-btn">
-                    <img src={actionImg} alt="Action" className="expired-action-img" />
-                  </button>
+
                   <button className="expired-action-btn" onClick={() => openDeletePopup(user)}>
                     <img src={deleteimg} alt="Delete" className="expired-action-img" />
                   </button>
@@ -101,7 +101,7 @@ const ExpiredTrial = () => {
           </tbody>
         </table>
       </div>
-      <Pagination />
+      
 
       {/* Delete Confirmation Popup */}
       {isDeletePopupOpen && (

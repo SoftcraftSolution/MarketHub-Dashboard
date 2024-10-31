@@ -88,9 +88,7 @@ const UserList = () => {
                 <td className='freeuserdata'>{new Date(user.planStartDate).toLocaleDateString()}</td>
                 <td className={user.planName.toLowerCase()}>{user.planName}</td>
                 <td className='freeuser-buttons'>
-                  <button className="edit-button">
-                    <img src={action} alt='edit button' />
-                  </button>
+         
                   <button className="edit-button" onClick={() => openDeletePopup(user)}>
                     <img src={deleteimage} alt='delete button' />
                   </button>
@@ -100,7 +98,7 @@ const UserList = () => {
           </tbody>
         </table>
       </div>
-      <Pagination />
+
 
       {/* Delete Confirmation Popup */}
       {isDeletePopupOpen && (

@@ -24,6 +24,7 @@ import AddUpdate from '../AddUpdate/AddUpdate.js';
 import AddLocation from '../AddLocation/AddLocation.js';
 import Feedback from '../Feedback/Feedback.js';
 import AddSBI from '../AddSBIREFERENCE/AddSbi.js';
+import WarehouseStockEditor from '../AddWarehouse/addwarehouse.js';
 
 
 const Dashboard = () => {
@@ -65,14 +66,16 @@ const Dashboard = () => {
         return <RejectedUserTrial />;
       case 14:
         return <FreeUser />;
-        case 15:
-          return <AddSBI />;
-          case 16:
+       case 16:
             return <Updates />;
            case 17:
               return <Feedback />;  
               case 18:
                 return <AddUpdate />;   
+                case 19:
+                  return <AddSBI />;
+                case 20:
+                  return <WarehouseStockEditor/>  
       default:
         return null;
     }
