@@ -1,5 +1,6 @@
 
-// UserListPage.js
+
+
 import React from "react";
 import CardsComponent from "./Card/Cardcomponent";
 import TableComponent from "./Table/Table";
@@ -15,3 +16,4 @@ const UserListPage = () => {
 };
 
 export default UserListPage;
+
