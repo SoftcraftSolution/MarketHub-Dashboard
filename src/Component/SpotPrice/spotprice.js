@@ -93,7 +93,7 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
 
   return (
 
-  return ( // Ensure the return statement is properly used
+ 
 
     <div className="spot-price-container">
       <div className='spotpagemaintitle'>Spot Price</div>
