@@ -6,8 +6,7 @@ import Pagination from '../Pagination';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import './spotprice.css';
 
-import './spotprice.css'; // External CSS for the page
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
+
 
 import righttick from '../../assets/tickimg.png';
 import wrongtick from '../../assets/removeimg.png';
