@@ -13,7 +13,7 @@ const RejectedUserTrial = () => {
     // Fetch rejected users from the API
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('https://markethub-app-backend.onrender.com/user/rejected-user-list');
+        const response = await axios.get('http://api.markethubindia.com/user/rejected-user-list');
         if (response.data.success) {
           setUsers(response.data.data);
         }

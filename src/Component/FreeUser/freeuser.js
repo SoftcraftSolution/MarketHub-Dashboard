@@ -13,7 +13,7 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('https://markethub-app-backend.onrender.com/user/free-user-list');
+        const response = await axios.get('http://api.markethubindia.com/user/free-user-list');
         if (response.data.success) {
           setUsers(response.data.data); // Set the fetched user data
         } else {

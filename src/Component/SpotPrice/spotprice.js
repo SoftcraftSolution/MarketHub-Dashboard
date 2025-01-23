@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import VerifyUsersTable from './VerifySpot/VerifySpot';
 import PriceListTable from './PriceList/PriceList';
 import Pagination from '../Pagination';
+
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import './spotprice.css';
+
 import './spotprice.css'; // External CSS for the page
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
+
 import righttick from '../../assets/tickimg.png';
 import wrongtick from '../../assets/removeimg.png';
 import filterimg from '../../assets/filter.png';
@@ -13,7 +18,7 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [actionType, setActionType] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState('');
 
   const exampleData = [
     {
@@ -35,26 +40,6 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
       previousAmt: "$150",
       currentAmt: "$155",
       dateTime: "2024-09-25 11:00 AM",
-    },
-    {
-      id: 3,
-      postedBy: "Michael Johnson",
-      commodity: "Soybeans",
-      city: "Los Angeles",
-      country: "USA",
-      previousAmt: "$300",
-      currentAmt: "$310",
-      dateTime: "2024-09-25 12:00 PM",
-    },
-    {
-      id: 4,
-      postedBy: "Emily Davis",
-      commodity: "Barley",
-      city: "Houston",
-      country: "USA",
-      previousAmt: "$120",
-      currentAmt: "$125",
-      dateTime: "2024-09-25 01:00 PM",
     },
   ];
 
@@ -165,7 +150,11 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
             </DialogTitle>
             <DialogContent>
               <p>
+
+                Are you sure you want to {actionType} the {selectedItem?.commodity}?
+
                 Are you sure you want to {actionType === 'verify' ? 'verify' : 'reject'} the {selectedItem?.commodity}?
+
               </p>
             </DialogContent>
             <DialogActions>
@@ -177,6 +166,8 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
               </Button>
             </DialogActions>
           </Dialog>
+
+
 
           <div className="spot-price-table">
             <div className="search-and-datepicker-container">
@@ -224,6 +215,7 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
               </tbody>
             </table>
           </div>
+
         </div>
       </div>
     </div>

@@ -79,7 +79,7 @@ const AddNews = () => {
     // console.log(newsData.data);
     try {
       const response = await axios.post(
-        'https://markethub-backend-ceka.onrender.com/admin/add-self-news',
+        'http://admin.markethubindia.com/admin/add-self-news',
       
         newsData,
         {

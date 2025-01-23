@@ -16,7 +16,7 @@ const FreeTrial = () => {
     // Fetch data from the API
     const fetchFreeTrialUsers = async () => {
       try {
-        const response = await axios.get('https://markethub-app-backend.onrender.com/user/free-trail-user-list');
+        const response = await axios.get('http://api.markethubindia.com/user/free-trail-user-list');
         if (response.data.success) {
           // Filter users where isInTrial is true
           const trialUsers = response.data.data.filter(user => user.isInTrail);
