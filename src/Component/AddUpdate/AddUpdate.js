@@ -1,65 +1,111 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import axios from 'axios'; // Import Axios
 import './AddUpdate.css'; // Importing external CSS
-import preview from '../../assets/previewimg.png';
+import preview from '../../assets/previewimg.png'; // Placeholder image
 
 const AddUpdate = () => {
   const [formData, setFormData] = useState({
     title: '',
-    content: '',
-    link: '',
-    image: null,
-    imagePreview: preview, // Default placeholder path
-    shareWith: {
-      freeTrial: true,
-      extendedTrial: true,
-      basic: false,
-      standard: false,
-      premium: false,
-    }
+    imageBase64: null,
+    imagePreview: preview, // Default placeholder image
   });
+  const canvasRef = useRef(); // Reference for the canvas
 
+  // Handle input change for the title field
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    if (type === 'checkbox') {
-      setFormData({
-        ...formData,
-        shareWith: {
-          ...formData.shareWith,
-          [name]: checked,
-        },
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Handle pasting Excel data into the designated area
+  const handlePaste = (event) => {
+    const clipboardData = event.clipboardData || window.clipboardData;
+    const text = clipboardData.getData('Text');
+
+    // Parse Excel data into rows and cells
+    const rows = text.split('\n').map((row) => row.split('\t'));
+
+    // Render the table as an image on a canvas
+    renderTableToCanvas(rows);
+  };
+
+  // Render the table data onto a canvas
+  const renderTableToCanvas = (rows) => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+
+    // Define canvas dimensions and cell sizes
+    const rowHeight = 30;
+    const colWidth = 100;
+    canvas.width = colWidth * rows[0].length;
+    canvas.height = rowHeight * rows.length;
+
+    // Style and draw the table
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = '16px Arial';
+    ctx.textAlign = 'center';
+
+    rows.forEach((row, rowIndex) => {
+      row.forEach((cell, colIndex) => {
+        const x = colIndex * colWidth + colWidth / 2;
+        const y = rowIndex * rowHeight + rowHeight / 2;
+
+        ctx.strokeRect(colIndex * colWidth, rowIndex * rowHeight, colWidth, rowHeight);
+        ctx.fillText(cell, x, y);
       });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    });
+
+    // Convert the canvas to Base64 format
+    const imageSrc = canvas.toDataURL('image/png');
+
+    // Update formData with the generated Base64 image
+    setFormData({
+      ...formData,
+      imageBase64: imageSrc.split(',')[1], // Extract Base64 part
+      imagePreview: imageSrc, // Update the image preview
+    });
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({
-          ...formData,
-          image: file,
-          imagePreview: reader.result, // Set uploaded image preview
-        });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSubmit = (e) => {
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+
+    if (!formData.title || !formData.imageBase64) {
+      alert('Please provide both a title and an image (either uploaded or generated).');
+      return;
+    }
+
+    // Prepare the API payload
+    const payload = {
+      text: formData.title,
+      imageBase64: formData.imageBase64,
+    };
+
+    try {
+      const response = await axios.post(
+        'http://api.markethubindia.com/user/home-update',
+        payload,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      console.log('Response:', response.data);
+      alert('Update posted successfully!');
+    } catch (error) {
+      console.error('Error posting update:', error);
+      alert('Failed to post the update. Please try again.');
+    }
   };
 
   return (
     <div className="addupdatebiggestcontainer">
-      <div className='addupdatetoptitle'>Updates</div>
+      <div className="addupdatetoptitle">Updates</div>
       <div className="addupdate-container">
         <div className="addupdate-heading">Add Updates</div>
         <form className="addupdate-form" onSubmit={handleSubmit}>
+          {/* Title Input */}
           <div className="addupdateinput-group">
             <input
               type="text"
@@ -69,122 +115,40 @@ const AddUpdate = () => {
               onChange={handleChange}
               className="addupdateinput-field"
             />
-            <input
-              type="text"
-              name="content"
-              placeholder="Add Content"
-              value={formData.content}
-              onChange={handleChange}
-              className="addupdateinput-field"
+          </div>
+
+          {/* Paste Excel Data Area */}
+          <div style={{ paddingTop: '25px' }}>
+            <span style={{ fontWeight: '500' }}>Paste Excel Data</span>
+            <span className="addupdateoptional-text">(optional)</span>
+          </div>
+          <div
+            onPaste={handlePaste}
+            style={{
+              border: '1px dashed gray',
+              padding: '20px',
+              marginBottom: '20px',
+            }}
+          >
+            Paste Excel Data Here
+          </div>
+
+          {/* Hidden Canvas for Rendering Table */}
+          <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
+
+          {/* Image Preview */}
+          <div className="addupdateimage-preview-container">
+            <img
+              src={formData.imagePreview}
+              alt="Preview"
+              className="addupdateimage-preview"
             />
           </div>
-          
-          <div style={{ paddingTop: "25px" }}>
-  <span style={{ fontWeight: "500" }}>Upload Image </span> 
-  <span className="addupdateoptional-text">(optional)</span>
-</div>
 
-    <div className='addupdatefullpreviewflex'>      
-          <div className='addupdatetextbuttonflex'> 
-            <div className="addupdate-upload-info" style={{paddingLeft:"10px",paddingTop:"10px"}}>Please upload a PDF</div>
-            <div className="addupdatefile-upload">
-            <label htmlFor="file-upload" className="addupdate-file-upload">
-              Choose File
-            </label>
-            <input
-              id="file-upload"
-              type="file"
-              onChange={handleFileChange}
-              accept="image/jpeg,image/png"
-              className="add-input" // Hide the default file input
-            />
-            </div>  
-            </div>   
-        
-          <div className='addupdatepreviewflex'> 
- 
-            <div className="addupdateimage-preview-container">
-              <img src={formData.imagePreview} alt="Preview" className="addupdateimage-preview" />
-              </div>
-              
-            </div>
-            
-
-            <div className='addupdatepdfbuttonflex'> 
-              
-            <div className="circularpdffile-upload-info" style={{paddingLeft:"10px",paddingTop:"10px"}}>Please upload a JPG or PNG, size less than 2mb</div>
-            <div className="circularnewspdffile-upload">
-            <label htmlFor="file-upload" className="addupdate-file-upload">
-              Choose File
-            </label>
-            <input
-              id="file-upload"
-              type="file"
-              onChange={handleFileChange}
-              accept="image/jpeg,image/png"
-              className="addupdatepdffile-input" // Hide the default file input
-            />
-            </div>  
-            </div>   
-        
-          <div className='addupdatepdfpreviewflex'> 
- 
-            <div className="addupdateimage-preview-containerpdf">
-              <img src={formData.imagePreview} alt="Preview" className="addupdateimage-previewpdf" />
-              </div>
-              
-            </div>
-
-
-            
-   
-    </div>
-          <div className="circularnewscheckbox-group">
-            <label style={{fontWeight:"700"}}>Share With</label>
-            <div className="circularnewscheckboxes">
-              <label>
-                <input
-                  type="checkbox"
-                  name="freeTrial"
-                  checked={formData.shareWith.freeTrial}
-                  onChange={handleChange}
-                /> Free Trial Users
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="extendedTrial"
-                  checked={formData.shareWith.extendedTrial}
-                  onChange={handleChange}
-                /> Extended Trial Users
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="basic"
-                  checked={formData.shareWith.basic}
-                  onChange={handleChange}
-                /> Basic Users
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="standard"
-                  checked={formData.shareWith.standard}
-                  onChange={handleChange}
-                /> Standard Users
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="premium"
-                  checked={formData.shareWith.premium}
-                  onChange={handleChange}
-                /> Premium Users
-              </label>
-            </div>
-          </div>
-          <button type="submit" className="circularnewssubmit-btn">Post</button>
+          {/* Submit Button */}
+          <button type="submit" className="circularnewssubmit-btn">
+            Post
+          </button>
         </form>
       </div>
     </div>

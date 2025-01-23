@@ -15,7 +15,7 @@ const ExpiredTrial = () => {
   useEffect(() => {
     const fetchExpiredUsers = async () => {
       try {
-        const response = await axios.get('https://markethub-app-backend.onrender.com/user/expired-trail-user-list');
+        const response = await axios.get('http://api.markethubindia.com/user/expired-trail-user-list');
         if (response.data.success) {
           const expiredUsers = response.data.data.filter(user => new Date(user.planEndDate) < new Date());
           setUsers(expiredUsers); // Set the expired users in state
