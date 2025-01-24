@@ -15,7 +15,7 @@ const TableComponent = () => {
 
   useEffect(() => {
     // Fetch user data from API
-    axios.get('http://api.markethubindia.com/user/get-user-list')
+    axios.get('https://api.markethubindia.com/user/get-user-list')
       .then(response => {
         if (response.data.success) {
           const mappedUsers = response.data.data.map(user => ({

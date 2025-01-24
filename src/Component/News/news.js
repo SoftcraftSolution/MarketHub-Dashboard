@@ -14,7 +14,7 @@ const NewsPage = () => {
   useEffect(() => {
     const fetchNewsData = async () => {
       try {
-        const response = await axios.get('http://admin.markethubindia.com/admin/get-news-list');
+        const response = await axios.get('https://admin.markethubindia.com/admin/get-news-list');
         if (response.data.message === "News listing retrieved successfully") {
           const circularNews = response.data.circularNews.map(news => ({
             type: 'Circular',

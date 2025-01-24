@@ -15,7 +15,7 @@ const Updates = () => {
   // Fetch updates from the API
   const fetchUpdates = async () => {
     try {
-      const response = await axios.get('http://api.markethubindia.com/user/get-home-update');
+      const response = await axios.get('https://api.markethubindia.com/user/get-home-update');
       const updates = response.data.homeUpdates.map((update) => ({
         postedby: 'Unknown', // Replace with actual data if available in the API
         title: update.text,
