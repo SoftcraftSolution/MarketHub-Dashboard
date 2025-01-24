@@ -61,7 +61,7 @@ const AddCircularNews = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = 'http://admin.markethubindia.com/admin/circular-news'; // Replace with your API endpoint
+    const apiUrl = 'https://admin.markethubindia.com/admin/circular-news'; // Replace with your API endpoint
 
     const formDataToSubmit = new FormData();
     formDataToSubmit.append('title', formData.title);

@@ -83,7 +83,7 @@ const AddUpdate = () => {
 
     try {
       const response = await axios.post(
-        'http://api.markethubindia.com/user/home-update',
+        'https://api.markethubindia.com/user/home-update',
         payload,
         {
           headers: {

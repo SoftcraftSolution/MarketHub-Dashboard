@@ -79,7 +79,7 @@ const AddNews = () => {
     // console.log(newsData.data);
     try {
       const response = await axios.post(
-        'http://admin.markethubindia.com/admin/add-self-news',
+        'https://admin.markethubindia.com/admin/add-self-news',
       
         newsData,
         {

@@ -15,7 +15,7 @@ function VerifyUsers() {
   useEffect(() => {
     const fetchPendingUsers = async () => {
       try {
-        const response = await axios.get('http://api.markethubindia.com/user/pending-user-list');
+        const response = await axios.get('https://api.markethubindia.com/user/pending-user-list');
         if (response.data.success) {
           const fetchedUsers = response.data.data.map((user) => ({
             id: user._id,
@@ -54,7 +54,7 @@ function VerifyUsers() {
   const handleConfirm = async () => {
     try {
       console.log("Selected User Email:", selectedUser.email); // Log the email being sent
-      const response = await axios.get(`http://api.markethubindia.com/user/user-approve`, {
+      const response = await axios.get(`https://api.markethubindia.com/user/user-approve`, {
         params: {
           email: selectedUser.email,
           isApproved: "true",
@@ -74,7 +74,7 @@ function VerifyUsers() {
   
   const handleRejectConfirm = async () => {
     try {
-      const response = await axios.get('http://api.markethubindia.com/user/reject-user', {
+      const response = await axios.get('https://api.markethubindia.com/user/reject-user', {
         params: {
           email: selectedUser.email,
           isRejected: "false",
