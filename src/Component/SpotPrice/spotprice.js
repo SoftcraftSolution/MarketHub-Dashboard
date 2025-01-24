@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import VerifyUsersTable from './VerifySpot/VerifySpot';
 import PriceListTable from './PriceList/PriceList';
 import Pagination from '../Pagination';
+
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import './spotprice.css';
+
+import './spotprice.css'; // External CSS for the page
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
+
 import righttick from '../../assets/tickimg.png';
 import wrongtick from '../../assets/removeimg.png';
 import filterimg from '../../assets/filter.png';
@@ -145,7 +150,11 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
             </DialogTitle>
             <DialogContent>
               <p>
+
                 Are you sure you want to {actionType} the {selectedItem?.commodity}?
+
+                Are you sure you want to {actionType === 'verify' ? 'verify' : 'reject'} the {selectedItem?.commodity}?
+
               </p>
             </DialogContent>
             <DialogActions>
@@ -157,6 +166,56 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
               </Button>
             </DialogActions>
           </Dialog>
+
+
+
+          <div className="spot-price-table">
+            <div className="search-and-datepicker-container">
+              <div className='spot-title'>Price list</div>
+              <input
+                type="text"
+                placeholder="Search"
+                className="search-bar-price-list"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <input
+                type="date"
+                className="expired-price-list-datepicker"
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+              />
+              <button className="filter-btn">
+                <img src={filterimg} alt="filter" />
+              </button>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Posted by</th>
+                  <th>Commodity</th>
+                  <th>City</th>
+                  <th>Previous Amt</th>
+                  <th>Current Amt</th>
+                  <th>Date & Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.postedBy}</td>
+                    <td>{item.commodity}</td>
+                    <td>{item.city}</td>
+                    <td>{item.previousAmt}</td>
+                    <td>{item.currentAmt}</td>
+                    <td>{item.dateTime}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </div>
     </div>
