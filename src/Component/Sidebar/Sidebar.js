@@ -234,9 +234,17 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
               <li>
                 <Link
                   className={`submenu-item ${activeIndex === 11 ? 'active' : 'inactive'}`}
-                  onClick={() => onTabClick(10)}
+                  onClick={() => onTabClick(11)}
                 >
                   Add Circular
+                </Link>
+              </li>
+                      <li>
+                <Link
+                  className={`submenu-item ${activeIndex === 21 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(21)}
+                >
+                  Add Hindi
                 </Link>
               </li>
             </ul>

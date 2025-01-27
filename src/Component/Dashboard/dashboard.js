@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MainDashboard from '../DashboardMain/maindashboard.js';
 import SpotPrice from '../SpotPrice/spotprice.js';
+import HindiAddNews from '../HindiNews/hindinew.js';
 import VerifyUsers from '../VerifyUsers/verifyuser.js';
 import FreeTrial from '../FreeTrial/freetrial.js';
 import NewsPage from '../News/news.js';
@@ -76,6 +77,8 @@ const Dashboard = () => {
                   return <AddSBI />;
                 case 20:
                   return <WarehouseStockEditor/>  
+                  case 21:
+                    return <HindiAddNews/>
       default:
         return null;
     }
