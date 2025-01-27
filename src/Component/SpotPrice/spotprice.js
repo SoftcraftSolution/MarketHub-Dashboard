@@ -3,7 +3,7 @@ import VerifyUsersTable from './VerifySpot/VerifySpot';
 import PriceListTable from './PriceList/PriceList';
 import Pagination from '../Pagination';
 
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+
 import './spotprice.css';
 
 import './spotprice.css'; // External CSS for the page

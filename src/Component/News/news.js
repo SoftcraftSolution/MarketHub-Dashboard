@@ -17,6 +17,7 @@ const NewsPage = () => {
         const response = await axios.get('https://admin.markethubindia.com/admin/get-news-list');
         if (response.data.message === "News listing retrieved successfully") {
           const circularNews = response.data.circularNews.map(news => ({
+            id: news._id,
             type: 'Circular',
             title: news.addTitle,
             content: news.addContent,
@@ -27,16 +28,16 @@ const NewsPage = () => {
           }));
 
           const selfNews = response.data.selfNews.map(news => ({
+            id: news._id,
             type: 'Self',
             title: news.addTitle,
             content: news.addContent,
             link: news.addLink,
-            pdf: false, // Assuming no PDF for self news
+            pdf: false,
             image: news.image,
             uploadDate: new Date(news.createdAt).toLocaleString(),
           }));
 
-          // Combine circular and self news
           setNewsData([...circularNews, ...selfNews]);
         }
       } catch (error) {
@@ -73,10 +74,26 @@ const NewsPage = () => {
     setShowModal(false);
   };
 
-  const handleDelete = () => {
-    console.log('Delete news item:', selectedNewsIndex);
+  const handleDelete = async () => {
+    if (selectedNewsIndex !== null) {
+      const selectedNews = newsData[selectedNewsIndex];
+      const deleteUrl = selectedNews.type === 'Circular'
+        ? `https://admin.markethubindia.com/admin/delete-circular-news?id=${selectedNews.id}`
+        : ` https://admin.markethubindia.com/admin/delete-self-news?id=${selectedNews.id}`;
+
+      try {
+        const response = await axios.delete(deleteUrl);
+        if (response.data.message === "News deleted successfully") {
+          setNewsData(newsData.filter((_, index) => index !== selectedNewsIndex));
+        } else {
+          console.error('Failed to delete news:', response.data);
+        }
+      } catch (error) {
+        console.error('Error deleting news:', error);
+      }
+    }
+
     setShowModal(false);
-    // Perform deletion here, e.g., update the state or make an API call
   };
 
   const getStringDate = (date) => {
@@ -150,8 +167,8 @@ const NewsPage = () => {
             <div className='deletepopup-heading'>Delete News</div>
             <div className='deletepopup-message'>Are you sure you want to continue?</div>
             <div className="modal-actions">
-              <button onClick={handleDelete} className="modal-delete-button">No</button>
-              <button onClick={closeModal} className="modal-cancel-button">Yes</button>
+              <button onClick={closeModal} className="modal-cancel-button">No</button>
+              <button onClick={handleDelete} className="modal-delete-button">Yes</button>
             </div>
           </div>
         </div>
@@ -178,4 +195,3 @@ const StatBox = ({ title, number, shareCount, color }) => {
     </div>
   );
 };
-  

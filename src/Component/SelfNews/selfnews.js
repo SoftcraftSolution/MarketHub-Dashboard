@@ -112,14 +112,15 @@ const AddNews = () => {
               onChange={handleChange}
               className="selfnewsinput-field"
             />
-            <input
-              type="text"
-              name="content"
-              placeholder="Add Content"
-              value={formData.content}
-              onChange={handleChange}
-              className="selfnewsinput-field"
-            />
+      <textarea
+  name="content"
+  placeholder="Add Content"
+  value={formData.content}
+  onChange={handleChange}
+  className="selfnewsinput-field"
+  rows={5} // Optional: Adjust the height of the textarea
+></textarea>
+
           </div>
           <div className="input-group">
             <input
