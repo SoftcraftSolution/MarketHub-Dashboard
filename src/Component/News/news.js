@@ -6,6 +6,7 @@ import deleteIcon from '../../assets/deleteimg.png';
 
 const NewsPage = () => {
   const [newsData, setNewsData] = useState([]);
+  const [hindiNewsData, setHindiNewsData] = useState([]);
   const [insightsData, setInsightsData] = useState({ totalCircularNews: 0, totalSelfNews: 0, totalNewsCount: 0 });
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
@@ -17,6 +18,7 @@ const NewsPage = () => {
         const response = await axios.get('https://admin.markethubindia.com/admin/get-news-list');
         if (response.data.message === "News listing retrieved successfully") {
           const circularNews = response.data.circularNews.map(news => ({
+            id: news._id,
             type: 'Circular',
             title: news.addTitle,
             content: news.addContent,
@@ -27,20 +29,42 @@ const NewsPage = () => {
           }));
 
           const selfNews = response.data.selfNews.map(news => ({
+            id: news._id,
             type: 'Self',
             title: news.addTitle,
             content: news.addContent,
             link: news.addLink,
-            pdf: false, // Assuming no PDF for self news
+            pdf: false,
             image: news.image,
             uploadDate: new Date(news.createdAt).toLocaleString(),
           }));
 
-          // Combine circular and self news
           setNewsData([...circularNews, ...selfNews]);
         }
       } catch (error) {
         console.error('Error fetching news data:', error);
+      }
+    };
+
+    const fetchHindiNewsData = async () => {
+      try {
+        const response = await axios.get('https://admin.markethubindia.com/admin/get-hindi-news');
+        if (response.data.message === "Hindi news listing fetched successfully") {
+          const hindiNews = response.data.news.map(news => ({
+            id: news._id,
+            type: 'Hindi',
+            title: news.addTitle,
+            content: news.addContent,
+            link: news.addLink || '-',
+            pdf: false,
+            image: news.image,
+            uploadDate: new Date(news.createdAt).toLocaleString(),
+          }));
+
+          setHindiNewsData(hindiNews);
+        }
+      } catch (error) {
+        console.error('Error fetching Hindi news data:', error);
       }
     };
 
@@ -56,6 +80,7 @@ const NewsPage = () => {
     };
 
     fetchNewsData();
+    fetchHindiNewsData();
     fetchInsightsData();
   }, []);
 
@@ -73,10 +98,39 @@ const NewsPage = () => {
     setShowModal(false);
   };
 
-  const handleDelete = () => {
-    console.log('Delete news item:', selectedNewsIndex);
+  const handleDelete = async () => {
+    if (selectedNewsIndex !== null) {
+      let selectedNews;
+      let deleteUrl;
+
+      if (selectedNewsIndex < newsData.length) {
+        selectedNews = newsData[selectedNewsIndex];
+        deleteUrl = selectedNews.type === 'Circular'
+          ? `https://admin.markethubindia.com/admin/delete-circular-news?id=${selectedNews.id}`
+          : `https://admin.markethubindia.com/admin/delete-self-news?id=${selectedNews.id}`;
+      } else {
+        const hindiNewsIndex = selectedNewsIndex - newsData.length;
+        selectedNews = hindiNewsData[hindiNewsIndex];
+        deleteUrl = `https://admin.markethubindia.com/admin/delete-hindi-news?id=${selectedNews.id}`;
+      }
+
+      try {
+        const response = await axios.delete(deleteUrl);
+        if (response.data.message === "News deleted successfully") {
+          if (selectedNews.type === 'Hindi') {
+            setHindiNewsData(hindiNewsData.filter((_, index) => index !== selectedNewsIndex - newsData.length));
+          } else {
+            setNewsData(newsData.filter((_, index) => index !== selectedNewsIndex));
+          }
+        } else {
+          console.error('Failed to delete news:', response.data);
+        }
+      } catch (error) {
+        console.error('Error deleting news:', error);
+      }
+    }
+
     setShowModal(false);
-    // Perform deletion here, e.g., update the state or make an API call
   };
 
   const getStringDate = (date) => {
@@ -88,16 +142,16 @@ const NewsPage = () => {
 
   return (
     <div className="news-page">
-      <div className='news-header'>News</div>
+      <div className="news-header">News</div>
       <div className="stats">
-        <StatBox title="Total Self News Shared" number={insightsData.totalSelfNews} shareCount="3" color='#C7C5FF' />
-        <StatBox title="Total Circular Shared" number={insightsData.totalCircularNews} shareCount="3" color='#B2FFD9' />
-        <StatBox title="Total News Count" number={insightsData.totalNewsCount} shareCount="3" color='#ffe8af' />
+        <StatBox title="Total Self News Shared" number={insightsData.totalSelfNews} shareCount="3" color="#C7C5FF" />
+        <StatBox title="Total Circular Shared" number={insightsData.totalCircularNews} shareCount="3" color="#B2FFD9" />
+        <StatBox title="Total News Count" number={insightsData.totalNewsCount} shareCount="3" color="#ffe8af" />
       </div>
 
       <div className="news-list">
-        <div className='news-close'>
-          <div className='newstitle'>News List</div>
+        <div className="news-close">
+          <div className="newstitle">News List</div>
           <div className="search-and-date">
             <input type="text" placeholder="Search by name, phone..." className="search-bar" />
             <div id="datteePickeer">
@@ -127,12 +181,30 @@ const NewsPage = () => {
                 <td className="content-column">{news.content}</td>
                 <td><a href={news.link} target="_blank" rel="noopener noreferrer">View Link</a></td>
                 <td>
-                  {news.image ? <img src={news.image} alt="news-img" style={{ width: '50px', height: '50px', borderRadius: '10px' }} /> : '-' }
+                  {news.image ? <img src={news.image} alt="news-img" style={{ width: '50px', height: '50px', borderRadius: '10px' }} /> : '-'}
                 </td>
                 <td>{news.pdf ? <a href={news.pdf} target="_blank" rel="noopener noreferrer">View PDF</a> : '-'}</td>
                 <td>{news.uploadDate}</td>
                 <td>
                   <button style={{ border: "none", backgroundColor: "#FFFFFF" }} onClick={() => openModal(index)} className="delete-button">
+                    <img src={deleteIcon} alt="delete" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+            {hindiNewsData.map((news, index) => (
+              <tr key={news.id}>
+                <td>{news.type}</td>
+                <td>{news.title}</td>
+                <td className="content-column">{news.content}</td>
+                <td><a href={news.link} target="_blank" rel="noopener noreferrer">View Link</a></td>
+                <td>
+                  {news.image ? <img src={news.image} alt="news-img" style={{ width: '50px', height: '50px', borderRadius: '10px' }} /> : '-'}
+                </td>
+                <td>{news.pdf ? <a href={news.pdf} target="_blank" rel="noopener noreferrer">View PDF</a> : '-'}</td>
+                <td>{news.uploadDate}</td>
+                <td>
+                  <button style={{ border: "none", backgroundColor: "#FFFFFF" }} onClick={() => openModal(index + newsData.length)} className="delete-button">
                     <img src={deleteIcon} alt="delete" />
                   </button>
                 </td>
@@ -147,11 +219,11 @@ const NewsPage = () => {
         <div className="modal">
           <div className="modal-content">
             <span className="close-button" onClick={closeModal}>&times;</span>
-            <div className='deletepopup-heading'>Delete News</div>
-            <div className='deletepopup-message'>Are you sure you want to continue?</div>
+            <div className="deletepopup-heading">Delete News</div>
+            <div className="deletepopup-message">Are you sure you want to continue?</div>
             <div className="modal-actions">
-              <button onClick={handleDelete} className="modal-delete-button">No</button>
-              <button onClick={closeModal} className="modal-cancel-button">Yes</button>
+              <button onClick={closeModal} className="modal-cancel-button">No</button>
+              <button onClick={handleDelete} className="modal-delete-button">Yes</button>
             </div>
           </div>
         </div>
@@ -165,7 +237,7 @@ export default NewsPage;
 const StatBox = ({ title, number, shareCount, color }) => {
   return (
     <div className="stat-box">
-      <div className='stat-box-1'>
+      <div className="stat-box-1">
         <div className="stat-header">
           <div className="news-title">{title}</div>
         </div>
@@ -174,8 +246,7 @@ const StatBox = ({ title, number, shareCount, color }) => {
           <div className="stat-share">{shareCount} shared this month</div>
         </div>
       </div>
-      <div className='news-img' style={{ backgroundColor: `${color}` }}></div>
+      <div className="news-img" style={{ backgroundColor: color }}></div>
     </div>
   );
 };
-  
