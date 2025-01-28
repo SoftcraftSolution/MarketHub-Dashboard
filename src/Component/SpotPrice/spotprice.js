@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import VerifyUsersTable from './VerifySpot/VerifySpot';
 import PriceListTable from './PriceList/PriceList';
 import Pagination from '../Pagination';
-
-
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import './spotprice.css';
-
-
-
 import righttick from '../../assets/tickimg.png';
 import wrongtick from '../../assets/removeimg.png';
 import filterimg from '../../assets/filter.png';
@@ -17,37 +13,23 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [actionType, setActionType] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedDate, setSelectedDate] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const exampleData = [
-    {
-      id: 1,
-      postedBy: "John Doe",
-      commodity: "Wheat",
-      city: "New York",
-      country: "USA",
-      previousAmt: "$200",
-      currentAmt: "$210",
-      dateTime: "2024-09-25 10:00 AM",
-    },
-    {
-      id: 2,
-      postedBy: "Jane Smith",
-      commodity: "Corn",
-      city: "Chicago",
-      country: "USA",
-      previousAmt: "$150",
-      currentAmt: "$155",
-      dateTime: "2024-09-25 11:00 AM",
-    },
+    { id: 1, postedBy: "John Doe", commodity: "Wheat", city: "New York", country: "USA", previousAmt: "$200", currentAmt: "$210", dateTime: "2024-09-25 10:00 AM" },
+    { id: 2, postedBy: "Jane Smith", commodity: "Corn", city: "Chicago", country: "USA", previousAmt: "$150", currentAmt: "$155", dateTime: "2024-09-25 11:00 AM" },
   ];
 
   const displayedData = data.length > 0 ? data : exampleData;
 
   const filteredData = displayedData.filter(item =>
-    item.commodity.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.postedBy.toLowerCase().includes(searchTerm.toLowerCase())
+    item.commodity.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const paginatedData = filteredData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
   );
 
   const handleDialogOpen = (item, action) => {
@@ -64,11 +46,8 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
 
   const handleConfirm = () => {
     if (selectedItem) {
-      if (actionType === 'verify') {
-        onVerifyUser(selectedItem.id);
-      } else if (actionType === 'reject') {
-        onAddSpotPrice(selectedItem.id);
-      }
+      if (actionType === 'verify') onVerifyUser(selectedItem.id);
+      else if (actionType === 'reject') onAddSpotPrice(selectedItem.id);
     }
     handleCloseDialog();
   };
@@ -79,24 +58,26 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
 
       <div className="verify-users-section">
         <VerifyUsersTable />
+        <input
+          type="text"
+          placeholder="Search Verify Users"
+          className="search-bar"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
 
       <div className="price-list-section">
         <PriceListTable />
 
-        <div className="spot-price-table">
-          <div className='spot-verify-heading'>
-            <div className='spot-verify-title'>Verify Users</div>
+        <div className="price-list-table">
+          <div className="search-and-datepicker-container">
             <input
               type="text"
-              placeholder="Search"
-              className="search-bar-verify-user-list"
+              placeholder="Search Price List"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className="spotprice-filter-btn">
-              <img src={filterimg} alt="filter" />
-            </button>
           </div>
 
           <table>
@@ -113,7 +94,7 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
               </tr>
             </thead>
             <tbody>
-              {filteredData.map((item) => (
+              {paginatedData.map((item) => (
                 <tr key={item.id}>
                   <td>{item.postedBy}</td>
                   <td>{item.commodity}</td>
@@ -123,16 +104,10 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
                   <td>{item.currentAmt}</td>
                   <td>{item.dateTime}</td>
                   <td>
-                    <button
-                      style={{ border: 'none', marginRight: '10px' }}
-                      onClick={() => handleDialogOpen(item, 'verify')}
-                    >
+                    <button onClick={() => handleDialogOpen(item, 'verify')}>
                       <img src={righttick} alt="Verify" />
                     </button>
-                    <button
-                      style={{ border: 'none' }}
-                      onClick={() => handleDialogOpen(item, 'reject')}
-                    >
+                    <button onClick={() => handleDialogOpen(item, 'reject')}>
                       <img src={wrongtick} alt="Reject" />
                     </button>
                   </td>
@@ -141,84 +116,29 @@ function SpotPriceTable({ data = [], onVerifyUser, onAddSpotPrice }) {
             </tbody>
           </table>
 
-          <Pagination />
-
-          <Dialog open={openDialog} onClose={handleCloseDialog}>
-            <DialogTitle>
-              {selectedItem ? `Action for ${selectedItem.postedBy}` : ''}
-            </DialogTitle>
-            <DialogContent>
-              <p>
-
-                Are you sure you want to {actionType} the {selectedItem?.commodity}?
-
-                Are you sure you want to {actionType === 'verify' ? 'verify' : 'reject'} the {selectedItem?.commodity}?
-
-              </p>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseDialog} color="primary">
-                No
-              </Button>
-              <Button onClick={handleConfirm} color="primary">
-                Yes
-              </Button>
-            </DialogActions>
-          </Dialog>
-
-
-
-          <div className="spot-price-table">
-            <div className="search-and-datepicker-container">
-              <div className='spot-title'>Price list</div>
-              <input
-                type="text"
-                placeholder="Search"
-                className="search-bar-price-list"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <input
-                type="date"
-                className="expired-price-list-datepicker"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-              />
-              <button className="filter-btn">
-                <img src={filterimg} alt="filter" />
-              </button>
-            </div>
-
-            <table>
-              <thead>
-                <tr>
-                  <th>Posted by</th>
-                  <th>Commodity</th>
-                  <th>City</th>
-                  <th>Previous Amt</th>
-                  <th>Current Amt</th>
-                  <th>Date & Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredData.map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.postedBy}</td>
-                    <td>{item.commodity}</td>
-                    <td>{item.city}</td>
-                    <td>{item.previousAmt}</td>
-                    <td>{item.currentAmt}</td>
-                    <td>{item.dateTime}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
+          <Pagination currentPage={currentPage} onPageChange={setCurrentPage} />
         </div>
       </div>
+
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>Action Confirmation</DialogTitle>
+        <DialogContent>
+          <p>
+            Are you sure you want to {actionType === 'verify' ? 'verify' : 'reject'} the {selectedItem?.commodity}?
+          </p>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog}>No</Button>
+          <Button onClick={handleConfirm}>Yes</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
+
+SpotPriceTable.defaultProps = {
+  onVerifyUser: (id) => console.log(`Verified user with id: ${id}`),
+  onAddSpotPrice: (id) => console.log(`Added spot price for id: ${id}`),
+};
 
 export default SpotPriceTable;
