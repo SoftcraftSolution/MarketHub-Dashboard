@@ -5,7 +5,7 @@ import preview from '../../assets/previewimg.png'; // Placeholder image
 
 const AddUpdate = () => {
   const [formData, setFormData] = useState({
-    title: '',
+    title: 'Update',
     imageBase64: null,
     imagePreview: preview, // Default placeholder image
   });
