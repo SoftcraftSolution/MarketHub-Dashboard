@@ -10,7 +10,7 @@ const EditableTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://markethub-app-backend.onrender.com/user/get-all-item');
+        const response = await axios.get('http://api.markethubindia.com/user/get-all-item');
         // Map the response data to match your table structure
         const formattedData = response.data.map(item => ({
           id: item._id, // Assuming your items have an `_id` field for the unique identifier
@@ -43,7 +43,7 @@ const EditableTable = () => {
 
     try {
       // Send the updated data to the API
-      await axios.post('https://markethub-app-backend.onrender.com/user/price-update', updatedPrices);
+      await axios.post('http://api.markethubindia.com/user/price-update', updatedPrices);
       
     } catch (error) {
       console.error('Error updating data:', error);
