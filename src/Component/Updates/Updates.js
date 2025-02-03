@@ -52,7 +52,7 @@ const Updates = () => {
 
   return (
     <div className="updates-page">
-      <div className="updates-header">Updates</div>
+      <div className="updates-header">Update</div>
 
       <div className="updates-list">
         <div className="updates-close">
