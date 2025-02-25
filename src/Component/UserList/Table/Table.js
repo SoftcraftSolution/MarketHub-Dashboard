@@ -12,6 +12,9 @@ const TableComponent = () => {
   const [selectedImage, setSelectedImage] = useState('');
   const [customPopupContent, setCustomPopupContent] = useState(null);
   const [userToDelete, setUserToDelete] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
 
   useEffect(() => {
     // Fetch user data from API
@@ -20,7 +23,7 @@ const TableComponent = () => {
         if (response.data.success) {
           const mappedUsers = response.data.data.map(user => ({
             name: user.fullName,
-            email: user.email,  // Ensure you have the email in your user data
+            email: user.email,
             whatsapp: user.whatsappNumber,
             alternateno: user.phoneNumber,
             pincode: user.pincode,
@@ -29,7 +32,7 @@ const TableComponent = () => {
             country: user.country,
             visitingcard: user.visitingCard,
             plan: user.planName,
-            startdate: new Date(user.planStartDate).toLocaleDateString(),
+            startdate: user.planStartDate ? new Date(user.planStartDate) : null, // Ensure it's a valid Date object
             action: ""
           }));
           setUsers(mappedUsers);
@@ -79,18 +82,65 @@ const TableComponent = () => {
     setIsDeletePopupOpen(false);
   };
 
+  const toggleFilterOptions = () => {
+    setIsFilterOptionsOpen(!isFilterOptionsOpen);
+  };
+
+  const filteredUsers = users.filter(user => {
+    const userStartDate = user.startdate instanceof Date && !isNaN(user.startdate) 
+      ? user.startdate.toISOString().split('T')[0] 
+      : '';
+    return (
+      (searchTerm === '' || user.name.toLowerCase().includes(searchTerm.toLowerCase()) || user.whatsapp.includes(searchTerm)) &&
+      (selectedDate === '' || userStartDate === selectedDate)
+    );
+  });
+
   return (
     <div className="userlisttable-container">
       <div className="usertablehead">
         <div style={{ fontWeight: "600" }}>All Users</div>
-        <input type="text" placeholder="Search by name, phone..." className="usertable-input" />
+        <input
+          type="text"
+          placeholder="Search by name, phone..."
+          className="usertable-input"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
         <div id="userlistdatteePickeer">
-          <input type="date" id="birthday" name="birthday" className="date-picker-input" />
+          <input
+            type="date"
+            id="birthday"
+            name="birthday"
+            className="date-picker-input"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          />
         </div>
-        <button style={{ border: "none", backgroundColor: "#FFFFFF" }}>
+        <button style={{ border: "none", backgroundColor: "#FFFFFF" }} onClick={toggleFilterOptions}>
           <img src={filter} alt="filter" />
         </button>
       </div>
+
+      {isFilterOptionsOpen && (
+        <div className="filter-options">
+          <div className="filter-option">
+            <label>Sort By:</label>
+            <select>
+              <option value="name">Name</option>
+              <option value="startdate">Start Date</option>
+            </select>
+          </div>
+          <div className="filter-option">
+            <label>Filter By Plan:</label>
+            <select>
+              <option value="all">All Plans</option>
+              <option value="free">Free</option>
+              <option value="premium">Premium</option>
+            </select>
+          </div>
+        </div>
+      )}
 
       <div className="table-scrollable-container">
         <table className="userlisttable">
@@ -110,7 +160,7 @@ const TableComponent = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {filteredUsers.map((user, index) => (
               <tr key={index}>
                 <td className="userlistdata">{user.name}</td>
                 <td className="userlistdata">{user.whatsapp}</td>
@@ -131,7 +181,11 @@ const TableComponent = () => {
                   ) : "No Card"}
                 </td>
                 <td className="userlistdata">{user.plan}</td>
-                <td className="userlistdata">{user.startdate}</td>
+                <td className="userlistdata">
+                  {user.startdate instanceof Date && !isNaN(user.startdate) 
+                    ? user.startdate.toLocaleDateString() 
+                    : 'Invalid Date'}
+                </td>
                 <td className="expired-td" id="userlist-buttons">
                   <button className="userlist-action-btn" onClick={() => openCustomPopup(
                     <div style={{backgroundColor:"white",padding:"15px"}}className="custom-action-popup">

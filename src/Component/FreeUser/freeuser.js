@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './freeuser.css';
-import action from '../../assets/action.png';
 import deleteimage from '../../assets/deleteimg.png';
-import Pagination from '../Pagination';
 import axios from 'axios';
 
 const UserList = () => {
-  const [users, setUsers] = useState([]);
-  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
-  const [userToDelete, setUserToDelete] = useState(null);
+  const [users, setUsers] = useState([]); // State to store user data
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false); // State for delete popup
+  const [userToDelete, setUserToDelete] = useState(null); // State to store user to delete
+  const [searchKeyword, setSearchKeyword] = useState(''); // State for search keyword
+  const [selectedDate, setSelectedDate] = useState(''); // State for date filter
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -51,6 +51,15 @@ const UserList = () => {
     }
   };
 
+  // Filter users based on search keyword and selected date
+  const filteredUsers = users.filter(user => {
+    const matchesSearchKeyword = user.fullName.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+                                 user.whatsappNumber.includes(searchKeyword) ||
+                                 user.phoneNumber.includes(searchKeyword);
+    const matchesDate = selectedDate ? new Date(user.planStartDate).toLocaleDateString() === new Date(selectedDate).toLocaleDateString() : true;
+    return matchesSearchKeyword && matchesDate;
+  });
+
   return (
     <div className="page-wrapper">
       <div className="user-list-label">
@@ -59,8 +68,19 @@ const UserList = () => {
       <div className="user-list">
         <div className="user-list-header">
           <div className='freeuserdiv'>Free Users</div>
-          <input type="text" placeholder="Search by name, phone..." className="freeuserlist-input" />
-          <input type="date" className="freeuserlist-dateepicker" />
+          <input
+            type="text"
+            placeholder="Search by name, phone..."
+            className="freeuserlist-input"
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)} // Update search keyword state
+          />
+          <input
+            type="date"
+            className="freeuserlist-dateepicker"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)} // Update selected date state
+          />
         </div>
         <table>
           <thead>
@@ -77,7 +97,7 @@ const UserList = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
               <tr key={user._id}>
                 <td className='freeuserdata'>{user.fullName}</td>
                 <td className='freeuserdata'>{user.whatsappNumber}</td>
@@ -88,7 +108,6 @@ const UserList = () => {
                 <td className='freeuserdata'>{new Date(user.planStartDate).toLocaleDateString()}</td>
                 <td className={user.planName.toLowerCase()}>{user.planName}</td>
                 <td className='freeuser-buttons'>
-         
                   <button className="edit-button" onClick={() => openDeletePopup(user)}>
                     <img src={deleteimage} alt='delete button' />
                   </button>
@@ -98,7 +117,6 @@ const UserList = () => {
           </tbody>
         </table>
       </div>
-
 
       {/* Delete Confirmation Popup */}
       {isDeletePopupOpen && (

@@ -9,16 +9,16 @@ const FreeTrial = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showDeletePopup, setShowDeletePopup] = useState(false);  // State to control delete popup visibility
-  const [selectedUser, setSelectedUser] = useState(null);  // State to store the selected user for deletion
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
 
   useEffect(() => {
-    // Fetch data from the API
     const fetchFreeTrialUsers = async () => {
       try {
         const response = await axios.get('https://api.markethubindia.com/user/free-trail-user-list');
         if (response.data.success) {
-          // Filter users where isInTrial is true
           const trialUsers = response.data.data.filter(user => user.isInTrail);
           setUsers(trialUsers);
         } else {
@@ -35,25 +35,30 @@ const FreeTrial = () => {
   }, []);
 
   const handleDeleteClick = (user) => {
-    setSelectedUser(user);  // Set the user to be deleted
-    setShowDeletePopup(true);  // Show the delete confirmation popup
+    setSelectedUser(user);
+    setShowDeletePopup(true);
   };
 
   const handleConfirmDelete = async () => {
     if (selectedUser) {
       try {
-        // Call the delete API using the user's email
         await axios.delete(`https://markethub-app-backend.onrender.com/user/delete-user?email=${encodeURIComponent(selectedUser.email)}`);
-        // Remove the user from the list after successful deletion
         setUsers(users.filter(user => user._id !== selectedUser._id));
       } catch (error) {
         console.error('Error deleting user:', error);
       } finally {
-        setShowDeletePopup(false);  // Close the popup
-        setSelectedUser(null);  // Reset selected user
+        setShowDeletePopup(false);
+        setSelectedUser(null);
       }
     }
   };
+
+  const filteredUsers = users.filter(user => {
+    const matchesSearchKeyword = user.fullName.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+                                 user.phoneNumber.includes(searchKeyword);
+    const matchesDate = selectedDate ? new Date(user.planStartDate).toLocaleDateString() === new Date(selectedDate).toLocaleDateString() : true;
+    return matchesSearchKeyword && matchesDate;
+  });
 
   if (loading) {
     return <div>Loading...</div>;
@@ -67,8 +72,19 @@ const FreeTrial = () => {
     <div className="user-list-container">
       <div className="user-list-header">
         <h2 style={{ margin: '0px' }}>Free Trial</h2>
-        <input type="text" placeholder="Search by name, phone..." className="freetrial-input" />
-        <input type="date" className="freetrial-datepicker" />
+        <input 
+          type="text" 
+          placeholder="Search by name, phone..." 
+          className="freetrial-input" 
+          value={searchKeyword}
+          onChange={(e) => setSearchKeyword(e.target.value)}
+        />
+        <input 
+          type="date" 
+          className="freetrial-datepicker" 
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+        />
       </div>
 
       <table className="user-list-table">
@@ -83,7 +99,7 @@ const FreeTrial = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {filteredUsers.map((user) => (
             <tr key={user._id}>
               <td>{user.fullName}</td>
               <td>{user.phoneNumber}</td>
@@ -91,10 +107,9 @@ const FreeTrial = () => {
               <td>{user.extendendDays}</td>
               <td>{new Date(user.planEndDate).toLocaleDateString()}</td>
               <td className='freetrial-buttons'>
-                
                 <button 
                   style={{ border: 'none', backgroundColor: '#FFFFFF' }} 
-                  onClick={() => handleDeleteClick(user)}  // Show popup on delete button click
+                  onClick={() => handleDeleteClick(user)}
                 >
                   <img src={delimg} alt="delete"/>
                 </button>
@@ -104,9 +119,6 @@ const FreeTrial = () => {
         </tbody>
       </table>
 
-      
-
-      {/* Delete confirmation popup */}
       {showDeletePopup && (
         <div className="delete-popup">
           <div className="delete-popup-content">

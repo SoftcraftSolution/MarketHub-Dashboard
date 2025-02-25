@@ -47,7 +47,7 @@ const EditableTable = () => {
 
     try {
       // Send the updated data to the API
-      await axios.post('https://admin.markethubindia.com/user/update-spot-price', updatedPrices);
+      await axios.post('https://api.markethubindia.com/user/update-spot-price', updatedPrices);
       
     } catch (error) {
       console.error('Error updating data:', error);

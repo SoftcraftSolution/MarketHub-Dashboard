@@ -11,6 +11,7 @@ function VerifyUsers() {
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchPendingUsers = async () => {
@@ -98,6 +99,11 @@ function VerifyUsers() {
     setIsRejectModalOpen(false);
   };
 
+  const filteredUsers = users.filter(user => 
+    user.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    user.phone.includes(searchTerm)
+  );
+
   return (
     <div className="verify-users-container">
       <div className="verify-heading">Verify Users</div>
@@ -106,11 +112,14 @@ function VerifyUsers() {
         <div className="top-bar">
           <div style={{ paddingTop: '10px', fontSize: "16px", fontWeight: "600" }}>Verify Users</div>
           <div className="verify-search">
-            <input type="text" placeholder="Search by name, phone..." className="expired-input" />
+            <input 
+              type="text" 
+              placeholder="Search by name, phone..." 
+              className="expired-input" 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
-          <button className="filter-btn">
-            <img src={filterimg} alt="filter" />
-          </button>
         </div>
 
         <table className="users-table">
@@ -129,7 +138,7 @@ function VerifyUsers() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
               <tr key={user.id}>
                 <td className='buttonsverify'>
                   <button className="edit-btn" onClick={() => handleTickClick(user)}>

@@ -11,6 +11,9 @@ const NewsPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
   const [selectedNewsIndex, setSelectedNewsIndex] = useState(null);
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [filteredNewsData, setFilteredNewsData] = useState([]);
+  const [filteredHindiNewsData, setFilteredHindiNewsData] = useState([]);
 
   useEffect(() => {
     const fetchNewsData = async () => {
@@ -40,6 +43,7 @@ const NewsPage = () => {
           }));
 
           setNewsData([...circularNews, ...selfNews]);
+          setFilteredNewsData([...circularNews, ...selfNews]);
         }
       } catch (error) {
         console.error('Error fetching news data:', error);
@@ -62,6 +66,7 @@ const NewsPage = () => {
           }));
 
           setHindiNewsData(hindiNews);
+          setFilteredHindiNewsData(hindiNews);
         }
       } catch (error) {
         console.error('Error fetching Hindi news data:', error);
@@ -87,6 +92,28 @@ const NewsPage = () => {
   const handleDateChange = (event) => {
     const date = new Date(event.target.value);
     setSelectedDate(date);
+    filterNewsData(searchKeyword, date);
+  };
+
+  const handleSearchKeywordChange = (event) => {
+    const keyword = event.target.value;
+    setSearchKeyword(keyword);
+    filterNewsData(keyword, selectedDate);
+  };
+
+  const filterNewsData = (keyword, date) => {
+    const filteredNews = newsData.filter(news => 
+      (news.title.toLowerCase().includes(keyword.toLowerCase()) || news.type.toLowerCase().includes(keyword.toLowerCase())) &&
+      new Date(news.uploadDate).toDateString() === date.toDateString()
+    );
+
+    const filteredHindiNews = hindiNewsData.filter(news => 
+      (news.title.toLowerCase().includes(keyword.toLowerCase()) || news.type.toLowerCase().includes(keyword.toLowerCase())) &&
+      new Date(news.uploadDate).toDateString() === date.toDateString()
+    );
+
+    setFilteredNewsData(filteredNews);
+    setFilteredHindiNewsData(filteredHindiNews);
   };
 
   const openModal = (index) => {
@@ -119,8 +146,10 @@ const NewsPage = () => {
         if (response.data.message === "News deleted successfully") {
           if (selectedNews.type === 'Hindi') {
             setHindiNewsData(hindiNewsData.filter((_, index) => index !== selectedNewsIndex - newsData.length));
+            setFilteredHindiNewsData(filteredHindiNewsData.filter((_, index) => index !== selectedNewsIndex - newsData.length));
           } else {
             setNewsData(newsData.filter((_, index) => index !== selectedNewsIndex));
+            setFilteredNewsData(filteredNewsData.filter((_, index) => index !== selectedNewsIndex));
           }
         } else {
           console.error('Failed to delete news:', response.data);
@@ -153,9 +182,20 @@ const NewsPage = () => {
         <div className="news-close">
           <div className="newstitle">News List</div>
           <div className="search-and-date">
-            <input type="text" placeholder="Search by name, phone..." className="search-bar" />
+            <input 
+              type="text" 
+              placeholder="Search by title, type..." 
+              className="search-bar" 
+              value={searchKeyword}
+              onChange={handleSearchKeywordChange}
+            />
             <div id="datteePickeer">
-              <input type="date" className="date-picker-input" value={getStringDate(selectedDate)} onChange={handleDateChange} />
+              <input 
+                type="date" 
+                className="date-picker-input" 
+                value={getStringDate(selectedDate)} 
+                onChange={handleDateChange} 
+              />
             </div>
           </div>
         </div>
@@ -174,7 +214,7 @@ const NewsPage = () => {
             </tr>
           </thead>
           <tbody>
-            {newsData.map((news, index) => (
+            {filteredNewsData.map((news, index) => (
               <tr key={index}>
                 <td>{news.type}</td>
                 <td>{news.title}</td>
@@ -192,7 +232,7 @@ const NewsPage = () => {
                 </td>
               </tr>
             ))}
-            {hindiNewsData.map((news, index) => (
+            {filteredHindiNewsData.map((news, index) => (
               <tr key={news.id}>
                 <td>{news.type}</td>
                 <td>{news.title}</td>

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './expiredtrial.css'; // Import the CSS file for styling
-import actionImg from '../../assets/action.png'; // Placeholder image for action button
 import deleteimg from '../../assets/deleteimg.png';
-import Pagination from '../Pagination';
 
 const ExpiredTrial = () => {
   const [users, setUsers] = useState([]); // State to store user data
@@ -11,6 +9,8 @@ const ExpiredTrial = () => {
   const [error, setError] = useState(null); // State to manage error
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false); // State for delete popup
   const [userToDelete, setUserToDelete] = useState(null); // State to store user to delete
+  const [searchKeyword, setSearchKeyword] = useState(''); // State for search keyword
+  const [selectedDate, setSelectedDate] = useState(''); // State for date filter
 
   useEffect(() => {
     const fetchExpiredUsers = async () => {
@@ -56,6 +56,14 @@ const ExpiredTrial = () => {
     }
   };
 
+  // Filter users based on search keyword and selected date
+  const filteredUsers = users.filter(user => {
+    const matchesSearchKeyword = user.fullName.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+                                 user.phoneNumber.includes(searchKeyword);
+    const matchesDate = selectedDate ? new Date(user.planStartDate).toLocaleDateString() === new Date(selectedDate).toLocaleDateString() : true;
+    return matchesSearchKeyword && matchesDate;
+  });
+
   if (loading) return <div>Loading...</div>; // Show loading indicator while fetching data
   if (error) return <div>{error}</div>; // Show error message if there's an error
 
@@ -66,8 +74,19 @@ const ExpiredTrial = () => {
         <div className="expired-header">
           <div className="expired-title">Expired Trial</div>
           <div className="expired-search">
-            <input type="text" placeholder="Search by name, phone..." className="expired-input" />
-            <input type="date" className="expired-datepicker" />
+            <input
+              type="text"
+              placeholder="Search by name, phone..."
+              className="expired-input"
+              value={searchKeyword}
+              onChange={(e) => setSearchKeyword(e.target.value)} // Update search keyword state
+            />
+            <input
+              type="date"
+              className="expired-datepicker"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)} // Update selected date state
+            />
           </div>
         </div>
 
@@ -83,7 +102,7 @@ const ExpiredTrial = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
               <tr key={user._id} className="expired-row">
                 <td className="expired-td">{user.fullName}</td>
                 <td className="expired-td">{user.phoneNumber}</td>
@@ -91,7 +110,6 @@ const ExpiredTrial = () => {
                 <td className="expired-td">{new Date(user.planEndDate).toLocaleDateString()}</td>
                 <td className="expired-td">{user.extendendDays}</td>
                 <td className="expired-td" id="expired-buttons">
-
                   <button className="expired-action-btn" onClick={() => openDeletePopup(user)}>
                     <img src={deleteimg} alt="Delete" className="expired-action-img" />
                   </button>
@@ -101,7 +119,6 @@ const ExpiredTrial = () => {
           </tbody>
         </table>
       </div>
-      
 
       {/* Delete Confirmation Popup */}
       {isDeletePopupOpen && (

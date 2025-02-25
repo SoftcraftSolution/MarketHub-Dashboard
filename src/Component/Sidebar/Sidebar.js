@@ -233,8 +233,8 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
               </li>
               <li>
                 <Link
-                  className={`submenu-item ${activeIndex === 11 ? 'active' : 'inactive'}`}
-                  onClick={() => onTabClick(11)}
+                  className={`submenu-item ${activeIndex === 10 ? 'active' : 'inactive'}`}
+                  onClick={() => onTabClick(10)}
                 >
                   Add Circular
                 </Link>

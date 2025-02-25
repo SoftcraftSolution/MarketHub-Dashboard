@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import axios
 import './addadmin.css';
 import logout from '../../assets/logout.png';
 import pencilIcon from '../../assets/pencil.png';
@@ -12,6 +13,8 @@ const AdminDashboard = () => {
     const [showAddNewAdminPopup, setShowAddNewAdminPopup] = useState(false); // State for Add New Admin confirmation popup
     const [showSuccessPopup, setShowSuccessPopup] = useState(false); // State for success popup
     const [adminDetails, setAdminDetails] = useState({ fullName: '', phoneNumber: '+91 ', email: '', accessLevel: '' });
+    const [loading, setLoading] = useState(false); // State for loading
+    const [error, setError] = useState(''); // State for error messages
 
     const admins = [
         { name: 'Shantanu Dixit', mobile: '7689898034', email: 'Shantanu@xyzmail.com', access: 'Spot Price', date: '12-04-2024', action: action, delete: deleteimg },
@@ -40,6 +43,8 @@ const AdminDashboard = () => {
 
     const handleClosePopup = () => {
         setShowPopup(false);
+        setAdminDetails({ fullName: '', phoneNumber: '+91 ', email: '', accessLevel: '' }); // Reset form fields
+        setError(''); // Clear error messages
     };
 
     const handleAdminInputChange = (e) => {
@@ -59,16 +64,42 @@ const AdminDashboard = () => {
         setAdminDetails({ ...adminDetails, accessLevel: e.target.value });
     };
 
-    const handleSubmit = () => {
-        setShowPopup(false);
-        setShowAddNewAdminPopup(true);
-    };
+    const handleSubmit = async () => {
+        const { fullName, phoneNumber, email, accessLevel } = adminDetails;
 
-    const handleConfirmAddAdmin = () => {
-        setShowAddNewAdminPopup(false);
-        setShowSuccessPopup(true); // Show success popup after confirmation
+        // Basic validation
+        if (!fullName || !phoneNumber || !email || !accessLevel) {
+            setError('All fields are required.');
+            return;
+        }
+
+        setLoading(true);
+        setError('');
+
+        try {
+            const response = await axios.post('https://api.markethubindia.com/admin/register', {
+                fullName,
+                email,
+                phoneNumber,
+                access: accessLevel.toLowerCase(), // Convert to lowercase as per API requirement
+                role: 'admin' // Hardcoded role as per API requirement
+            });
+
+            if (response.data.message === "Admin registered successfully") {
+                setShowPopup(false);
+                setShowAddNewAdminPopup(false);
+                setShowSuccessPopup(true); // Show success popup
+                setAdminDetails({ fullName: '', phoneNumber: '+91 ', email: '', accessLevel: '' }); // Reset form fields
+            } else {
+                setError('Failed to add admin. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error adding admin:', error);
+            setError('An error occurred. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
-    
 
     return (
         <div className="admin-dashboard">
@@ -169,6 +200,7 @@ const AdminDashboard = () => {
                     <div className="popup-content">
                         <span className="close-icon" onClick={handleClosePopup}>×</span>
                         <div className='poptitle'>Add New Admin</div>
+                        {error && <div className="error-message">{error}</div>}
                         <div className='addpopup-flex'>
                             <input
                                 className='addadmin-fullname'
@@ -231,22 +263,9 @@ const AdminDashboard = () => {
                                 </div>
                             </div>
                         </div>
-                        <button className="submit-btn" onClick={handleSubmit}>Continue</button>
-                    </div>
-                </div>
-            )}
-
-            {/* Second popup (Add New Admin confirmation) */}
-            {showAddNewAdminPopup && (
-                <div className="popup-overlay">
-                    <div className="newadminpopup-content">
-                        <span className="close-icon" onClick={() => setShowAddNewAdminPopup(false)}>×</span>
-                        <div style={{fontWeight:"700",textAlign:"left",fontSize:"18px"}}>Add New Admin</div>
-                        <div className='popup-message'>Are you sure you want to add an Admin?</div>
-                        <div className="confirmation-buttons">
-                            <button className="confirmation-yes-btn" onClick={handleConfirmAddAdmin}>Yes</button>
-                            <button className="confirmation-no-btn" onClick={() => setShowAddNewAdminPopup(false)}>No</button>
-                        </div>
+                        <button className="submit-btn" onClick={handleSubmit} disabled={loading}>
+                            {loading ? 'Adding...' : 'Continue'}
+                        </button>
                     </div>
                 </div>
             )}
