@@ -5,15 +5,16 @@ import './spottable.css'; // Ensure this path points to your CSS file
 const EditableTable = () => {
   const [data, setData] = useState([]);
   const [editIndex, setEditIndex] = useState({ row: null, column: null });
+  const [successMessage, setSuccessMessage] = useState(''); // State for success message
 
   // Fetch data from the API when the component mounts
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://api.markethubindia.com/user/get-all-item');
-  
+
         const items = Array.isArray(response.data) ? response.data : response.data.items;
-  
+
         const formattedData = items.map(item => ({
           id: item._id,
           type: item.type,
@@ -21,16 +22,15 @@ const EditableTable = () => {
           name: item.subcategory,
           price: item.price,
         }));
-  
+
         setData(formattedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-  
+
     fetchData();
   }, []);
-  
 
   const handleInputChange = (index, name, value) => {
     const newData = [...data];
@@ -39,16 +39,26 @@ const EditableTable = () => {
   };
 
   const handleUpdate = async () => {
-    // Prepare the data for the update request
-    const updatedPrices = data.map(item => ({
-      id: item.id, // Use the unique identifier
-      price: parseFloat(item.price), // Ensure price is a float
-    }));
-
     try {
-      // Send the updated data to the API
-      await axios.post('https://api.markethubindia.com/user/update-spot-price', updatedPrices);
-      
+      // Loop through each item and send an update request
+      for (const item of data) {
+        const updateData = {
+          category: item.category,
+          type: item.type,
+          subcategory: item.name,
+          newPrice: parseFloat(item.price), // Ensure price is a float
+        };
+
+        // Send the updated data to the API
+        const response = await axios.post('https://api.markethubindia.com/user/update-spot-price', updateData);
+
+        if (response.data.message === "Price updated successfully") {
+          setSuccessMessage('Prices updated successfully!'); // Set success message
+          setTimeout(() => setSuccessMessage(''), 3000); // Clear message after 3 seconds
+        } else {
+          alert('Failed to update prices.');
+        }
+      }
     } catch (error) {
       console.error('Error updating data:', error);
       alert('Failed to update data.');
@@ -71,6 +81,13 @@ const EditableTable = () => {
 
   return (
     <div className="table-container-unique">
+      {/* Success message */}
+      {successMessage && (
+        <div className="success-message-unique">
+          {successMessage}
+        </div>
+      )}
+
       <table className="table-unique">
         <thead>
           <tr>

@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Import axios
 import './addwarehouse.css';
 
 const WarehouseStockEditor = () => {
-  const [data, setData] = useState([
-    { symbol: 'Copper', last: '591145', chn: '674', oerCh: '8.2%', chnS: '5.7%' },
-    { symbol: 'Aluminum', last: '361908', chn: '618', oerCh: '0.0%', chnS: '5.7%' },
-    { symbol: 'Zinc', last: '24012', chn: '540', oerCh: '8.7%', chnS: '5.7%' },
-    { symbol: 'Nickel', last: '14422', chn: '870', oerCh: '9.2%', chnS: '5.7%' },
-    { symbol: 'Lead', last: '2970', chn: '530', oerCh: '6.1%', chnS: '5.7%' },
-    { symbol: 'Tin', last: '400', chn: '657', oerCh: '6.9%', chnS: '5.7%' },
-    { symbol: 'Al Alloy', last: '250', chn: '367', oerCh: '0.0%', chnS: '5.7%' },
-  ]);
+  const [data, setData] = useState([]); // State to store warehouse stock data
+  const [successMessage, setSuccessMessage] = useState(''); // State for success message
+
+  // Fetch data from the API when the component mounts
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://api.markethubindia.com/user/get-lme-warehouse');
+        if (response.data.message === "LME warehouse stock retrieved successfully") {
+          // Extract the relevant data from the API response
+          const warehouseData = response.data.data[0].LME_Warehouse_Stock.map(item => ({
+            symbol: item.Symbol,
+            last: item.Live.toString(), // Convert to string for input field
+            chn: item.Change.toString(), // Convert to string for input field
+            oerCh: item['% Change'].toString(), // Convert to string for input field
+            chnS: item.PercentChange?.toString() || '0', // Handle optional field
+          }));
+          setData(warehouseData); // Set the fetched data to state
+        } else {
+          console.error('Failed to fetch warehouse stock data');
+        }
+      } catch (error) {
+        console.error('Error fetching warehouse stock data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (index, field, value) => {
     const updatedData = [...data];
@@ -18,13 +38,49 @@ const WarehouseStockEditor = () => {
     setData(updatedData);
   };
 
-  const handleSubmit = () => {
-    // Add your submit logic here
-    console.log('Data submitted:', data);
+  const handleSubmit = async () => {
+    try {
+      // Loop through each item and send an update request
+      for (const item of data) {
+        const updateData = {
+          Open: parseFloat(item.last), // Use the updated "last" value for Open
+          In: 8000, // Example value (you can make this editable if needed)
+          Out: 2500, // Example value (you can make this editable if needed)
+          Close: 284200, // Example value (you can make this editable if needed)
+          Live: parseFloat(item.last), // Use the updated "last" value for Live
+          Cancel: 21325, // Example value (you can make this editable if needed)
+          Change: parseFloat(item.chn), // Use the updated "chn" value for Change
+          PercentChange: parseFloat(item.oerCh), // Use the updated "oerCh" value for PercentChange
+        };
+
+        // Send the updated data to the API
+        const response = await axios.post(
+          `https://api.markethubindia.com/user/update-lmewarehouse?symbol=${item.symbol}`,
+          updateData
+        );
+
+        if (response.data.message === "LME warehouse stock updated successfully.") {
+          setSuccessMessage(`Stock for ${item.symbol} updated successfully!`);
+          setTimeout(() => setSuccessMessage(''), 3000); // Clear message after 3 seconds
+        } else {
+          console.error('Failed to update stock for:', item.symbol);
+        }
+      }
+    } catch (error) {
+      console.error('Error updating warehouse stock:', error);
+      alert('Failed to update warehouse stock.');
+    }
   };
 
   return (
     <div className="warehouse-editor-container">
+      {/* Success message */}
+      {successMessage && (
+        <div className="success-message">
+          {successMessage}
+        </div>
+      )}
+
       <h2 className="warehouse-editor-title">Future Price</h2>
       <h3 className="warehouse-editor-subtitle">Add Warehouse Stock</h3>
       <table className="warehouse-editor-table">

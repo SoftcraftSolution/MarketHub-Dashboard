@@ -164,14 +164,7 @@ const Sidebar = ({ activeIndex, onTabClick }) => {
                   Add Warehouse Stock
                 </Link>
               </li>
-              <li>
-                <Link
-                  className={`submenu-item ${activeIndex === 18 ? 'active' : 'inactive'}`}
-                  onClick={() => onTabClick(18)}
-                >
-                  Add Settlement
-                </Link>
-              </li>
+      
             </ul>
         </li>
 

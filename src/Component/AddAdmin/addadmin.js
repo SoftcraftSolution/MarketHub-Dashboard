@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Import axios
 import './addadmin.css';
 import logout from '../../assets/logout.png';
@@ -12,17 +12,31 @@ const AdminDashboard = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [showAddNewAdminPopup, setShowAddNewAdminPopup] = useState(false); // State for Add New Admin confirmation popup
     const [showSuccessPopup, setShowSuccessPopup] = useState(false); // State for success popup
+    const [showDeleteConfirmationPopup, setShowDeleteConfirmationPopup] = useState(false); // State for delete confirmation popup
+    const [showDeleteSuccessPopup, setShowDeleteSuccessPopup] = useState(false); // State for delete success popup
     const [adminDetails, setAdminDetails] = useState({ fullName: '', phoneNumber: '+91 ', email: '', accessLevel: '' });
     const [loading, setLoading] = useState(false); // State for loading
     const [error, setError] = useState(''); // State for error messages
+    const [admins, setAdmins] = useState([]); // State to store admin list from API
+    const [adminToDelete, setAdminToDelete] = useState(null); // State to store the admin to delete
 
-    const admins = [
-        { name: 'Shantanu Dixit', mobile: '7689898034', email: 'Shantanu@xyzmail.com', access: 'Spot Price', date: '12-04-2024', action: action, delete: deleteimg },
-        { name: 'Abhishek Mishra', mobile: '7689898055', email: 'AbhiMishra@gmail.com', access: 'Spot Price', date: '26-03-2023', action: action, delete: deleteimg },
-        { name: 'Niraj Prakash', mobile: '7689898040', email: 'nirajPrakash@workmail.com', access: 'Spot Price', date: '28-05-2024', action: action, delete: deleteimg },
-        { name: 'Parmeshwar Kadam', mobile: '7689898049', email: 'parmeshwarKadam@xyzmail.com', access: 'Spot Price', date: '08-12-2023', action: action, delete: deleteimg },
-        { name: 'Niraj Prakash', mobile: '7689898050', email: 'Keshav@Niraj123@gmail.com', access: 'Spot Price', date: '27-01-2024', action: action, delete: deleteimg }
-    ];
+    // Fetch admin list from API
+    useEffect(() => {
+        const fetchAdmins = async () => {
+            try {
+                const response = await axios.get('https://admin.markethubindia.com/admin/user-list');
+                if (response.data.message === "User list retrieved successfully") {
+                    setAdmins(response.data.users); // Set the admin list
+                } else {
+                    console.error('Failed to fetch admin list');
+                }
+            } catch (error) {
+                console.error('Error fetching admin list:', error);
+            }
+        };
+
+        fetchAdmins();
+    }, []);
 
     const handleImageChange = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -77,7 +91,7 @@ const AdminDashboard = () => {
         setError('');
 
         try {
-            const response = await axios.post('https://api.markethubindia.com/admin/register', {
+            const response = await axios.post('https://admin.markethubindia.com/admin/register', {
                 fullName,
                 email,
                 phoneNumber,
@@ -90,6 +104,12 @@ const AdminDashboard = () => {
                 setShowAddNewAdminPopup(false);
                 setShowSuccessPopup(true); // Show success popup
                 setAdminDetails({ fullName: '', phoneNumber: '+91 ', email: '', accessLevel: '' }); // Reset form fields
+
+                // Refresh the admin list after adding a new admin
+                const adminListResponse = await axios.get('https://admin.markethubindia.com/admin/user-list');
+                if (adminListResponse.data.message === "User list retrieved successfully") {
+                    setAdmins(adminListResponse.data.users); // Update the admin list
+                }
             } else {
                 setError('Failed to add admin. Please try again.');
             }
@@ -98,6 +118,38 @@ const AdminDashboard = () => {
             setError('An error occurred. Please try again.');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleDeleteClick = (adminId) => {
+        setAdminToDelete(adminId); // Set the admin ID to delete
+        setShowDeleteConfirmationPopup(true); // Show delete confirmation popup
+    };
+
+    const handleDeleteConfirm = async () => {
+        if (!adminToDelete) return;
+
+        try {
+            const response = await axios.delete(`https://admin.markethubindia.com/admin/delete-admin`, {
+                params: { id: adminToDelete } // Pass the admin ID as a query parameter
+            });
+
+            if (response.data.message === "Admin deleted successfully") {
+                setShowDeleteConfirmationPopup(false); // Close confirmation popup
+                setShowDeleteSuccessPopup(true); // Show delete success popup
+
+                // Refresh the admin list after deleting
+                const adminListResponse = await axios.get('https://admin.markethubindia.com/admin/user-list');
+                if (adminListResponse.data.message === "User list retrieved successfully") {
+                    setAdmins(adminListResponse.data.users); // Update the admin list
+                }
+            } else {
+                console.error('Failed to delete admin');
+            }
+        } catch (error) {
+            console.error('Error deleting admin:', error);
+        } finally {
+            setAdminToDelete(null); // Reset admin to delete
         }
     };
 
@@ -167,24 +219,24 @@ const AdminDashboard = () => {
                     <tbody>
                         {admins.map((admin, index) => (
                             <tr key={index}>
-                                <td>{admin.name}</td>
-                                <td>{admin.mobile}</td>
+                                <td>{admin.fullName || 'N/A'}</td>
+                                <td>{admin.phoneNumber}</td>
                                 <td>{admin.email}</td>
                                 <td>{admin.access}</td>
-                                <td>{admin.date}</td>
+                                <td>{new Date(admin.createdAt).toLocaleDateString()}</td>
                                 <td>
                                     <img
-                                        src={admin.action}
+                                        src={action}
                                         alt="Action"
                                         className="action-icon"
-                                        onClick={() => console.log(`Action clicked for ${admin.name}`)}
+                                        onClick={() => console.log(`Action clicked for ${admin.fullName}`)}
                                     />
                                     <button style={{ border: "none", backgroundColor: "#FFFFFF" }}>
                                         <img
-                                            src={admin.delete}
+                                            src={deleteimg}
                                             alt="Delete"
                                             className="action-icon"
-                                            onClick={() => console.log(`Delete clicked for ${admin.name}`)}
+                                            onClick={() => handleDeleteClick(admin._id)} // Pass admin ID to delete
                                         />
                                     </button>
                                 </td>
@@ -278,6 +330,33 @@ const AdminDashboard = () => {
                         <div className='success-message'>
                             <img src={tickImage} alt="Success" className="success-icon" />
                             <span>Admin added successfully!</span>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Delete Confirmation Popup */}
+            {showDeleteConfirmationPopup && (
+                <div className="popup-overlay">
+                    <div className="popup-content">
+                        <span className="close-icon" onClick={() => setShowDeleteConfirmationPopup(false)}>×</span>
+                        <div className='poptitle'>Are you sure you want to delete this admin?</div>
+                        <div className="popup-buttons">
+                            <button className="confirm-btn" onClick={handleDeleteConfirm}>Yes</button>
+                            <button className="cancel-btn" onClick={() => setShowDeleteConfirmationPopup(false)}>No</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Delete Success Popup */}
+            {showDeleteSuccessPopup && (
+                <div className="popup-overlay">
+                    <div className="popup-content">
+                        <span className="close-icon" onClick={() => setShowDeleteSuccessPopup(false)}>×</span>
+                        <div className='success-message'>
+                            <img src={tickImage} alt="Success" className="success-icon" />
+                            <span>Admin deleted successfully!</span>
                         </div>
                     </div>
                 </div>

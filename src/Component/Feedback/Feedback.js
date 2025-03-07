@@ -1,15 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Feedback.css';
 
 const Feedback = () => {
-  const users = [
-    { name: 'Bhavesh Kumar', whatsapp: '+91 7690839130', alternate: '-', rating: 4, feedback: 'Enhance Personalization, Improve Performance', others: '', dateTime: '12-04-2024, 22:14' },
-    { name: 'Ram Bandhu', whatsapp: '+91 8290839130', alternate: '+91 8290839130', rating: 3, feedback: 'Enhance Personalization, Improve Performance, Simplify Usability', others: 'Market Hub has streamlined...', dateTime: '30-12-2024, 14:27' },
-  ];
-
-  // State for search keyword and date filter
+  const [users, setUsers] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
+
+  // Fetch data from the API
+  useEffect(() => {
+    const fetchFeedback = async () => {
+      try {
+        const response = await axios.get('https://api.markethubindia.com/user/get-all-feedback');
+        const formattedData = response.data.map(item => ({
+          name: item['Full Name'],
+          whatsapp: item['WhatsApp No'],
+          alternate: item['Alternate No'],
+          rating: item['Rating'],
+          feedback: item['Feedback'],
+          others: item['Others'],
+          dateTime: item['Date & Time']
+        }));
+        setUsers(formattedData);
+      } catch (error) {
+        console.error('Error fetching feedback data:', error);
+      }
+    };
+
+    fetchFeedback();
+  }, []);
 
   // Filter users based on search keyword and date
   const filteredUsers = users.filter(user => {
@@ -19,7 +38,7 @@ const Feedback = () => {
       user.alternate.toLowerCase().includes(searchKeyword.toLowerCase());
 
     const matchesDate = selectedDate
-      ? new Date(user.dateTime.split(',')[0].split('-').reverse().join('-')).toISOString().split('T')[0] === selectedDate
+      ? new Date(user.dateTime.split(',')[0].split('/').reverse().join('-')).toISOString().split('T')[0] === selectedDate
       : true;
 
     return matchesKeyword && matchesDate;
