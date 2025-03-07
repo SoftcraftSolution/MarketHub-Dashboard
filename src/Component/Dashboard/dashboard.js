@@ -71,6 +71,8 @@ const Dashboard = () => {
             return <Updates />;
            case 17:
               return <Feedback />;  
+              case 18:
+                return <AddUpdate/>;
                
                 case 19:
                   return <AddSBI />;
